@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import LandingPage from './pages/LandingPage';
 import SearchResultsPage from './pages/SearchResultsPage';
 import HelperProfilePage from './pages/HelperProfilePage';
@@ -16,14 +17,15 @@ import EditProfilePage from './pages/EditProfilePage';
 import HelperSummaryDashboard from './pages/HelperSummaryDashboard';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import Header from './components/Layout/Header';
-import AdminCategoriesPage from './pages/AdminCategoriesPage';  // Admin Service Category Management
-import ServicesPage from './pages/ServicesPage';                // Services Listing Page
-import NotFoundPage from './pages/NotFoundPage';                // Optional 404 Page
+import AdminCategoriesPage from './pages/AdminCategoriesPage';
+import ServicesPage from './pages/ServicesPage';
+import NotFoundPage from './pages/NotFoundPage';
+import PaymentPage from './pages/PaymentPage'; // <-- Step 1: Add import
 
 const App: React.FC = () => {
   return (
     <Router>
-      <Header />  {/* Global Header */}
+      <Header /> {/* Global Header */}
 
       <Routes>
         {/* Public Routes */}
@@ -50,9 +52,12 @@ const App: React.FC = () => {
           <Route path="/user-chat/:helperId" element={<UserChatPage />} />
           <Route path="/helper-chat/:userId" element={<HelperChatPage />} />
           <Route path="/edit-profile" element={<EditProfilePage />} />
+
+          {/* ✅ Step 2: Add payment route here */}
+          <Route path="/payment" element={<PaymentPage />} />
         </Route>
 
-        {/* Catch-All Route */}
+        {/* Catch-All */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>

@@ -31,6 +31,11 @@ const SearchResultsPage: React.FC = () => {
     }
   };
 
+  const formatPrice = (price: number | null | undefined) => {
+    if (!price || price <= 0) return 'Contact for Pricing';
+    return `₹${price.toLocaleString('en-IN')}`;
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-6">
       <div className="max-w-7xl mx-auto">
@@ -81,7 +86,7 @@ const SearchResultsPage: React.FC = () => {
                   {helper.location || 'Location Not Available'}
                 </div>
                 <p>Experience: {helper.experience || 'N/A'}</p>
-                <p>Price: {helper.price || 'Contact'}</p>
+                <p>Price: {formatPrice(helper.price)}</p>
               </div>
             </Link>
           ))}
