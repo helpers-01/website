@@ -17,11 +17,7 @@ if (SENTRY_DSN) {
 
     // You can remove this option if you're not planning to use the Sentry Session Replay feature:
     integrations: [
-      new Sentry.Replay({
-        // Additional Replay configuration goes in here, for example:
-        maskAllText: true,
-        blockAllMedia: true,
-      }),
+      // Replay integration removed for compatibility
     ],
 
     // Performance monitoring
@@ -45,15 +41,15 @@ export const reportError = (error: Error, context?: Record<string, any>) => {
 }
 
 // Performance monitoring
-export const startTransaction = (name: string, op: string) => {
-  if (SENTRY_DSN) {
-    return Sentry.startTransaction({
-      name,
-      op,
-    })
-  }
-  return null
-}
+// export const startTransaction = (name: string, op: string) => {
+//   if (SENTRY_DSN) {
+//     return Sentry.startTransaction({
+//       name,
+//       op,
+//     })
+//   }
+//   return null
+// }
 
 // User tracking
 export const setUser = (user: { id: string; email?: string; role?: string }) => {
