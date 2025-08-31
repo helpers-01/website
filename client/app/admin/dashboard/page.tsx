@@ -1,10 +1,12 @@
+"use client"
+
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Users, UserCheck, Calendar, DollarSign, TrendingUp, AlertTriangle, Star, Clock, Loader2 } from "lucide-react"
 import AdminNav from "@/components/admin-nav"
-import { supabase, db } from "@/lib/supabase"
+import { supabase } from "@/lib/supabase/client"
 import { useRealtimeBookings, useRealtimeUsers, useRealtimeProviders } from "@/hooks/use-realtime"
 
 export default function AdminDashboard() {

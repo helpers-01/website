@@ -1,3 +1,5 @@
+"use client"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { TrendingUp, Users, DollarSign, Calendar, Star, Clock } from "lucide-react"
 import AdminNav from "@/components/admin-nav"

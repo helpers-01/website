@@ -1,4 +1,4 @@
-import { supabase } from './clients';
+import { supabase } from '../supabase/client';
 import { messaging } from './clients';
 import { getToken } from 'firebase/messaging';
 import type { Database } from '@/types/database.types';

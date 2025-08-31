@@ -1,15 +1,10 @@
-import { createClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
 import Razorpay from 'razorpay';
 import { initializeApp } from 'firebase/app';
 import { getMessaging } from 'firebase/messaging';
-import type { Database } from '@/types/database.types';
 
-// Initialize Supabase Client
-export const supabase = createClient<Database>(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+// Import Supabase client from the proper location
+export { supabase } from './supabase/client';
 
 // Initialize Stripe
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {

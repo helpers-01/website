@@ -1,4 +1,4 @@
-import { supabase } from './clients';
+import { supabase } from '../supabase/client';
 import type { Database } from '@/types/database.types';
 
 type Referral = Database['public']['Tables']['referrals']['Insert'];

@@ -1,6 +1,5 @@
-iimport { NextResponse } from 'next/server';
-import { parseSupabaseResponse, assertProfile } from '@/lib/database-utils';port { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 import { NextResponse } from 'next/server'
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 import type { NextRequest } from 'next/server'
 import type { Database } from '@/types/database.types'
 
