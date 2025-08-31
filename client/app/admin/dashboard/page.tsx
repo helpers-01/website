@@ -61,7 +61,7 @@ export default function AdminDashboard() {
       // Fetch bookings count and revenue
       const { data: bookingsData, error: bookingsError } = await supabase
         .from('bookings')
-        .select('total_amount, status')
+        .select('price, status')
 
       // Fetch services for top service
       const { data: servicesData, error: servicesError } = await supabase
@@ -79,7 +79,7 @@ export default function AdminDashboard() {
 
       if (!bookingsError && bookingsData) {
         const totalBookings = bookingsData.length
-        const totalRevenue = bookingsData.reduce((sum, booking) => sum + (booking.total_amount || 0), 0)
+        const totalRevenue = bookingsData.reduce((sum, booking) => sum + ((booking as any).price || 0), 0)
         setStats(prev => ({
           ...prev,
           totalBookings,
@@ -88,7 +88,7 @@ export default function AdminDashboard() {
       }
 
       if (!servicesError && servicesData && servicesData.length > 0) {
-        setStats(prev => ({ ...prev, topService: servicesData[0].name }))
+        setStats(prev => ({ ...prev, topService: (servicesData[0] as any).name }))
       }
 
       // Set default values for demo
