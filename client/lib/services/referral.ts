@@ -1,7 +1,7 @@
 import { supabase } from '../supabase/client';
-import type { Database } from '@/types/database.types';
+import { walletService } from './wallet';
 
-type Referral = Database['public']['Tables']['referrals']['Insert'];
+type Referral = any;
 
 export const referralService = {
   async generateCode(userId: string): Promise<string> {
