@@ -48,16 +48,16 @@ export default function HelperSettings() {
   }
 
   return (
-    <div className="min-h-screen bg-helpers-light">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
       {/* Header */}
-      <header className="bg-white border-b border-helpers-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-purple-200">
+        <div className="max-w-7xl mx-auto p-6">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/helper/dashboard" className="text-helpers-purple hover:text-helpers-dark">
+              <Link href="/helper/dashboard" className="text-gray-600 hover:text-gray-900">
                 <ArrowLeft className="w-5 h-5" />
               </Link>
-              <h1 className="text-xl font-bold text-helpers-dark">Helper Settings</h1>
+              <h1 className="text-xl font-bold text-gray-900">Helper Settings</h1>
             </div>
           </div>
         </div>
@@ -74,99 +74,99 @@ export default function HelperSettings() {
 
           {/* Banking Tab */}
           <TabsContent value="banking">
-            <Card className="bg-white border-helpers-muted">
+            <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-helpers-dark">
+                <CardTitle className="flex items-center gap-2 text-gray-900">
                   <CreditCard className="w-5 h-5" />
                   Bank Account Details
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="bg-helpers-pale border border-helpers-muted rounded-lg p-4">
+                <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-10 h-6 bg-blue-600 rounded text-white text-xs flex items-center justify-center">
                       BANK
                     </div>
                     <div>
-                      <p className="font-medium text-helpers-dark">{bankDetails.bankName}</p>
-                      <p className="text-sm text-helpers-purple">Primary Account</p>
+                      <p className="font-medium text-gray-900">{bankDetails.bankName}</p>
+                      <p className="text-sm text-gray-600">Primary Account</p>
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                      <span className="text-helpers-purple">Account Holder:</span>
-                      <div className="font-medium text-helpers-dark">{bankDetails.accountHolder}</div>
+                      <span className="text-gray-600">Account Holder:</span>
+                      <div className="font-medium text-gray-900">{bankDetails.accountHolder}</div>
                     </div>
                     <div>
-                      <span className="text-helpers-purple">Account Number:</span>
-                      <div className="font-medium text-helpers-dark">{bankDetails.accountNumber}</div>
+                      <span className="text-gray-600">Account Number:</span>
+                      <div className="font-medium text-gray-900">{bankDetails.accountNumber}</div>
                     </div>
                     <div>
-                      <span className="text-helpers-purple">Routing Number:</span>
-                      <div className="font-medium text-helpers-dark">{bankDetails.routingNumber}</div>
+                      <span className="text-gray-600">Routing Number:</span>
+                      <div className="font-medium text-gray-900">{bankDetails.routingNumber}</div>
                     </div>
                     <div>
-                      <span className="text-helpers-purple">Account Type:</span>
-                      <div className="font-medium text-helpers-dark capitalize">{bankDetails.accountType}</div>
+                      <span className="text-gray-600">Account Type:</span>
+                      <div className="font-medium text-gray-900 capitalize">{bankDetails.accountType}</div>
                     </div>
                   </div>
                 </div>
 
                 <div className="space-y-4">
-                  <h3 className="font-semibold text-helpers-dark">Update Bank Information</h3>
+                  <h3 className="font-semibold text-gray-900">Update Bank Information</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="accountHolder" className="text-helpers-dark">
+                      <Label htmlFor="accountHolder" className="text-gray-900">
                         Account Holder Name
                       </Label>
                       <Input
                         id="accountHolder"
                         value={bankDetails.accountHolder}
                         onChange={(e) => setBankDetails({ ...bankDetails, accountHolder: e.target.value })}
-                        className="border-helpers-muted focus:border-helpers-accent"
+                        className="border-purple-200 focus:border-purple-600"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="bankName" className="text-helpers-dark">
+                      <Label htmlFor="bankName" className="text-gray-900">
                         Bank Name
                       </Label>
                       <Input
                         id="bankName"
                         value={bankDetails.bankName}
                         onChange={(e) => setBankDetails({ ...bankDetails, bankName: e.target.value })}
-                        className="border-helpers-muted focus:border-helpers-accent"
+                        className="border-purple-200 focus:border-purple-600"
                       />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="accountNumber" className="text-helpers-dark">
+                      <Label htmlFor="accountNumber" className="text-gray-900">
                         Account Number
                       </Label>
                       <Input
                         id="accountNumber"
                         placeholder="Enter full account number"
-                        className="border-helpers-muted focus:border-helpers-accent"
+                        className="border-purple-200 focus:border-purple-600"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="routingNumber" className="text-helpers-dark">
+                      <Label htmlFor="routingNumber" className="text-gray-900">
                         Routing Number
                       </Label>
                       <Input
                         id="routingNumber"
                         placeholder="Enter routing number"
-                        className="border-helpers-muted focus:border-helpers-accent"
+                        className="border-purple-200 focus:border-purple-600"
                       />
                     </div>
                   </div>
                   <div>
-                    <Label htmlFor="accountType" className="text-helpers-dark">
+                    <Label htmlFor="accountType" className="text-gray-900">
                       Account Type
                     </Label>
                     <select
                       id="accountType"
-                      className="w-full border border-helpers-muted rounded-lg px-3 py-2 text-helpers-dark"
+                      className="w-full border border-purple-200 rounded-lg px-3 py-2 text-gray-900"
                       value={bankDetails.accountType}
                       onChange={(e) => setBankDetails({ ...bankDetails, accountType: e.target.value })}
                     >
@@ -174,7 +174,7 @@ export default function HelperSettings() {
                       <option value="savings">Savings</option>
                     </select>
                   </div>
-                  <Button className="bg-helpers-accent hover:bg-helpers-accent-dark text-white">
+                  <Button className="bg-purple-600 hover:bg-purple-600-dark text-white">
                     Update Bank Details
                   </Button>
                 </div>
@@ -184,21 +184,21 @@ export default function HelperSettings() {
 
           {/* Notifications Tab */}
           <TabsContent value="notifications">
-            <Card className="bg-white border-helpers-muted">
+            <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-helpers-dark">
+                <CardTitle className="flex items-center gap-2 text-gray-900">
                   <Bell className="w-5 h-5" />
                   Notification Preferences
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div>
-                  <h3 className="font-semibold text-helpers-dark mb-4">Push Notifications</h3>
+                  <h3 className="font-semibold text-gray-900 mb-4">Push Notifications</h3>
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-helpers-dark">New Job Requests</p>
-                        <p className="text-sm text-helpers-purple">Get notified when customers request your services</p>
+                        <p className="font-medium text-gray-900">New Job Requests</p>
+                        <p className="text-sm text-gray-600">Get notified when customers request your services</p>
                       </div>
                       <Switch
                         checked={notifications.newJobRequests}
@@ -207,8 +207,8 @@ export default function HelperSettings() {
                     </div>
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-helpers-dark">Job Reminders</p>
-                        <p className="text-sm text-helpers-purple">Reminders before scheduled jobs</p>
+                        <p className="font-medium text-gray-900">Job Reminders</p>
+                        <p className="text-sm text-gray-600">Reminders before scheduled jobs</p>
                       </div>
                       <Switch
                         checked={notifications.jobReminders}
@@ -217,8 +217,8 @@ export default function HelperSettings() {
                     </div>
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-helpers-dark">Payment Notifications</p>
-                        <p className="text-sm text-helpers-purple">Updates on payments and payouts</p>
+                        <p className="font-medium text-gray-900">Payment Notifications</p>
+                        <p className="text-sm text-gray-600">Updates on payments and payouts</p>
                       </div>
                       <Switch
                         checked={notifications.paymentNotifications}
@@ -227,8 +227,8 @@ export default function HelperSettings() {
                     </div>
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-helpers-dark">Customer Messages</p>
-                        <p className="text-sm text-helpers-purple">Messages from customers</p>
+                        <p className="font-medium text-gray-900">Customer Messages</p>
+                        <p className="text-sm text-gray-600">Messages from customers</p>
                       </div>
                       <Switch
                         checked={notifications.customerMessages}
@@ -239,12 +239,12 @@ export default function HelperSettings() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-helpers-dark mb-4">Email Notifications</h3>
+                  <h3 className="font-semibold text-gray-900 mb-4">Email Notifications</h3>
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-helpers-dark">New Job Alerts</p>
-                        <p className="text-sm text-helpers-purple">Email alerts for new job opportunities</p>
+                        <p className="font-medium text-gray-900">New Job Alerts</p>
+                        <p className="text-sm text-gray-600">Email alerts for new job opportunities</p>
                       </div>
                       <Switch
                         checked={notifications.emailNewJobs}
@@ -253,8 +253,8 @@ export default function HelperSettings() {
                     </div>
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-helpers-dark">Payment Updates</p>
-                        <p className="text-sm text-helpers-purple">Email confirmations for payments</p>
+                        <p className="font-medium text-gray-900">Payment Updates</p>
+                        <p className="text-sm text-gray-600">Email confirmations for payments</p>
                       </div>
                       <Switch
                         checked={notifications.emailPayments}
@@ -263,8 +263,8 @@ export default function HelperSettings() {
                     </div>
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-helpers-dark">Promotions & Tips</p>
-                        <p className="text-sm text-helpers-purple">Helper tips and promotional offers</p>
+                        <p className="font-medium text-gray-900">Promotions & Tips</p>
+                        <p className="text-sm text-gray-600">Helper tips and promotional offers</p>
                       </div>
                       <Switch
                         checked={notifications.emailPromotions}
@@ -275,12 +275,12 @@ export default function HelperSettings() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-helpers-dark mb-4">SMS Notifications</h3>
+                  <h3 className="font-semibold text-gray-900 mb-4">SMS Notifications</h3>
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-helpers-dark">Job Alerts</p>
-                        <p className="text-sm text-helpers-purple">SMS alerts for urgent job requests</p>
+                        <p className="font-medium text-gray-900">Job Alerts</p>
+                        <p className="text-sm text-gray-600">SMS alerts for urgent job requests</p>
                       </div>
                       <Switch
                         checked={notifications.smsJobAlerts}
@@ -289,8 +289,8 @@ export default function HelperSettings() {
                     </div>
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-helpers-dark">Payment Confirmations</p>
-                        <p className="text-sm text-helpers-purple">SMS confirmations for payments</p>
+                        <p className="font-medium text-gray-900">Payment Confirmations</p>
+                        <p className="text-sm text-gray-600">SMS confirmations for payments</p>
                       </div>
                       <Switch
                         checked={notifications.smsPayments}
@@ -305,9 +305,9 @@ export default function HelperSettings() {
 
           {/* Availability Tab */}
           <TabsContent value="availability">
-            <Card className="bg-white border-helpers-muted">
+            <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-helpers-dark">
+                <CardTitle className="flex items-center gap-2 text-gray-900">
                   <User className="w-5 h-5" />
                   Availability Settings
                 </CardTitle>
@@ -316,8 +316,8 @@ export default function HelperSettings() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium text-helpers-dark">Currently Accepting Jobs</p>
-                      <p className="text-sm text-helpers-purple">Turn off to stop receiving new job requests</p>
+                      <p className="font-medium text-gray-900">Currently Accepting Jobs</p>
+                      <p className="text-sm text-gray-600">Turn off to stop receiving new job requests</p>
                     </div>
                     <Switch
                       checked={availability.acceptingJobs}
@@ -327,8 +327,8 @@ export default function HelperSettings() {
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium text-helpers-dark">Instant Booking</p>
-                      <p className="text-sm text-helpers-purple">Allow customers to book without approval</p>
+                      <p className="font-medium text-gray-900">Instant Booking</p>
+                      <p className="text-sm text-gray-600">Allow customers to book without approval</p>
                     </div>
                     <Switch
                       checked={availability.instantBooking}
@@ -339,12 +339,12 @@ export default function HelperSettings() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <Label htmlFor="maxJobs" className="text-helpers-dark">
+                    <Label htmlFor="maxJobs" className="text-gray-900">
                       Maximum Jobs Per Day
                     </Label>
                     <select
                       id="maxJobs"
-                      className="w-full border border-helpers-muted rounded-lg px-3 py-2 text-helpers-dark"
+                      className="w-full border border-purple-200 rounded-lg px-3 py-2 text-gray-900"
                       value={availability.maxJobsPerDay}
                       onChange={(e) => handleAvailabilityUpdate("maxJobsPerDay", Number.parseInt(e.target.value))}
                     >
@@ -357,12 +357,12 @@ export default function HelperSettings() {
                   </div>
 
                   <div>
-                    <Label htmlFor="advanceNotice" className="text-helpers-dark">
+                    <Label htmlFor="advanceNotice" className="text-gray-900">
                       Minimum Advance Notice
                     </Label>
                     <select
                       id="advanceNotice"
-                      className="w-full border border-helpers-muted rounded-lg px-3 py-2 text-helpers-dark"
+                      className="w-full border border-purple-200 rounded-lg px-3 py-2 text-gray-900"
                       value={availability.advanceNotice}
                       onChange={(e) => handleAvailabilityUpdate("advanceNotice", Number.parseInt(e.target.value))}
                     >
@@ -375,7 +375,7 @@ export default function HelperSettings() {
                   </div>
                 </div>
 
-                <Button className="bg-helpers-accent hover:bg-helpers-accent-dark text-white">
+                <Button className="bg-purple-600 hover:bg-purple-600-dark text-white">
                   Save Availability Settings
                 </Button>
               </CardContent>
@@ -384,63 +384,63 @@ export default function HelperSettings() {
 
           {/* Security Tab */}
           <TabsContent value="security">
-            <Card className="bg-white border-helpers-muted">
+            <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-helpers-dark">
+                <CardTitle className="flex items-center gap-2 text-gray-900">
                   <Shield className="w-5 h-5" />
                   Security Settings
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div>
-                  <h3 className="font-semibold text-helpers-dark mb-4">Change Password</h3>
+                  <h3 className="font-semibold text-gray-900 mb-4">Change Password</h3>
                   <div className="space-y-4">
                     <div>
-                      <Label htmlFor="currentPassword" className="text-helpers-dark">
+                      <Label htmlFor="currentPassword" className="text-gray-900">
                         Current Password
                       </Label>
                       <Input
                         id="currentPassword"
                         type="password"
-                        className="border-helpers-muted focus:border-helpers-accent"
+                        className="border-purple-200 focus:border-purple-600"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="newPassword" className="text-helpers-dark">
+                      <Label htmlFor="newPassword" className="text-gray-900">
                         New Password
                       </Label>
                       <Input
                         id="newPassword"
                         type="password"
-                        className="border-helpers-muted focus:border-helpers-accent"
+                        className="border-purple-200 focus:border-purple-600"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="confirmPassword" className="text-helpers-dark">
+                      <Label htmlFor="confirmPassword" className="text-gray-900">
                         Confirm New Password
                       </Label>
                       <Input
                         id="confirmPassword"
                         type="password"
-                        className="border-helpers-muted focus:border-helpers-accent"
+                        className="border-purple-200 focus:border-purple-600"
                       />
                     </div>
-                    <Button className="bg-helpers-accent hover:bg-helpers-accent-dark text-white">
+                    <Button className="bg-purple-600 hover:bg-purple-600-dark text-white">
                       Update Password
                     </Button>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-helpers-dark mb-4">Two-Factor Authentication</h3>
-                  <div className="flex items-center justify-between p-4 border border-helpers-muted rounded-lg">
+                  <h3 className="font-semibold text-gray-900 mb-4">Two-Factor Authentication</h3>
+                  <div className="flex items-center justify-between p-4 border border-purple-200 rounded-lg">
                     <div>
-                      <p className="font-medium text-helpers-dark">Enable 2FA</p>
-                      <p className="text-sm text-helpers-purple">Add an extra layer of security to your account</p>
+                      <p className="font-medium text-gray-900">Enable 2FA</p>
+                      <p className="text-sm text-gray-600">Add an extra layer of security to your account</p>
                     </div>
                     <Button
                       variant="outline"
-                      className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                      className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                     >
                       Enable
                     </Button>
@@ -448,26 +448,26 @@ export default function HelperSettings() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-helpers-dark mb-4">Account Verification</h3>
+                  <h3 className="font-semibold text-gray-900 mb-4">Account Verification</h3>
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 border border-helpers-muted rounded-lg">
+                    <div className="flex items-center justify-between p-3 border border-purple-200 rounded-lg">
                       <div>
-                        <p className="font-medium text-helpers-dark">Identity Verification</p>
-                        <p className="text-sm text-helpers-purple">Government ID verified</p>
+                        <p className="font-medium text-gray-900">Identity Verification</p>
+                        <p className="text-sm text-gray-600">Government ID verified</p>
                       </div>
                       <span className="text-sm text-green-600">✓ Verified</span>
                     </div>
-                    <div className="flex items-center justify-between p-3 border border-helpers-muted rounded-lg">
+                    <div className="flex items-center justify-between p-3 border border-purple-200 rounded-lg">
                       <div>
-                        <p className="font-medium text-helpers-dark">Background Check</p>
-                        <p className="text-sm text-helpers-purple">Criminal background check completed</p>
+                        <p className="font-medium text-gray-900">Background Check</p>
+                        <p className="text-sm text-gray-600">Criminal background check completed</p>
                       </div>
                       <span className="text-sm text-green-600">✓ Verified</span>
                     </div>
-                    <div className="flex items-center justify-between p-3 border border-helpers-muted rounded-lg">
+                    <div className="flex items-center justify-between p-3 border border-purple-200 rounded-lg">
                       <div>
-                        <p className="font-medium text-helpers-dark">Insurance Verification</p>
-                        <p className="text-sm text-helpers-purple">Liability insurance confirmed</p>
+                        <p className="font-medium text-gray-900">Insurance Verification</p>
+                        <p className="text-sm text-gray-600">Liability insurance confirmed</p>
                       </div>
                       <span className="text-sm text-green-600">✓ Verified</span>
                     </div>

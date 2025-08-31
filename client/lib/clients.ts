@@ -1,0 +1,35 @@
+import { createClient } from '@supabase/supabase-js';
+import Stripe from 'stripe';
+import Razorpay from 'razorpay';
+import { initializeApp } from 'firebase/app';
+import { getMessaging } from 'firebase/messaging';
+import type { Database } from '@/types/database.types';
+
+// Initialize Supabase Client
+export const supabase = createClient<Database>(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
+// Initialize Stripe
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2023-10-16'
+});
+
+// Initialize Razorpay
+export const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID!,
+  key_secret: process.env.RAZORPAY_SECRET!
+});
+
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+export const messaging = getMessaging(firebaseApp);

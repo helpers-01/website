@@ -4,7 +4,7 @@
   "description": "Backend API for Helpers App - Urban Company Clone",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "nodemon src/index-working.ts",
+    "dev": "nodemon src/index.ts",
     "dev:original": "nodemon src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",

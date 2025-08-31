@@ -116,32 +116,32 @@ export default function SearchResults() {
   ]
 
   return (
-    <div className="min-h-screen bg-helpers-light">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
       {/* Header */}
-      <header className="bg-white border-b border-helpers-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-purple-200">
+        <div className="max-w-7xl mx-auto p-6">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/user/dashboard" className="text-helpers-purple hover:text-helpers-dark">
+              <Link href="/user/dashboard" className="text-gray-600 hover:text-gray-900">
                 <ArrowLeft className="w-5 h-5" />
               </Link>
-              <h1 className="text-xl font-bold text-helpers-dark">Search Results</h1>
+              <h1 className="text-xl font-bold text-gray-900">Search Results</h1>
             </div>
             <div className="flex-1 max-w-md mx-8">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-helpers-purple" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
                 <Input
                   placeholder="Search services..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 border-helpers-muted focus:border-helpers-accent"
+                  className="pl-10 border-purple-200 focus:border-purple-600"
                 />
               </div>
             </div>
             <Button
               variant="outline"
               onClick={() => setShowFilters(!showFilters)}
-              className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+              className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
             >
               <SlidersHorizontal className="w-4 h-4 mr-2" />
               Filters
@@ -156,12 +156,12 @@ export default function SearchResults() {
           {showFilters && (
             <div className="w-80 space-y-6">
               {/* Price Range */}
-              <Card className="bg-white border-helpers-muted">
+              <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-helpers-dark mb-4">Price Range</h3>
+                  <h3 className="font-semibold text-gray-900 mb-4">Price Range</h3>
                   <div className="space-y-4">
                     <Slider value={priceRange} onValueChange={setPriceRange} max={500} step={10} className="w-full" />
-                    <div className="flex justify-between text-sm text-helpers-purple">
+                    <div className="flex justify-between text-sm text-gray-600">
                       <span>${priceRange[0]}</span>
                       <span>${priceRange[1]}</span>
                     </div>
@@ -170,19 +170,19 @@ export default function SearchResults() {
               </Card>
 
               {/* Categories */}
-              <Card className="bg-white border-helpers-muted">
+              <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-helpers-dark mb-4">Categories</h3>
+                  <h3 className="font-semibold text-gray-900 mb-4">Categories</h3>
                   <div className="space-y-3">
                     {filters.categories.map((category) => (
                       <div key={category.id} className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
                           <Checkbox id={category.id} />
-                          <label htmlFor={category.id} className="text-sm text-helpers-dark">
+                          <label htmlFor={category.id} className="text-sm text-gray-900">
                             {category.label}
                           </label>
                         </div>
-                        <span className="text-xs text-helpers-purple">({category.count})</span>
+                        <span className="text-xs text-gray-600">({category.count})</span>
                       </div>
                     ))}
                   </div>
@@ -190,19 +190,19 @@ export default function SearchResults() {
               </Card>
 
               {/* Ratings */}
-              <Card className="bg-white border-helpers-muted">
+              <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-helpers-dark mb-4">Rating</h3>
+                  <h3 className="font-semibold text-gray-900 mb-4">Rating</h3>
                   <div className="space-y-3">
                     {filters.ratings.map((rating) => (
                       <div key={rating.id} className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
                           <Checkbox id={rating.id} />
-                          <label htmlFor={rating.id} className="text-sm text-helpers-dark">
+                          <label htmlFor={rating.id} className="text-sm text-gray-900">
                             {rating.label}
                           </label>
                         </div>
-                        <span className="text-xs text-helpers-purple">({rating.count})</span>
+                        <span className="text-xs text-gray-600">({rating.count})</span>
                       </div>
                     ))}
                   </div>
@@ -210,19 +210,19 @@ export default function SearchResults() {
               </Card>
 
               {/* Availability */}
-              <Card className="bg-white border-helpers-muted">
+              <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-helpers-dark mb-4">Availability</h3>
+                  <h3 className="font-semibold text-gray-900 mb-4">Availability</h3>
                   <div className="space-y-3">
                     {filters.availability.map((avail) => (
                       <div key={avail.id} className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
                           <Checkbox id={avail.id} />
-                          <label htmlFor={avail.id} className="text-sm text-helpers-dark">
+                          <label htmlFor={avail.id} className="text-sm text-gray-900">
                             {avail.label}
                           </label>
                         </div>
-                        <span className="text-xs text-helpers-purple">({avail.count})</span>
+                        <span className="text-xs text-gray-600">({avail.count})</span>
                       </div>
                     ))}
                   </div>
@@ -236,10 +236,10 @@ export default function SearchResults() {
             {/* Results Header */}
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-xl font-bold text-helpers-dark">{searchResults.length} services found</h2>
-                <p className="text-helpers-purple">Showing results for "cleaning services"</p>
+                <h2 className="text-xl font-bold text-gray-900">{searchResults.length} services found</h2>
+                <p className="text-gray-600">Showing results for "cleaning services"</p>
               </div>
-              <select className="border border-helpers-muted rounded-lg px-3 py-2 text-sm text-helpers-dark">
+              <select className="border border-purple-200 rounded-lg px-3 py-2 text-sm text-gray-900">
                 <option>Sort by: Relevance</option>
                 <option>Price: Low to High</option>
                 <option>Price: High to Low</option>
@@ -253,7 +253,7 @@ export default function SearchResults() {
               {searchResults.map((service) => (
                 <Card
                   key={service.id}
-                  className="bg-white border-helpers-muted hover:border-helpers-accent transition-colors"
+                  className="bg-white/80 backdrop-blur-sm border-purple-200 hover:border-helpers-accent transition-colors"
                 >
                   <CardContent className="p-6">
                     <div className="flex gap-6">
@@ -268,12 +268,12 @@ export default function SearchResults() {
                       <div className="flex-1">
                         <div className="flex items-start justify-between mb-2">
                           <div>
-                            <h3 className="text-lg font-semibold text-helpers-dark mb-1">{service.name}</h3>
-                            <p className="text-helpers-purple">{service.provider}</p>
+                            <h3 className="text-lg font-semibold text-gray-900 mb-1">{service.name}</h3>
+                            <p className="text-gray-600">{service.provider}</p>
                           </div>
                           <div className="text-right">
-                            <div className="text-2xl font-bold text-helpers-dark">${service.price}</div>
-                            <div className="text-sm text-helpers-purple">{service.duration}</div>
+                            <div className="text-2xl font-bold text-gray-900">${service.price}</div>
+                            <div className="text-sm text-gray-600">{service.duration}</div>
                           </div>
                         </div>
 
@@ -281,24 +281,24 @@ export default function SearchResults() {
                           <div className="flex items-center gap-1">
                             <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                             <span className="font-medium">{service.rating}</span>
-                            <span className="text-helpers-purple">({service.reviews} reviews)</span>
+                            <span className="text-gray-600">({service.reviews} reviews)</span>
                           </div>
-                          <div className="flex items-center gap-1 text-helpers-purple">
+                          <div className="flex items-center gap-1 text-gray-600">
                             <MapPin className="w-4 h-4" />
                             <span className="text-sm">{service.location}</span>
                           </div>
-                          <div className="flex items-center gap-1 text-helpers-purple">
+                          <div className="flex items-center gap-1 text-gray-600">
                             <Clock className="w-4 h-4" />
                             <span className="text-sm">{service.duration}</span>
                           </div>
                         </div>
 
-                        <p className="text-helpers-purple text-sm mb-4">{service.description}</p>
+                        <p className="text-gray-600 text-sm mb-4">{service.description}</p>
 
                         <div className="flex items-center justify-between">
                           <div className="flex gap-2">
                             {service.badges.map((badge) => (
-                              <Badge key={badge} variant="secondary" className="bg-helpers-pale text-helpers-purple">
+                              <Badge key={badge} variant="secondary" className="bg-purple-50 text-gray-600">
                                 {badge}
                               </Badge>
                             ))}
@@ -306,12 +306,12 @@ export default function SearchResults() {
                           <div className="flex gap-2">
                             <Button
                               variant="outline"
-                              className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                              className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                             >
                               View Details
                             </Button>
                             <Button
-                              className="bg-helpers-accent hover:bg-helpers-accent-dark text-white"
+                              className="bg-purple-600 hover:bg-purple-600-dark text-white"
                               onClick={() => (window.location.href = `/user/service/${service.id}`)}
                             >
                               Book Now
@@ -330,26 +330,26 @@ export default function SearchResults() {
               <div className="flex gap-2">
                 <Button
                   variant="outline"
-                  className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                  className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                 >
                   Previous
                 </Button>
-                <Button className="bg-helpers-accent text-white">1</Button>
+                <Button className="bg-purple-600 text-white">1</Button>
                 <Button
                   variant="outline"
-                  className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                  className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                 >
                   2
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                  className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                 >
                   3
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                  className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                 >
                   Next
                 </Button>

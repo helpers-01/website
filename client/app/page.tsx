@@ -33,16 +33,16 @@ export default function LoginDashboard() {
   ]
 
   return (
-    <div className="min-h-screen bg-helpers-light">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="flex justify-center py-8">
         <div className="flex items-center gap-3">
-          <div className="w-16 h-16 bg-helpers-accent rounded-full flex items-center justify-center">
-            <Users className="w-8 h-8 text-white" />
+          <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
+            <Users className="w-8 h-8 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-helpers-dark">Helpers</h1>
-            <p className="text-helpers-purple text-sm">Management System</p>
+            <h1 className="text-3xl font-bold text-foreground">Helpers</h1>
+            <p className="text-primary text-sm">Management System</p>
           </div>
         </div>
       </div>
@@ -53,33 +53,33 @@ export default function LoginDashboard() {
           {loginOptions.map((option) => {
             const IconComponent = option.icon
             return (
-              <Card
+              <div
                 key={option.id}
-                className="bg-white border-helpers-muted shadow-sm hover:shadow-md transition-shadow"
+                className="card-style hover:shadow-lg transition-shadow"
               >
                 <CardContent className="p-6">
                   <div className="flex flex-col items-start space-y-4">
                     {/* Icon */}
-                    <div className="w-12 h-12 bg-helpers-pale rounded-lg flex items-center justify-center">
-                      <IconComponent className="w-6 h-6 text-helpers-purple" />
+                    <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center">
+                      <IconComponent className="w-6 h-6 text-primary" />
                     </div>
 
                     {/* Title */}
-                    <h2 className="text-xl font-semibold text-helpers-dark">{option.title}</h2>
+                    <h2 className="text-xl font-semibold text-foreground">{option.title}</h2>
 
                     {/* Description */}
-                    <p className="text-sm text-helpers-purple leading-relaxed">{option.description}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{option.description}</p>
 
                     {/* Login Button */}
                     <Button
-                      className="w-full bg-helpers-accent hover:bg-helpers-accent-dark text-white font-medium"
+                      className="btn-primary w-full"
                       onClick={() => (window.location.href = option.href)}
                     >
                       Login Now
                     </Button>
                   </div>
                 </CardContent>
-              </Card>
+              </div>
             )
           })}
         </div>
@@ -87,7 +87,7 @@ export default function LoginDashboard() {
 
       {/* Footer */}
       <div className="text-center pb-8">
-        <p className="text-xs text-helpers-purple">© 2025 Helpers Management System. All rights reserved.</p>
+        <p className="text-xs text-muted-foreground">© 2025 Helpers Management System. All rights reserved.</p>
       </div>
     </div>
   )

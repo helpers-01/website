@@ -166,15 +166,15 @@ jobs:
     - name: Check Backend Health
       run: |
         sleep 30  # Wait for deployment to be ready
-        curl -f https://helpers-platform-api.fly.dev/health || exit 1
+        curl -f https://your-production-api-domain.com/health || exit 1
         
     - name: Check Frontend
       run: |
-        curl -f https://your-domain.com || exit 1
-        
+        curl -f https://your-production-domain.com || exit 1
+
     - name: Notify deployment success
       run: |
         echo "🎉 Deployment successful!"
-        echo "Frontend: https://your-domain.com"
-        echo "Backend API: https://helpers-platform-api.fly.dev"
-        echo "Health Check: https://helpers-platform-api.fly.dev/health"
+        echo "Frontend: https://your-production-domain.com"
+        echo "Backend API: https://your-production-api-domain.com"
+        echo "Health Check: https://your-production-api-domain.com/health"

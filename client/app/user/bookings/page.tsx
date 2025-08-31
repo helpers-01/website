@@ -115,16 +115,16 @@ export default function MyBookings() {
   }
 
   return (
-    <div className="min-h-screen bg-helpers-light">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
       {/* Header */}
-      <header className="bg-white border-b border-helpers-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-purple-200">
+        <div className="max-w-7xl mx-auto p-6">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/user/dashboard" className="text-helpers-purple hover:text-helpers-dark">
+              <Link href="/user/dashboard" className="text-gray-600 hover:text-gray-900">
                 <ArrowLeft className="w-5 h-5" />
               </Link>
-              <h1 className="text-xl font-bold text-helpers-dark">My Bookings</h1>
+              <h1 className="text-xl font-bold text-gray-900">My Bookings</h1>
             </div>
           </div>
         </div>
@@ -140,7 +140,7 @@ export default function MyBookings() {
 
           <TabsContent value="upcoming" className="space-y-6">
             {bookings.upcoming.map((booking) => (
-              <Card key={booking.id} className="bg-white border-helpers-muted">
+              <Card key={booking.id} className="bg-white/80 backdrop-blur-sm border-purple-200">
                 <CardContent className="p-6">
                   <div className="flex gap-6">
                     <img
@@ -151,8 +151,8 @@ export default function MyBookings() {
                     <div className="flex-1">
                       <div className="flex items-start justify-between mb-2">
                         <div>
-                          <h3 className="text-lg font-semibold text-helpers-dark">{booking.service}</h3>
-                          <p className="text-helpers-purple">{booking.provider}</p>
+                          <h3 className="text-lg font-semibold text-gray-900">{booking.service}</h3>
+                          <p className="text-gray-600">{booking.provider}</p>
                           <div className="flex items-center gap-1 mt-1">
                             <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
                             <span className="text-sm font-medium">{booking.providerRating}</span>
@@ -160,11 +160,11 @@ export default function MyBookings() {
                         </div>
                         <div className="text-right">
                           <Badge className={getStatusColor(booking.status)}>{booking.status}</Badge>
-                          <div className="text-lg font-bold text-helpers-dark mt-1">${booking.price}</div>
+                          <div className="text-lg font-bold text-gray-900 mt-1">${booking.price}</div>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 text-sm text-helpers-purple">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 text-sm text-gray-600">
                         <div className="flex items-center gap-2">
                           <Calendar className="w-4 h-4" />
                           <span>{formatDate(booking.date)}</span>
@@ -185,7 +185,7 @@ export default function MyBookings() {
                         <Button
                           size="sm"
                           variant="outline"
-                          className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                          className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                         >
                           <MessageCircle className="w-4 h-4 mr-2" />
                           Message Provider
@@ -193,7 +193,7 @@ export default function MyBookings() {
                         <Button
                           size="sm"
                           variant="outline"
-                          className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                          className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                         >
                           <RotateCcw className="w-4 h-4 mr-2" />
                           Reschedule
@@ -216,7 +216,7 @@ export default function MyBookings() {
 
           <TabsContent value="completed" className="space-y-6">
             {bookings.completed.map((booking) => (
-              <Card key={booking.id} className="bg-white border-helpers-muted">
+              <Card key={booking.id} className="bg-white/80 backdrop-blur-sm border-purple-200">
                 <CardContent className="p-6">
                   <div className="flex gap-6">
                     <img
@@ -227,8 +227,8 @@ export default function MyBookings() {
                     <div className="flex-1">
                       <div className="flex items-start justify-between mb-2">
                         <div>
-                          <h3 className="text-lg font-semibold text-helpers-dark">{booking.service}</h3>
-                          <p className="text-helpers-purple">{booking.provider}</p>
+                          <h3 className="text-lg font-semibold text-gray-900">{booking.service}</h3>
+                          <p className="text-gray-600">{booking.provider}</p>
                           <div className="flex items-center gap-1 mt-1">
                             <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
                             <span className="text-sm font-medium">{booking.providerRating}</span>
@@ -236,11 +236,11 @@ export default function MyBookings() {
                         </div>
                         <div className="text-right">
                           <Badge className={getStatusColor(booking.status)}>{booking.status}</Badge>
-                          <div className="text-lg font-bold text-helpers-dark mt-1">${booking.price}</div>
+                          <div className="text-lg font-bold text-gray-900 mt-1">${booking.price}</div>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 text-sm text-helpers-purple">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 text-sm text-gray-600">
                         <div className="flex items-center gap-2">
                           <Calendar className="w-4 h-4" />
                           <span>{formatDate(booking.date)}</span>
@@ -260,7 +260,7 @@ export default function MyBookings() {
                       <div className="flex gap-2">
                         {booking.reviewed ? (
                           <div className="flex items-center gap-2">
-                            <span className="text-sm text-helpers-purple">Your rating:</span>
+                            <span className="text-sm text-gray-600">Your rating:</span>
                             <div className="flex items-center gap-1">
                               {[...Array(5)].map((_, i) => (
                                 <Star
@@ -275,7 +275,7 @@ export default function MyBookings() {
                         ) : booking.canReview ? (
                           <Button
                             size="sm"
-                            className="bg-helpers-accent hover:bg-helpers-accent-dark text-white"
+                            className="bg-purple-600 hover:bg-purple-600-dark text-white"
                             onClick={() => (window.location.href = `/user/review/${booking.id}`)}
                           >
                             <Star className="w-4 h-4 mr-2" />
@@ -285,7 +285,7 @@ export default function MyBookings() {
                         <Button
                           size="sm"
                           variant="outline"
-                          className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                          className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                         >
                           Book Again
                         </Button>
@@ -299,7 +299,7 @@ export default function MyBookings() {
 
           <TabsContent value="cancelled" className="space-y-6">
             {bookings.cancelled.map((booking) => (
-              <Card key={booking.id} className="bg-white border-helpers-muted">
+              <Card key={booking.id} className="bg-white/80 backdrop-blur-sm border-purple-200">
                 <CardContent className="p-6">
                   <div className="flex gap-6">
                     <img
@@ -310,8 +310,8 @@ export default function MyBookings() {
                     <div className="flex-1">
                       <div className="flex items-start justify-between mb-2">
                         <div>
-                          <h3 className="text-lg font-semibold text-helpers-dark">{booking.service}</h3>
-                          <p className="text-helpers-purple">{booking.provider}</p>
+                          <h3 className="text-lg font-semibold text-gray-900">{booking.service}</h3>
+                          <p className="text-gray-600">{booking.provider}</p>
                           <div className="flex items-center gap-1 mt-1">
                             <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
                             <span className="text-sm font-medium">{booking.providerRating}</span>
@@ -319,11 +319,11 @@ export default function MyBookings() {
                         </div>
                         <div className="text-right">
                           <Badge className={getStatusColor(booking.status)}>{booking.status}</Badge>
-                          <div className="text-sm text-helpers-purple mt-1">Refunded: ${booking.refundAmount}</div>
+                          <div className="text-sm text-gray-600 mt-1">Refunded: ${booking.refundAmount}</div>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 text-sm text-helpers-purple">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 text-sm text-gray-600">
                         <div className="flex items-center gap-2">
                           <Calendar className="w-4 h-4" />
                           <span>{formatDate(booking.date)}</span>
@@ -341,7 +341,7 @@ export default function MyBookings() {
                       </div>
 
                       <div className="flex gap-2">
-                        <Button size="sm" className="bg-helpers-accent hover:bg-helpers-accent-dark text-white">
+                        <Button size="sm" className="bg-purple-600 hover:bg-purple-600-dark text-white">
                           Book Again
                         </Button>
                       </div>

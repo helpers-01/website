@@ -79,16 +79,16 @@ export default function HelperProfile() {
   }
 
   return (
-    <div className="min-h-screen bg-helpers-light">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
       {/* Header */}
-      <header className="bg-white border-b border-helpers-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-purple-200">
+        <div className="max-w-7xl mx-auto p-6">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/helper/dashboard" className="text-helpers-purple hover:text-helpers-dark">
+              <Link href="/helper/dashboard" className="text-gray-600 hover:text-gray-900">
                 <ArrowLeft className="w-5 h-5" />
               </Link>
-              <h1 className="text-xl font-bold text-helpers-dark">Profile Management</h1>
+              <h1 className="text-xl font-bold text-gray-900">Profile Management</h1>
             </div>
           </div>
         </div>
@@ -106,57 +106,57 @@ export default function HelperProfile() {
           <TabsContent value="profile">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <div className="lg:col-span-2">
-                <Card className="bg-white border-helpers-muted">
+                <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-helpers-dark">
+                    <CardTitle className="flex items-center gap-2 text-gray-900">
                       <User className="w-5 h-5" />
                       Personal Information
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div className="flex items-center gap-6">
-                      <div className="w-20 h-20 bg-helpers-accent rounded-full flex items-center justify-center">
+                      <div className="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center">
                         <User className="w-10 h-10 text-white" />
                       </div>
                       <div>
                         <Button
                           variant="outline"
-                          className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                          className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                         >
                           <Camera className="w-4 h-4 mr-2" />
                           Change Photo
                         </Button>
-                        <p className="text-sm text-helpers-purple mt-1">JPG, PNG or GIF. Max size 2MB.</p>
+                        <p className="text-sm text-gray-600 mt-1">JPG, PNG or GIF. Max size 2MB.</p>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <Label htmlFor="firstName" className="text-helpers-dark">
+                        <Label htmlFor="firstName" className="text-gray-900">
                           First Name
                         </Label>
                         <Input
                           id="firstName"
                           value={profile.firstName}
                           onChange={(e) => setProfile({ ...profile, firstName: e.target.value })}
-                          className="border-helpers-muted focus:border-helpers-accent"
+                          className="border-purple-200 focus:border-purple-600"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="lastName" className="text-helpers-dark">
+                        <Label htmlFor="lastName" className="text-gray-900">
                           Last Name
                         </Label>
                         <Input
                           id="lastName"
                           value={profile.lastName}
                           onChange={(e) => setProfile({ ...profile, lastName: e.target.value })}
-                          className="border-helpers-muted focus:border-helpers-accent"
+                          className="border-purple-200 focus:border-purple-600"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <Label htmlFor="email" className="text-helpers-dark">
+                      <Label htmlFor="email" className="text-gray-900">
                         Email Address
                       </Label>
                       <Input
@@ -164,12 +164,12 @@ export default function HelperProfile() {
                         type="email"
                         value={profile.email}
                         onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                        className="border-helpers-muted focus:border-helpers-accent"
+                        className="border-purple-200 focus:border-purple-600"
                       />
                     </div>
 
                     <div>
-                      <Label htmlFor="phone" className="text-helpers-dark">
+                      <Label htmlFor="phone" className="text-gray-900">
                         Phone Number
                       </Label>
                       <Input
@@ -177,51 +177,51 @@ export default function HelperProfile() {
                         type="tel"
                         value={profile.phone}
                         onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-                        className="border-helpers-muted focus:border-helpers-accent"
+                        className="border-purple-200 focus:border-purple-600"
                       />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <Label htmlFor="location" className="text-helpers-dark">
+                        <Label htmlFor="location" className="text-gray-900">
                           Location
                         </Label>
                         <Input
                           id="location"
                           value={profile.location}
                           onChange={(e) => setProfile({ ...profile, location: e.target.value })}
-                          className="border-helpers-muted focus:border-helpers-accent"
+                          className="border-purple-200 focus:border-purple-600"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="experience" className="text-helpers-dark">
+                        <Label htmlFor="experience" className="text-gray-900">
                           Experience
                         </Label>
                         <Input
                           id="experience"
                           value={profile.experience}
                           onChange={(e) => setProfile({ ...profile, experience: e.target.value })}
-                          className="border-helpers-muted focus:border-helpers-accent"
+                          className="border-purple-200 focus:border-purple-600"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <Label htmlFor="bio" className="text-helpers-dark">
+                      <Label htmlFor="bio" className="text-gray-900">
                         Bio
                       </Label>
                       <Textarea
                         id="bio"
                         value={profile.bio}
                         onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
-                        className="border-helpers-muted focus:border-helpers-accent min-h-[100px]"
+                        className="border-purple-200 focus:border-purple-600 min-h-[100px]"
                         placeholder="Tell customers about your experience and specialties..."
                       />
                     </div>
 
                     <Button
                       onClick={handleProfileUpdate}
-                      className="bg-helpers-accent hover:bg-helpers-accent-dark text-white"
+                      className="bg-purple-600 hover:bg-purple-600-dark text-white"
                     >
                       Save Changes
                     </Button>
@@ -231,53 +231,53 @@ export default function HelperProfile() {
 
               {/* Stats Sidebar */}
               <div className="space-y-6">
-                <Card className="bg-white border-helpers-muted">
+                <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
                   <CardHeader>
-                    <CardTitle className="text-helpers-dark">Profile Stats</CardTitle>
+                    <CardTitle className="text-gray-900">Profile Stats</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-helpers-purple">Rating</span>
+                      <span className="text-gray-600">Rating</span>
                       <div className="flex items-center gap-1">
                         <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                        <span className="font-medium text-helpers-dark">{stats.rating}</span>
+                        <span className="font-medium text-gray-900">{stats.rating}</span>
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-helpers-purple">Total Jobs</span>
-                      <span className="font-medium text-helpers-dark">{stats.totalJobs}</span>
+                      <span className="text-gray-600">Total Jobs</span>
+                      <span className="font-medium text-gray-900">{stats.totalJobs}</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-helpers-purple">Response Rate</span>
-                      <span className="font-medium text-helpers-dark">{stats.responseRate}%</span>
+                      <span className="text-gray-600">Response Rate</span>
+                      <span className="font-medium text-gray-900">{stats.responseRate}%</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-helpers-purple">On-Time Rate</span>
-                      <span className="font-medium text-helpers-dark">{stats.onTimeRate}%</span>
+                      <span className="text-gray-600">On-Time Rate</span>
+                      <span className="font-medium text-gray-900">{stats.onTimeRate}%</span>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white border-helpers-muted">
+                <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
                   <CardHeader>
-                    <CardTitle className="text-helpers-dark">Profile Completion</CardTitle>
+                    <CardTitle className="text-gray-900">Profile Completion</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-helpers-purple">Profile Info</span>
+                        <span className="text-gray-600">Profile Info</span>
                         <span className="text-green-600">✓ Complete</span>
                       </div>
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-helpers-purple">Services</span>
+                        <span className="text-gray-600">Services</span>
                         <span className="text-green-600">✓ Complete</span>
                       </div>
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-helpers-purple">Availability</span>
+                        <span className="text-gray-600">Availability</span>
                         <span className="text-green-600">✓ Complete</span>
                       </div>
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-helpers-purple">Verification</span>
+                        <span className="text-gray-600">Verification</span>
                         <span className="text-green-600">✓ Verified</span>
                       </div>
                     </div>
@@ -289,11 +289,11 @@ export default function HelperProfile() {
 
           {/* Services Tab */}
           <TabsContent value="services">
-            <Card className="bg-white border-helpers-muted">
+            <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
               <CardHeader>
-                <CardTitle className="flex items-center justify-between text-helpers-dark">
+                <CardTitle className="flex items-center justify-between text-gray-900">
                   Services Offered
-                  <Button className="bg-helpers-accent hover:bg-helpers-accent-dark text-white">
+                  <Button className="bg-purple-600 hover:bg-purple-600-dark text-white">
                     <Plus className="w-4 h-4 mr-2" />
                     Add Service
                   </Button>
@@ -301,11 +301,11 @@ export default function HelperProfile() {
               </CardHeader>
               <CardContent className="space-y-6">
                 {services.map((service) => (
-                  <div key={service.id} className="border border-helpers-muted rounded-lg p-4">
+                  <div key={service.id} className="border border-purple-200 rounded-lg p-4">
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <h3 className="font-semibold text-helpers-dark">{service.name}</h3>
-                        <Badge variant="secondary" className="bg-helpers-pale text-helpers-purple">
+                        <h3 className="font-semibold text-gray-900">{service.name}</h3>
+                        <Badge variant="secondary" className="bg-purple-50 text-gray-600">
                           {service.category}
                         </Badge>
                       </div>
@@ -313,7 +313,7 @@ export default function HelperProfile() {
                         <Button
                           size="sm"
                           variant="outline"
-                          className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                          className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                         >
                           Edit
                         </Button>
@@ -326,15 +326,15 @@ export default function HelperProfile() {
                         </Button>
                       </div>
                     </div>
-                    <p className="text-helpers-purple mb-4">{service.description}</p>
+                    <p className="text-gray-600 mb-4">{service.description}</p>
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div className="flex items-center gap-2">
-                        <span className="text-helpers-purple">Price:</span>
-                        <span className="font-medium text-helpers-dark">${service.price}</span>
+                        <span className="text-gray-600">Price:</span>
+                        <span className="font-medium text-gray-900">${service.price}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-helpers-purple" />
-                        <span className="text-helpers-dark">{service.duration}</span>
+                        <Clock className="w-4 h-4 text-gray-600" />
+                        <span className="text-gray-900">{service.duration}</span>
                       </div>
                     </div>
                   </div>
@@ -345,28 +345,28 @@ export default function HelperProfile() {
 
           {/* Availability Tab */}
           <TabsContent value="availability">
-            <Card className="bg-white border-helpers-muted">
+            <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
               <CardHeader>
-                <CardTitle className="text-helpers-dark">Weekly Availability</CardTitle>
+                <CardTitle className="text-gray-900">Weekly Availability</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {Object.entries(availability).map(([day, schedule]) => (
                   <div
                     key={day}
-                    className="flex items-center justify-between p-4 border border-helpers-muted rounded-lg"
+                    className="flex items-center justify-between p-4 border border-purple-200 rounded-lg"
                   >
                     <div className="flex items-center gap-4">
                       <div className="w-20">
-                        <span className="font-medium text-helpers-dark capitalize">{day}</span>
+                        <span className="font-medium text-gray-900 capitalize">{day}</span>
                       </div>
                       <label className="flex items-center space-x-2">
                         <input
                           type="checkbox"
                           checked={schedule.available}
                           onChange={(e) => handleAvailabilityUpdate(day, { available: e.target.checked })}
-                          className="rounded border-helpers-muted"
+                          className="rounded border-purple-200"
                         />
-                        <span className="text-sm text-helpers-purple">Available</span>
+                        <span className="text-sm text-gray-600">Available</span>
                       </label>
                     </div>
                     {schedule.available && (
@@ -375,20 +375,20 @@ export default function HelperProfile() {
                           type="time"
                           value={schedule.start}
                           onChange={(e) => handleAvailabilityUpdate(day, { start: e.target.value })}
-                          className="w-24 border-helpers-muted focus:border-helpers-accent"
+                          className="w-24 border-purple-200 focus:border-purple-600"
                         />
-                        <span className="text-helpers-purple">to</span>
+                        <span className="text-gray-600">to</span>
                         <Input
                           type="time"
                           value={schedule.end}
                           onChange={(e) => handleAvailabilityUpdate(day, { end: e.target.value })}
-                          className="w-24 border-helpers-muted focus:border-helpers-accent"
+                          className="w-24 border-purple-200 focus:border-purple-600"
                         />
                       </div>
                     )}
                   </div>
                 ))}
-                <Button className="bg-helpers-accent hover:bg-helpers-accent-dark text-white">Save Availability</Button>
+                <Button className="bg-purple-600 hover:bg-purple-600-dark text-white">Save Availability</Button>
               </CardContent>
             </Card>
           </TabsContent>

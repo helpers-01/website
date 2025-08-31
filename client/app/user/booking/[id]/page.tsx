@@ -75,16 +75,16 @@ export default function BookingFlow() {
   }
 
   return (
-    <div className="min-h-screen bg-helpers-light">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
       {/* Header */}
-      <header className="bg-white border-b border-helpers-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-purple-200">
+        <div className="max-w-7xl mx-auto p-6">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/user/service/1" className="text-helpers-purple hover:text-helpers-dark">
+              <Link href="/user/service/1" className="text-gray-600 hover:text-gray-900">
                 <ArrowLeft className="w-5 h-5" />
               </Link>
-              <h1 className="text-xl font-bold text-helpers-dark">Book Service</h1>
+              <h1 className="text-xl font-bold text-gray-900">Book Service</h1>
             </div>
           </div>
         </div>
@@ -101,7 +101,7 @@ export default function BookingFlow() {
                     step.completed
                       ? "bg-green-500 text-white"
                       : currentStep === step.id
-                        ? "bg-helpers-accent text-white"
+                        ? "bg-purple-600 text-white"
                         : "bg-gray-200 text-gray-600"
                   }`}
                 >
@@ -109,7 +109,7 @@ export default function BookingFlow() {
                 </div>
                 <span
                   className={`ml-2 text-sm font-medium ${
-                    currentStep === step.id ? "text-helpers-dark" : "text-helpers-purple"
+                    currentStep === step.id ? "text-gray-900" : "text-gray-600"
                   }`}
                 >
                   {step.name}
@@ -125,14 +125,14 @@ export default function BookingFlow() {
           <div className="lg:col-span-2">
             {/* Step 1: Date & Time */}
             {currentStep === 1 && (
-              <Card className="bg-white border-helpers-muted">
+              <Card className="bg-white border-purple-200">
                 <CardHeader>
-                  <CardTitle className="text-helpers-dark">Select Date & Time</CardTitle>
+                  <CardTitle className="text-gray-900">Select Date & Time</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {/* Date Selection */}
                   <div>
-                    <Label className="text-helpers-dark mb-3 block">Choose Date</Label>
+                    <Label className="text-gray-900 mb-3 block">Choose Date</Label>
                     <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
                       {availableDates.map((dateOption) => (
                         <button
@@ -141,14 +141,14 @@ export default function BookingFlow() {
                           disabled={!dateOption.available}
                           className={`p-3 rounded-lg border text-center transition-colors ${
                             selectedDate === dateOption.date
-                              ? "border-helpers-accent bg-helpers-pale text-helpers-dark"
+                              ? "border-helpers-accent bg-purple-50 text-gray-900"
                               : dateOption.available
-                                ? "border-helpers-muted hover:border-helpers-accent text-helpers-dark"
+                                ? "border-purple-200 hover:border-purple-600 text-gray-900"
                                 : "border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed"
                           }`}
                         >
                           <div className="text-sm font-medium">{dateOption.day}</div>
-                          <div className="text-xs text-helpers-purple">{new Date(dateOption.date).getDate()}</div>
+                          <div className="text-xs text-gray-600">{new Date(dateOption.date).getDate()}</div>
                         </button>
                       ))}
                     </div>
@@ -157,7 +157,7 @@ export default function BookingFlow() {
                   {/* Time Selection */}
                   {selectedDate && (
                     <div>
-                      <Label className="text-helpers-dark mb-3 block">Choose Time</Label>
+                      <Label className="text-gray-900 mb-3 block">Choose Time</Label>
                       <div className="grid grid-cols-4 sm:grid-cols-8 gap-3">
                         {availableTimes.map((timeOption) => (
                           <button
@@ -166,9 +166,9 @@ export default function BookingFlow() {
                             disabled={!timeOption.available}
                             className={`p-2 rounded-lg border text-center transition-colors ${
                               selectedTime === timeOption.time
-                                ? "border-helpers-accent bg-helpers-pale text-helpers-dark"
+                                ? "border-helpers-accent bg-purple-50 text-gray-900"
                                 : timeOption.available
-                                  ? "border-helpers-muted hover:border-helpers-accent text-helpers-dark"
+                                  ? "border-purple-200 hover:border-purple-600 text-gray-900"
                                   : "border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed"
                             }`}
                           >
@@ -184,14 +184,14 @@ export default function BookingFlow() {
 
             {/* Step 2: Address */}
             {currentStep === 2 && (
-              <Card className="bg-white border-helpers-muted">
+              <Card className="bg-white border-purple-200">
                 <CardHeader>
-                  <CardTitle className="text-helpers-dark">Service Address</CardTitle>
+                  <CardTitle className="text-gray-900">Service Address</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 gap-4">
                     <div>
-                      <Label htmlFor="street" className="text-helpers-dark">
+                      <Label htmlFor="street" className="text-gray-900">
                         Street Address
                       </Label>
                       <Input
@@ -199,12 +199,12 @@ export default function BookingFlow() {
                         placeholder="123 Main Street"
                         value={address.street}
                         onChange={(e) => setAddress({ ...address, street: e.target.value })}
-                        className="border-helpers-muted focus:border-helpers-accent"
+                        className="border-purple-200 focus:border-purple-600"
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="city" className="text-helpers-dark">
+                        <Label htmlFor="city" className="text-gray-900">
                           City
                         </Label>
                         <Input
@@ -212,11 +212,11 @@ export default function BookingFlow() {
                           placeholder="New York"
                           value={address.city}
                           onChange={(e) => setAddress({ ...address, city: e.target.value })}
-                          className="border-helpers-muted focus:border-helpers-accent"
+                          className="border-purple-200 focus:border-purple-600"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="state" className="text-helpers-dark">
+                        <Label htmlFor="state" className="text-gray-900">
                           State
                         </Label>
                         <Input
@@ -224,13 +224,13 @@ export default function BookingFlow() {
                           placeholder="NY"
                           value={address.state}
                           onChange={(e) => setAddress({ ...address, state: e.target.value })}
-                          className="border-helpers-muted focus:border-helpers-accent"
+                          className="border-purple-200 focus:border-purple-600"
                         />
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="zip" className="text-helpers-dark">
+                        <Label htmlFor="zip" className="text-gray-900">
                           ZIP Code
                         </Label>
                         <Input
@@ -238,12 +238,12 @@ export default function BookingFlow() {
                           placeholder="10001"
                           value={address.zip}
                           onChange={(e) => setAddress({ ...address, zip: e.target.value })}
-                          className="border-helpers-muted focus:border-helpers-accent"
+                          className="border-purple-200 focus:border-purple-600"
                         />
                       </div>
                     </div>
                     <div>
-                      <Label htmlFor="instructions" className="text-helpers-dark">
+                      <Label htmlFor="instructions" className="text-gray-900">
                         Special Instructions (Optional)
                       </Label>
                       <Textarea
@@ -251,7 +251,7 @@ export default function BookingFlow() {
                         placeholder="Any special instructions for the service provider..."
                         value={address.instructions}
                         onChange={(e) => setAddress({ ...address, instructions: e.target.value })}
-                        className="border-helpers-muted focus:border-helpers-accent"
+                        className="border-purple-200 focus:border-purple-600"
                       />
                     </div>
                   </div>
@@ -261,70 +261,70 @@ export default function BookingFlow() {
 
             {/* Step 3: Payment */}
             {currentStep === 3 && (
-              <Card className="bg-white border-helpers-muted">
+              <Card className="bg-white border-purple-200">
                 <CardHeader>
-                  <CardTitle className="text-helpers-dark">Payment Information</CardTitle>
+                  <CardTitle className="text-gray-900">Payment Information</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 gap-4">
                     <div>
-                      <Label htmlFor="cardNumber" className="text-helpers-dark">
+                      <Label htmlFor="cardNumber" className="text-gray-900">
                         Card Number
                       </Label>
                       <Input
                         id="cardNumber"
                         placeholder="1234 5678 9012 3456"
-                        className="border-helpers-muted focus:border-helpers-accent"
+                        className="border-purple-200 focus:border-purple-600"
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="expiry" className="text-helpers-dark">
+                        <Label htmlFor="expiry" className="text-gray-900">
                           Expiry Date
                         </Label>
                         <Input
                           id="expiry"
                           placeholder="MM/YY"
-                          className="border-helpers-muted focus:border-helpers-accent"
+                          className="border-purple-200 focus:border-purple-600"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="cvv" className="text-helpers-dark">
+                        <Label htmlFor="cvv" className="text-gray-900">
                           CVV
                         </Label>
                         <Input
                           id="cvv"
                           placeholder="123"
-                          className="border-helpers-muted focus:border-helpers-accent"
+                          className="border-purple-200 focus:border-purple-600"
                         />
                       </div>
                     </div>
                     <div>
-                      <Label htmlFor="cardName" className="text-helpers-dark">
+                      <Label htmlFor="cardName" className="text-gray-900">
                         Name on Card
                       </Label>
                       <Input
                         id="cardName"
                         placeholder="John Doe"
-                        className="border-helpers-muted focus:border-helpers-accent"
+                        className="border-purple-200 focus:border-purple-600"
                       />
                     </div>
                   </div>
 
-                  <div className="bg-helpers-pale border border-helpers-muted rounded-lg p-4">
-                    <h4 className="font-medium text-helpers-dark mb-2">Payment Summary</h4>
+                  <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                    <h4 className="font-medium text-gray-900 mb-2">Payment Summary</h4>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
-                        <span className="text-helpers-purple">Service Fee</span>
-                        <span className="text-helpers-dark">${service.price}</span>
+                        <span className="text-gray-600">Service Fee</span>
+                        <span className="text-gray-900">${service.price}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-helpers-purple">Platform Fee</span>
-                        <span className="text-helpers-dark">$5</span>
+                        <span className="text-gray-600">Platform Fee</span>
+                        <span className="text-gray-900">$5</span>
                       </div>
-                      <div className="border-t border-helpers-muted pt-2 flex justify-between font-medium">
-                        <span className="text-helpers-dark">Total</span>
-                        <span className="text-helpers-dark">${service.price + 5}</span>
+                      <div className="border-t border-purple-200 pt-2 flex justify-between font-medium">
+                        <span className="text-gray-900">Total</span>
+                        <span className="text-gray-900">${service.price + 5}</span>
                       </div>
                     </div>
                   </div>
@@ -334,53 +334,53 @@ export default function BookingFlow() {
 
             {/* Step 4: Confirmation */}
             {currentStep === 4 && (
-              <Card className="bg-white border-helpers-muted">
+              <Card className="bg-white border-purple-200">
                 <CardHeader>
-                  <CardTitle className="text-helpers-dark">Booking Confirmation</CardTitle>
+                  <CardTitle className="text-gray-900">Booking Confirmation</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="text-center">
                     <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold text-helpers-dark mb-2">Booking Confirmed!</h3>
-                    <p className="text-helpers-purple">Your service has been successfully booked.</p>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Booking Confirmed!</h3>
+                    <p className="text-gray-600">Your service has been successfully booked.</p>
                   </div>
 
-                  <div className="bg-helpers-pale border border-helpers-muted rounded-lg p-4">
-                    <h4 className="font-medium text-helpers-dark mb-3">Booking Details</h4>
+                  <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                    <h4 className="font-medium text-gray-900 mb-3">Booking Details</h4>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
-                        <span className="text-helpers-purple">Service</span>
-                        <span className="text-helpers-dark">{service.name}</span>
+                        <span className="text-gray-600">Service</span>
+                        <span className="text-gray-900">{service.name}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-helpers-purple">Provider</span>
-                        <span className="text-helpers-dark">{service.provider}</span>
+                        <span className="text-gray-600">Provider</span>
+                        <span className="text-gray-900">{service.provider}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-helpers-purple">Date</span>
-                        <span className="text-helpers-dark">{selectedDate}</span>
+                        <span className="text-gray-600">Date</span>
+                        <span className="text-gray-900">{selectedDate}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-helpers-purple">Time</span>
-                        <span className="text-helpers-dark">{selectedTime}</span>
+                        <span className="text-gray-600">Time</span>
+                        <span className="text-gray-900">{selectedTime}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-helpers-purple">Total Paid</span>
-                        <span className="text-helpers-dark">${service.price + 5}</span>
+                        <span className="text-gray-600">Total Paid</span>
+                        <span className="text-gray-900">${service.price + 5}</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="flex gap-3">
                     <Button
-                      className="flex-1 bg-helpers-accent hover:bg-helpers-accent-dark text-white"
+                      className="flex-1 bg-purple-600 hover:bg-purple-600-dark text-white"
                       onClick={() => (window.location.href = "/user/bookings")}
                     >
                       View My Bookings
                     </Button>
                     <Button
                       variant="outline"
-                      className="flex-1 border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                      className="flex-1 border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                       onClick={() => (window.location.href = "/user/dashboard")}
                     >
                       Back to Dashboard
@@ -397,7 +397,7 @@ export default function BookingFlow() {
                   variant="outline"
                   onClick={handleBack}
                   disabled={currentStep === 1}
-                  className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                  className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                 >
                   <ChevronLeft className="w-4 h-4 mr-2" />
                   Back
@@ -408,7 +408,7 @@ export default function BookingFlow() {
                     (currentStep === 1 && (!selectedDate || !selectedTime)) ||
                     (currentStep === 2 && (!address.street || !address.city || !address.state || !address.zip))
                   }
-                  className="bg-helpers-accent hover:bg-helpers-accent-dark text-white"
+                  className="bg-purple-600 hover:bg-purple-600-dark text-white"
                 >
                   {currentStep === 3 ? "Confirm Booking" : "Continue"}
                   <ChevronRight className="w-4 h-4 ml-2" />
@@ -419,14 +419,14 @@ export default function BookingFlow() {
 
           {/* Booking Summary Sidebar */}
           <div className="space-y-6">
-            <Card className="bg-white border-helpers-muted sticky top-8">
+            <Card className="bg-white border-purple-200 sticky top-8">
               <CardHeader>
-                <CardTitle className="text-helpers-dark">Booking Summary</CardTitle>
+                <CardTitle className="text-gray-900">Booking Summary</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <h3 className="font-semibold text-helpers-dark">{service.name}</h3>
-                  <p className="text-sm text-helpers-purple">{service.provider}</p>
+                  <h3 className="font-semibold text-gray-900">{service.name}</h3>
+                  <p className="text-sm text-gray-600">{service.provider}</p>
                   <div className="flex items-center gap-1 mt-1">
                     <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
                     <span className="text-sm font-medium">{service.rating}</span>
@@ -435,31 +435,31 @@ export default function BookingFlow() {
 
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-helpers-purple">Package</span>
-                    <span className="text-helpers-dark">{service.package}</span>
+                    <span className="text-gray-600">Package</span>
+                    <span className="text-gray-900">{service.package}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-helpers-purple">Duration</span>
-                    <span className="text-helpers-dark">{service.duration}</span>
+                    <span className="text-gray-600">Duration</span>
+                    <span className="text-gray-900">{service.duration}</span>
                   </div>
                   {selectedDate && (
                     <div className="flex justify-between">
-                      <span className="text-helpers-purple">Date</span>
-                      <span className="text-helpers-dark">{selectedDate}</span>
+                      <span className="text-gray-600">Date</span>
+                      <span className="text-gray-900">{selectedDate}</span>
                     </div>
                   )}
                   {selectedTime && (
                     <div className="flex justify-between">
-                      <span className="text-helpers-purple">Time</span>
-                      <span className="text-helpers-dark">{selectedTime}</span>
+                      <span className="text-gray-600">Time</span>
+                      <span className="text-gray-900">{selectedTime}</span>
                     </div>
                   )}
                 </div>
 
-                <div className="border-t border-helpers-muted pt-4">
+                <div className="border-t border-purple-200 pt-4">
                   <div className="flex justify-between text-lg font-bold">
-                    <span className="text-helpers-dark">Total</span>
-                    <span className="text-helpers-dark">${service.price}</span>
+                    <span className="text-gray-900">Total</span>
+                    <span className="text-gray-900">${service.price}</span>
                   </div>
                 </div>
               </CardContent>

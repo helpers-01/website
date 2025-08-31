@@ -35,6 +35,7 @@
     "docker:logs": "docker-compose logs -f",
     "monitoring:up": "docker-compose --profile monitoring up",
     "security:audit": "npm audit --audit-level=high",
-    "clean": "npm run clean --workspace client && npm run clean --workspace server && rm -rf node_modules"
+    "clean": "npm run clean --workspace client && npm run clean --workspace server && rm -rf node_modules",
+    "ci": "npm ci"
   }
 }

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import HelperNav from "@/components/helper-nav"
+import { useRealtimeBookings, useRealtimeServices } from "@/hooks/use-realtime"
 import {
   Calendar,
   Clock,
@@ -22,6 +23,18 @@ import {
 
 export default function HelperDashboard() {
   const [activeTab, setActiveTab] = useState("requests")
+  const [refreshTrigger, setRefreshTrigger] = useState(0)
+
+  // Real-time subscriptions for helper dashboard
+  useRealtimeBookings(() => {
+    console.log('New booking available for helper, refreshing dashboard...')
+    setRefreshTrigger(prev => prev + 1)
+  })
+
+  useRealtimeServices(() => {
+    console.log('Services updated, refreshing helper dashboard...')
+    setRefreshTrigger(prev => prev + 1)
+  })
 
   const helperStats = {
     todayEarnings: 245,
@@ -108,10 +121,16 @@ export default function HelperDashboard() {
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
       <HelperNav />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto p-6 space-y-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome back, Alex!</h2>
+          <div className="flex items-center gap-3 mb-2">
+            <h2 className="text-2xl font-bold text-gray-900">Welcome back, Alex!</h2>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-sm text-green-600 font-medium">Live Updates</span>
+            </div>
+          </div>
           <p className="text-gray-600">Here are your latest job requests and schedule</p>
         </div>
 

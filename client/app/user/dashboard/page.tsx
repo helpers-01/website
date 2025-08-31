@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import UserNav from "@/components/user-nav"
+import { useRealtimeBookings, useRealtimeServices } from "@/hooks/use-realtime"
 import {
   Search,
   MapPin,
@@ -23,6 +24,18 @@ import {
 
 export default function UserDashboard() {
   const [searchQuery, setSearchQuery] = useState("")
+  const [refreshTrigger, setRefreshTrigger] = useState(0)
+
+  // Real-time subscriptions for user dashboard
+  useRealtimeBookings(() => {
+    console.log('Booking status updated, refreshing user dashboard...')
+    setRefreshTrigger(prev => prev + 1)
+  })
+
+  useRealtimeServices(() => {
+    console.log('Services updated, refreshing user dashboard...')
+    setRefreshTrigger(prev => prev + 1)
+  })
 
   const upcomingBookings = [
     {
@@ -91,7 +104,13 @@ export default function UserDashboard() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome back, John!</h2>
+          <div className="flex items-center gap-3 mb-2">
+            <h2 className="text-2xl font-bold text-gray-900">Welcome back, John!</h2>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-sm text-green-600 font-medium">Live Updates</span>
+            </div>
+          </div>
           <p className="text-gray-600">What service do you need today?</p>
         </div>
 

@@ -9,11 +9,6 @@ import { createServer } from 'http';
 // Load environment variables
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
-console.log('🔍 Server Starting...');
-console.log('Environment Variables:');
-console.log('SUPABASE_URL:', process.env.SUPABASE_URL ? '✅ Set' : '❌ Missing');
-console.log('SUPABASE_ANON_KEY:', process.env.SUPABASE_ANON_KEY ? '✅ Set' : '❌ Missing');
-console.log('PORT:', process.env.PORT || 3001);
 
 const app = express();
 const server = createServer(app);
@@ -83,7 +78,6 @@ app.get('/api/test', (req, res) => {
 
 // Simple error handler
 app.use((error: any, req: any, res: any, next: any) => {
-  console.error('Error:', error);
   res.status(error.statusCode || 500).json({
     success: false,
     error: {
@@ -109,25 +103,20 @@ app.use((req: any, res: any) => {
 
 // Graceful shutdown
 process.on('SIGTERM', () => {
-  console.log('SIGTERM received, shutting down gracefully');
   server.close(() => {
-    console.log('Process terminated');
+    // Process terminated
   });
 });
 
 process.on('SIGINT', () => {
-  console.log('SIGINT received, shutting down gracefully');
   server.close(() => {
-    console.log('Process terminated');
+    // Process terminated
   });
 });
 
 // Start server
 server.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📝 Environment: ${process.env.NODE_ENV}`);
-  console.log(`🔗 Health check: http://localhost:${PORT}/health`);
-  console.log(`🧪 Test API: http://localhost:${PORT}/api/test`);
+  // Server started successfully
 });
 
 export default app;

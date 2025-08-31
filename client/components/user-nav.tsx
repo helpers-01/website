@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Home, Grid3X3, Search, Calendar, Settings, HelpCircle, LogOut, Menu, X } from "lucide-react"
@@ -10,6 +10,7 @@ import { Home, Grid3X3, Search, Calendar, Settings, HelpCircle, LogOut, Menu, X 
 export default function UserNav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
+  const router = useRouter()
 
   const navItems = [
     { href: "/user/dashboard", label: "Dashboard", icon: Home },
@@ -65,7 +66,7 @@ export default function UserNav() {
               variant="outline"
               size="sm"
               className="border-purple-200 text-purple-700 hover:bg-purple-50 bg-transparent"
-              onClick={() => (window.location.href = "/")}
+              onClick={() => router.push("/")}
             >
               <LogOut className="w-4 h-4 mr-2" />
               Logout
@@ -110,7 +111,7 @@ export default function UserNav() {
                   variant="outline"
                   size="sm"
                   className="w-full border-purple-200 text-purple-700 hover:bg-purple-50 bg-transparent"
-                  onClick={() => (window.location.href = "/")}
+                  onClick={() => router.push("/")}
                 >
                   <LogOut className="w-4 h-4 mr-2" />
                   Logout

@@ -58,7 +58,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://helpers-platform-api.fly.dev/api/$1"
+      "destination": "https://your-production-api-domain.com/api/$1"
     }
   ],
 
@@ -69,8 +69,13 @@
       "permanent": false
     },
     {
-      "source": "/provider",
-      "destination": "/provider/dashboard", 
+      "source": "/helper",
+      "destination": "/helper/dashboard",
+      "permanent": false
+    },
+    {
+      "source": "/user",
+      "destination": "/user/dashboard",
       "permanent": false
     }
   ],

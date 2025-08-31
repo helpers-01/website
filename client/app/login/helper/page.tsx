@@ -1,78 +1,169 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { ArrowLeft, Users, Eye, EyeOff } from "lucide-react"
-import Link from "next/link"
+import { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabase/client';
+import { getUserProfile, getRoleRedirectPath } from '@/lib/auth-utils';
+import { ArrowLeft, Users, Eye, EyeOff } from 'lucide-react';
+import Link from 'next/link';
 
-export default function HelperLogin() {
-  const [employeeId, setEmployeeId] = useState("")
-  const [password, setPassword] = useState("")
-  const [showPassword, setShowPassword] = useState(false)
+interface AuthState {
+  isLoading: boolean;
+  error: string | null;
+  success: string | null;
+}
 
-  const handleLogin = () => {
-    // Redirect to helper dashboard
-    window.location.href = "/helper/dashboard"
-  }
+export default function HelperLoginPage() {
+  const router = useRouter();
+  const [employeeId, setEmployeeId] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  const [authState, setAuthState] = useState<AuthState>({
+    isLoading: false,
+    error: null,
+    success: null
+  });
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'SIGNED_IN' && session?.user) {
+        try {
+          const profile = await getUserProfile(session.user.id);
+          if (profile.role === 'helper') {
+            const redirectPath = getRoleRedirectPath(profile.role);
+            router.push(redirectPath);
+          } else {
+            setAuthState(prev => ({ ...prev, error: 'Access denied. Helper privileges required.' }));
+            await supabase.auth.signOut();
+          }
+        } catch (error) {
+          console.error('Error fetching profile:', error);
+          setAuthState(prev => ({ ...prev, error: 'Failed to load user profile' }));
+        }
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [router]);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAuthState(prev => ({ ...prev, isLoading: true, error: null, success: null }));
+
+    if (!employeeId || !password) {
+      setAuthState(prev => ({ ...prev, error: 'Please fill in all fields', isLoading: false }));
+      return;
+    }
+
+    try {
+      // For helper login, we'll use employeeId as email for authentication
+      const { error } = await supabase.auth.signInWithPassword({
+        email: employeeId.includes('@') ? employeeId : `${employeeId}@helper.local`,
+        password,
+      });
+
+      if (error) throw error;
+
+      setAuthState(prev => ({ ...prev, success: 'Login successful!' }));
+    } catch (err: any) {
+      setAuthState(prev => ({ ...prev, error: err.message, isLoading: false }));
+    }
+  };
+
+  const handleForgotPassword = async () => {
+    if (!employeeId) {
+      setAuthState(prev => ({ ...prev, error: 'Please enter your Employee ID first' }));
+      return;
+    }
+
+    setAuthState(prev => ({ ...prev, isLoading: true, error: null, success: null }));
+
+    try {
+      const email = employeeId.includes('@') ? employeeId : `${employeeId}@helper.local`;
+      const { error } = await supabase.auth.resetPasswordForEmail(email);
+      if (error) throw error;
+      setAuthState(prev => ({ ...prev, success: 'Password reset email sent!', isLoading: false }));
+    } catch (err: any) {
+      setAuthState(prev => ({ ...prev, error: err.message, isLoading: false }));
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-helpers-light flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 text-helpers-purple hover:text-helpers-dark mb-4">
+          <Link href="/login" className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4">
             <ArrowLeft className="w-4 h-4" />
             Back to Login Options
           </Link>
           <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-helpers-accent rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
               <Users className="w-8 h-8 text-white" />
             </div>
           </div>
-          <h1 className="text-2xl font-bold text-helpers-dark">Helper Login</h1>
-          <p className="text-helpers-purple">Access your service provider account</p>
+          <h1 className="text-2xl font-semibold text-gray-800">
+            Helper Login
+          </h1>
+          <p className="text-gray-500">
+            Access your service provider account
+          </p>
         </div>
 
-        <Card className="bg-white border-helpers-muted shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-center text-helpers-dark">Service Provider Portal</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="space-y-4">
+        {/* Auth Card */}
+        <div className="bg-white rounded-2xl shadow-lg p-6">
+          <div className="space-y-6">
+            <div className="text-center">
+              <h2 className="text-lg font-medium text-gray-900">Service Provider Portal</h2>
+            </div>
+
+            {authState.error && (
+              <div className="text-sm text-red-500 text-center">
+                {authState.error}
+              </div>
+            )}
+
+            {authState.success && (
+              <div className="text-sm text-green-500 text-center">
+                {authState.success}
+              </div>
+            )}
+
+            <form onSubmit={handleLogin} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="employeeId" className="text-helpers-dark">
+                <label htmlFor="employeeId" className="text-sm font-medium text-gray-700">
                   Employee ID
-                </Label>
-                <Input
-                  id="employeeId"
+                </label>
+                <input
                   type="text"
-                  placeholder="Enter your Employee ID"
+                  id="employeeId"
+                  required
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
                   value={employeeId}
                   onChange={(e) => setEmployeeId(e.target.value)}
-                  className="border-helpers-muted focus:border-helpers-accent"
+                  placeholder="Enter your Employee ID"
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-helpers-dark">
+                <label htmlFor="password" className="text-sm font-medium text-gray-700">
                   Password
-                </Label>
+                </label>
                 <div className="relative">
-                  <Input
-                    id="password"
+                  <input
                     type={showPassword ? "text" : "password"}
-                    placeholder="Enter your password"
+                    id="password"
+                    required
+                    className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="border-helpers-muted focus:border-helpers-accent pr-10"
+                    placeholder="Enter your password"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-helpers-purple hover:text-helpers-dark"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -81,33 +172,55 @@ export default function HelperLogin() {
 
               <div className="flex items-center justify-between">
                 <label className="flex items-center space-x-2">
-                  <input type="checkbox" className="rounded border-helpers-muted" />
-                  <span className="text-sm text-helpers-purple">Remember me</span>
+                  <input
+                    type="checkbox"
+                    className="rounded border-gray-300"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                  />
+                  <span className="text-sm text-gray-600">Remember me</span>
                 </label>
-                <Link href="#" className="text-sm text-helpers-accent hover:underline">
+                <button
+                  type="button"
+                  className="text-sm text-purple-600 hover:text-purple-700 font-medium"
+                  onClick={handleForgotPassword}
+                >
                   Forgot password?
-                </Link>
+                </button>
               </div>
 
-              <Button
-                onClick={handleLogin}
-                className="w-full bg-helpers-accent hover:bg-helpers-accent-dark text-white"
+              <button
+                type="submit"
+                disabled={authState.isLoading}
+                className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed relative"
               >
-                Login to Helper Portal
-              </Button>
-            </div>
+                {authState.isLoading ? (
+                  <>
+                    <span className="opacity-0">Signing in...</span>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                  </>
+                ) : (
+                  'Login to Helper Portal'
+                )}
+              </button>
+            </form>
 
             <div className="text-center">
-              <p className="text-sm text-helpers-purple">
-                New helper?{" "}
-                <Link href="#" className="text-helpers-accent hover:underline">
+              <p className="text-sm text-gray-600">
+                New helper?{' '}
+                <button
+                  onClick={() => router.push('/apply-helper')}
+                  className="text-purple-600 hover:text-purple-700 font-medium"
+                >
                   Apply to join
-                </Link>
+                </button>
               </p>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
-  )
+  );
 }

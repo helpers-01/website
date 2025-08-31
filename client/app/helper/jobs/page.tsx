@@ -114,16 +114,16 @@ export default function HelperJobs() {
   }
 
   return (
-    <div className="min-h-screen bg-helpers-light">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
       {/* Header */}
-      <header className="bg-white border-b border-helpers-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-purple-200">
+        <div className="max-w-7xl mx-auto p-6">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/helper/dashboard" className="text-helpers-purple hover:text-helpers-dark">
+              <Link href="/helper/dashboard" className="text-gray-600 hover:text-gray-900">
                 <ArrowLeft className="w-5 h-5" />
               </Link>
-              <h1 className="text-xl font-bold text-helpers-dark">My Jobs</h1>
+              <h1 className="text-xl font-bold text-gray-900">My Jobs</h1>
             </div>
           </div>
         </div>
@@ -139,7 +139,7 @@ export default function HelperJobs() {
 
           <TabsContent value="accepted" className="space-y-6">
             {jobs.accepted.map((job) => (
-              <Card key={job.id} className="bg-white border-helpers-muted">
+              <Card key={job.id} className="bg-white/80 backdrop-blur-sm border-purple-200">
                 <CardContent className="p-6">
                   <div className="flex gap-6">
                     <img
@@ -150,21 +150,21 @@ export default function HelperJobs() {
                     <div className="flex-1">
                       <div className="flex items-start justify-between mb-2">
                         <div>
-                          <h3 className="text-lg font-semibold text-helpers-dark">{job.service}</h3>
-                          <p className="text-helpers-purple">Customer: {job.customer}</p>
+                          <h3 className="text-lg font-semibold text-gray-900">{job.service}</h3>
+                          <p className="text-gray-600">Customer: {job.customer}</p>
                           <div className="flex items-center gap-1 mt-1">
                             <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
                             <span className="text-sm font-medium">{job.customerRating}</span>
-                            <span className="text-sm text-helpers-purple">customer rating</span>
+                            <span className="text-sm text-gray-600">customer rating</span>
                           </div>
                         </div>
                         <div className="text-right">
                           <Badge className={getStatusColor(job.status)}>{job.status}</Badge>
-                          <div className="text-lg font-bold text-helpers-dark mt-1">${job.price}</div>
+                          <div className="text-lg font-bold text-gray-900 mt-1">${job.price}</div>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 text-sm text-helpers-purple">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 text-sm text-gray-600">
                         <div className="flex items-center gap-2">
                           <Calendar className="w-4 h-4" />
                           <span>{formatDate(job.date)}</span>
@@ -183,7 +183,7 @@ export default function HelperJobs() {
                         <Button
                           size="sm"
                           variant="outline"
-                          className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                          className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                         >
                           <MessageCircle className="w-4 h-4 mr-2" />
                           Message Customer
@@ -191,12 +191,12 @@ export default function HelperJobs() {
                         <Button
                           size="sm"
                           variant="outline"
-                          className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                          className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                         >
                           <Phone className="w-4 h-4 mr-2" />
                           Call Customer
                         </Button>
-                        <Button size="sm" className="bg-helpers-accent hover:bg-helpers-accent-dark text-white">
+                        <Button size="sm" className="bg-purple-600 hover:bg-purple-600-dark text-white">
                           View Details
                         </Button>
                       </div>
@@ -209,7 +209,7 @@ export default function HelperJobs() {
 
           <TabsContent value="completed" className="space-y-6">
             {jobs.completed.map((job) => (
-              <Card key={job.id} className="bg-white border-helpers-muted">
+              <Card key={job.id} className="bg-white/80 backdrop-blur-sm border-purple-200">
                 <CardContent className="p-6">
                   <div className="flex gap-6">
                     <img
@@ -220,21 +220,21 @@ export default function HelperJobs() {
                     <div className="flex-1">
                       <div className="flex items-start justify-between mb-2">
                         <div>
-                          <h3 className="text-lg font-semibold text-helpers-dark">{job.service}</h3>
-                          <p className="text-helpers-purple">Customer: {job.customer}</p>
+                          <h3 className="text-lg font-semibold text-gray-900">{job.service}</h3>
+                          <p className="text-gray-600">Customer: {job.customer}</p>
                           <div className="flex items-center gap-1 mt-1">
                             <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
                             <span className="text-sm font-medium">{job.customerRating}</span>
-                            <span className="text-sm text-helpers-purple">customer rating</span>
+                            <span className="text-sm text-gray-600">customer rating</span>
                           </div>
                         </div>
                         <div className="text-right">
                           <Badge className={getStatusColor(job.status)}>{job.status}</Badge>
-                          <div className="text-lg font-bold text-helpers-dark mt-1">${job.price}</div>
+                          <div className="text-lg font-bold text-gray-900 mt-1">${job.price}</div>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 text-sm text-helpers-purple">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 text-sm text-gray-600">
                         <div className="flex items-center gap-2">
                           <Calendar className="w-4 h-4" />
                           <span>{formatDate(job.date)}</span>
@@ -250,11 +250,11 @@ export default function HelperJobs() {
                       </div>
 
                       {job.customerReview && (
-                        <div className="bg-helpers-pale border border-helpers-muted rounded-lg p-3 mb-4">
-                          <p className="text-sm font-medium text-helpers-dark mb-1">Customer Review:</p>
-                          <p className="text-sm text-helpers-purple">{job.customerReview}</p>
+                        <div className="bg-purple-50 border border-purple-200 rounded-lg p-3 mb-4">
+                          <p className="text-sm font-medium text-gray-900 mb-1">Customer Review:</p>
+                          <p className="text-sm text-gray-600">{job.customerReview}</p>
                           <div className="flex items-center gap-1 mt-2">
-                            <span className="text-sm text-helpers-purple">Customer rated you:</span>
+                            <span className="text-sm text-gray-600">Customer rated you:</span>
                             <div className="flex items-center gap-1">
                               {[...Array(5)].map((_, i) => (
                                 <Star
@@ -273,7 +273,7 @@ export default function HelperJobs() {
                         <Button
                           size="sm"
                           variant="outline"
-                          className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                          className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                         >
                           <DollarSign className="w-4 h-4 mr-2" />
                           View Payment
@@ -281,7 +281,7 @@ export default function HelperJobs() {
                         <Button
                           size="sm"
                           variant="outline"
-                          className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                          className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                         >
                           Contact Customer
                         </Button>
@@ -295,7 +295,7 @@ export default function HelperJobs() {
 
           <TabsContent value="cancelled" className="space-y-6">
             {jobs.cancelled.map((job) => (
-              <Card key={job.id} className="bg-white border-helpers-muted">
+              <Card key={job.id} className="bg-white/80 backdrop-blur-sm border-purple-200">
                 <CardContent className="p-6">
                   <div className="flex gap-6">
                     <img
@@ -306,21 +306,21 @@ export default function HelperJobs() {
                     <div className="flex-1">
                       <div className="flex items-start justify-between mb-2">
                         <div>
-                          <h3 className="text-lg font-semibold text-helpers-dark">{job.service}</h3>
-                          <p className="text-helpers-purple">Customer: {job.customer}</p>
+                          <h3 className="text-lg font-semibold text-gray-900">{job.service}</h3>
+                          <p className="text-gray-600">Customer: {job.customer}</p>
                           <div className="flex items-center gap-1 mt-1">
                             <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
                             <span className="text-sm font-medium">{job.customerRating}</span>
-                            <span className="text-sm text-helpers-purple">customer rating</span>
+                            <span className="text-sm text-gray-600">customer rating</span>
                           </div>
                         </div>
                         <div className="text-right">
                           <Badge className={getStatusColor(job.status)}>{job.status}</Badge>
-                          <div className="text-sm text-helpers-purple mt-1">Cancelled by {job.cancelledBy}</div>
+                          <div className="text-sm text-gray-600 mt-1">Cancelled by {job.cancelledBy}</div>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 text-sm text-helpers-purple">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 text-sm text-gray-600">
                         <div className="flex items-center gap-2">
                           <Calendar className="w-4 h-4" />
                           <span>{formatDate(job.date)}</span>

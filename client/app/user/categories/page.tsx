@@ -123,23 +123,23 @@ export default function ServiceCategories() {
   ]
 
   return (
-    <div className="min-h-screen bg-helpers-light">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
       {/* Header */}
-      <header className="bg-white border-b border-helpers-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-purple-200">
+        <div className="max-w-7xl mx-auto p-6">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/user/dashboard" className="text-helpers-purple hover:text-helpers-dark">
+              <Link href="/user/dashboard" className="text-gray-600 hover:text-gray-900">
                 <ArrowLeft className="w-5 h-5" />
               </Link>
-              <h1 className="text-xl font-bold text-helpers-dark">Service Categories</h1>
+              <h1 className="text-xl font-bold text-gray-900">Service Categories</h1>
             </div>
             <div className="flex-1 max-w-md mx-8">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-helpers-purple" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
                 <Input
                   placeholder="Search categories..."
-                  className="pl-10 border-helpers-muted focus:border-helpers-accent"
+                  className="pl-10 border-purple-200 focus:border-purple-600"
                 />
               </div>
             </div>
@@ -150,8 +150,8 @@ export default function ServiceCategories() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Title */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-helpers-dark mb-2">Browse All Services</h2>
-          <p className="text-helpers-purple">Find the perfect service for your needs</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Browse All Services</h2>
+          <p className="text-gray-600">Find the perfect service for your needs</p>
         </div>
 
         {/* Categories Grid */}
@@ -161,7 +161,7 @@ export default function ServiceCategories() {
             return (
               <Card
                 key={category.id}
-                className="bg-white border-helpers-muted hover:border-helpers-accent transition-colors cursor-pointer group"
+                className="bg-white/80 backdrop-blur-sm border-purple-200 hover:border-purple-600 transition-colors cursor-pointer group"
               >
                 <CardContent className="p-6">
                   <div className="flex flex-col items-center text-center space-y-4">
@@ -173,19 +173,19 @@ export default function ServiceCategories() {
                     </div>
 
                     {/* Category Name */}
-                    <h3 className="text-lg font-semibold text-helpers-dark">{category.name}</h3>
+                    <h3 className="text-lg font-semibold text-gray-900">{category.name}</h3>
 
                     {/* Description */}
-                    <p className="text-sm text-helpers-purple">{category.description}</p>
+                    <p className="text-sm text-gray-600">{category.description}</p>
 
                     {/* Services Count */}
-                    <Badge variant="secondary" className="bg-helpers-pale text-helpers-purple">
+                    <Badge variant="secondary" className="bg-purple-50 text-gray-600">
                       {category.services} services
                     </Badge>
 
                     {/* Browse Button */}
                     <Button
-                      className="w-full bg-helpers-accent hover:bg-helpers-accent-dark text-white"
+                      className="w-full bg-purple-600 hover:bg-purple-600-dark text-white"
                       onClick={() => (window.location.href = `/user/search?category=${category.id}`)}
                     >
                       Browse Services
@@ -199,25 +199,25 @@ export default function ServiceCategories() {
 
         {/* Popular Categories Section */}
         <div className="mt-12">
-          <h3 className="text-xl font-bold text-helpers-dark mb-6">Most Popular This Week</h3>
+          <h3 className="text-xl font-bold text-gray-900 mb-6">Most Popular This Week</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {categories.slice(0, 3).map((category) => {
               const IconComponent = category.icon
               return (
-                <Card key={category.id} className="bg-white border-helpers-muted">
+                <Card key={category.id} className="bg-white/80 backdrop-blur-sm border-purple-200">
                   <CardContent className="p-6">
                     <div className="flex items-center gap-4">
                       <div className={`w-12 h-12 rounded-full flex items-center justify-center ${category.color}`}>
                         <IconComponent className="w-6 h-6" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-semibold text-helpers-dark">{category.name}</h4>
-                        <p className="text-sm text-helpers-purple">{category.services} services available</p>
+                        <h4 className="font-semibold text-gray-900">{category.name}</h4>
+                        <p className="text-sm text-gray-600">{category.services} services available</p>
                       </div>
                       <Button
                         size="sm"
                         variant="outline"
-                        className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                        className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                       >
                         View
                       </Button>

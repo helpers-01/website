@@ -123,18 +123,18 @@ export default function HelperEarnings() {
   }
 
   return (
-    <div className="min-h-screen bg-helpers-light">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
       {/* Header */}
-      <header className="bg-white border-b border-helpers-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-purple-200">
+        <div className="max-w-7xl mx-auto p-6">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/helper/dashboard" className="text-helpers-purple hover:text-helpers-dark">
+              <Link href="/helper/dashboard" className="text-gray-600 hover:text-gray-900">
                 <ArrowLeft className="w-5 h-5" />
               </Link>
-              <h1 className="text-xl font-bold text-helpers-dark">Earnings & Payouts</h1>
+              <h1 className="text-xl font-bold text-gray-900">Earnings & Payouts</h1>
             </div>
-            <Button className="bg-helpers-accent hover:bg-helpers-accent-dark text-white">
+            <Button className="bg-purple-600 hover:bg-purple-700 text-white">
               <Download className="w-4 h-4 mr-2" />
               Export Report
             </Button>
@@ -145,48 +145,48 @@ export default function HelperEarnings() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="bg-white border-helpers-muted">
+          <Card className="bg-white border-purple-200">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-helpers-purple">Available Balance</p>
-                  <p className="text-2xl font-bold text-helpers-dark">${earningsStats.availableBalance}</p>
+                  <p className="text-sm text-gray-600">Available Balance</p>
+                  <p className="text-2xl font-bold text-gray-900">${earningsStats.availableBalance}</p>
                 </div>
                 <DollarSign className="w-8 h-8 text-green-500" />
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-white border-helpers-muted">
+          <Card className="bg-white border-purple-200">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-helpers-purple">This Month</p>
-                  <p className="text-2xl font-bold text-helpers-dark">${earningsStats.thisMonth}</p>
+                  <p className="text-sm text-gray-600">This Month</p>
+                  <p className="text-2xl font-bold text-gray-900">${earningsStats.thisMonth}</p>
                 </div>
                 <TrendingUp className="w-8 h-8 text-blue-500" />
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-white border-helpers-muted">
+          <Card className="bg-white border-purple-200">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-helpers-purple">Pending Payouts</p>
-                  <p className="text-2xl font-bold text-helpers-dark">${earningsStats.pendingPayouts}</p>
+                  <p className="text-sm text-gray-600">Pending Payouts</p>
+                  <p className="text-2xl font-bold text-gray-900">${earningsStats.pendingPayouts}</p>
                 </div>
                 <Clock className="w-8 h-8 text-yellow-500" />
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-white border-helpers-muted">
+          <Card className="bg-white border-purple-200">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-helpers-purple">Total Earnings</p>
-                  <p className="text-2xl font-bold text-helpers-dark">${earningsStats.totalEarnings}</p>
+                  <p className="text-sm text-gray-600">Total Earnings</p>
+                  <p className="text-2xl font-bold text-gray-900">${earningsStats.totalEarnings}</p>
                 </div>
                 <CheckCircle className="w-8 h-8 text-green-500" />
               </div>
@@ -205,35 +205,35 @@ export default function HelperEarnings() {
 
               <TabsContent value="overview" className="space-y-4">
                 {recentTransactions.map((transaction) => (
-                  <Card key={transaction.id} className="bg-white border-helpers-muted">
+                  <Card key={transaction.id} className="bg-white border-purple-200">
                     <CardContent className="p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div>
-                          <h3 className="font-semibold text-helpers-dark">{transaction.service}</h3>
-                          <p className="text-helpers-purple">Customer: {transaction.customer}</p>
+                          <h3 className="font-semibold text-gray-900">{transaction.service}</h3>
+                          <p className="text-gray-600">Customer: {transaction.customer}</p>
                           <div className="flex items-center gap-2 mt-1">
-                            <Calendar className="w-3 h-3 text-helpers-purple" />
-                            <span className="text-sm text-helpers-purple">{formatDate(transaction.date)}</span>
+                            <Calendar className="w-3 h-3 text-gray-600" />
+                            <span className="text-sm text-gray-600">{formatDate(transaction.date)}</span>
                           </div>
                         </div>
                         <div className="text-right">
                           <Badge className={getStatusColor(transaction.status)}>{transaction.status}</Badge>
-                          <div className="text-lg font-bold text-helpers-dark mt-1">${transaction.amount}</div>
+                          <div className="text-lg font-bold text-gray-900 mt-1">${transaction.amount}</div>
                         </div>
                       </div>
 
-                      <div className="bg-helpers-pale border border-helpers-muted rounded-lg p-3">
+                      <div className="bg-purple-50 border border-purple-200 rounded-lg p-3">
                         <div className="grid grid-cols-3 gap-4 text-sm">
                           <div>
-                            <span className="text-helpers-purple">Service Fee:</span>
-                            <div className="font-medium text-helpers-dark">-${transaction.fee}</div>
+                            <span className="text-gray-600">Service Fee:</span>
+                            <div className="font-medium text-gray-900">-${transaction.fee}</div>
                           </div>
                           <div>
-                            <span className="text-helpers-purple">Platform Fee:</span>
-                            <div className="font-medium text-helpers-dark">5%</div>
+                            <span className="text-gray-600">Platform Fee:</span>
+                            <div className="font-medium text-gray-900">5%</div>
                           </div>
                           <div>
-                            <span className="text-helpers-purple">Net Earnings:</span>
+                            <span className="text-gray-600">Net Earnings:</span>
                             <div className="font-bold text-green-600">${transaction.net}</div>
                           </div>
                         </div>
@@ -245,20 +245,20 @@ export default function HelperEarnings() {
 
               <TabsContent value="payouts" className="space-y-4">
                 {payoutHistory.map((payout) => (
-                  <Card key={payout.id} className="bg-white border-helpers-muted">
+                  <Card key={payout.id} className="bg-white border-purple-200">
                     <CardContent className="p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div>
-                          <h3 className="font-semibold text-helpers-dark">Payout #{payout.reference}</h3>
-                          <p className="text-helpers-purple">{payout.method}</p>
+                          <h3 className="font-semibold text-gray-900">Payout #{payout.reference}</h3>
+                          <p className="text-gray-600">{payout.method}</p>
                           <div className="flex items-center gap-2 mt-1">
-                            <Calendar className="w-3 h-3 text-helpers-purple" />
-                            <span className="text-sm text-helpers-purple">{formatDate(payout.date)}</span>
+                            <Calendar className="w-3 h-3 text-gray-600" />
+                            <span className="text-sm text-gray-600">{formatDate(payout.date)}</span>
                           </div>
                         </div>
                         <div className="text-right">
                           <Badge className={getStatusColor(payout.status)}>{payout.status}</Badge>
-                          <div className="text-lg font-bold text-helpers-dark mt-1">${payout.amount}</div>
+                          <div className="text-lg font-bold text-gray-900 mt-1">${payout.amount}</div>
                         </div>
                       </div>
 
@@ -266,7 +266,7 @@ export default function HelperEarnings() {
                         <Button
                           size="sm"
                           variant="outline"
-                          className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                          className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                         >
                           <Download className="w-4 h-4 mr-2" />
                           Receipt
@@ -274,7 +274,7 @@ export default function HelperEarnings() {
                         <Button
                           size="sm"
                           variant="outline"
-                          className="border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                          className="border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                         >
                           View Details
                         </Button>
@@ -289,31 +289,31 @@ export default function HelperEarnings() {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Withdrawal Card */}
-            <Card className="bg-white border-helpers-muted">
+            <Card className="bg-white border-purple-200">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-helpers-dark">
+                <CardTitle className="flex items-center gap-2 text-gray-900">
                   <CreditCard className="w-5 h-5" />
                   Withdraw Earnings
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-helpers-dark">${earningsStats.availableBalance}</div>
-                  <div className="text-sm text-helpers-purple">Available for withdrawal</div>
+                  <div className="text-2xl font-bold text-gray-900">${earningsStats.availableBalance}</div>
+                  <div className="text-sm text-gray-600">Available for withdrawal</div>
                 </div>
-                <Button className="w-full bg-helpers-accent hover:bg-helpers-accent-dark text-white">
+                <Button className="w-full bg-purple-600 hover:bg-purple-600-dark text-white">
                   Withdraw Funds
                 </Button>
-                <div className="text-xs text-helpers-purple text-center">
+                <div className="text-xs text-gray-600 text-center">
                   Withdrawals are processed within 1-3 business days
                 </div>
               </CardContent>
             </Card>
 
             {/* Payment Method */}
-            <Card className="bg-white border-helpers-muted">
+            <Card className="bg-white border-purple-200">
               <CardHeader>
-                <CardTitle className="text-helpers-dark">Payment Method</CardTitle>
+                <CardTitle className="text-gray-900">Payment Method</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center gap-3">
@@ -321,13 +321,13 @@ export default function HelperEarnings() {
                     BANK
                   </div>
                   <div>
-                    <p className="font-medium text-helpers-dark">Chase Bank</p>
-                    <p className="text-sm text-helpers-purple">•••• •••• •••• 4567</p>
+                    <p className="font-medium text-gray-900">Chase Bank</p>
+                    <p className="text-sm text-gray-600">•••• •••• •••• 4567</p>
                   </div>
                 </div>
                 <Button
                   variant="outline"
-                  className="w-full border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                  className="w-full border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                 >
                   Update Payment Method
                 </Button>
@@ -335,42 +335,42 @@ export default function HelperEarnings() {
             </Card>
 
             {/* Earnings Summary */}
-            <Card className="bg-white border-helpers-muted">
+            <Card className="bg-white border-purple-200">
               <CardHeader>
-                <CardTitle className="text-helpers-dark">Earnings Summary</CardTitle>
+                <CardTitle className="text-gray-900">Earnings Summary</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-helpers-purple">This Week</span>
-                  <span className="font-medium text-helpers-dark">${earningsStats.thisWeek}</span>
+                  <span className="text-gray-600">This Week</span>
+                  <span className="font-medium text-gray-900">${earningsStats.thisWeek}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-helpers-purple">This Month</span>
-                  <span className="font-medium text-helpers-dark">${earningsStats.thisMonth}</span>
+                  <span className="text-gray-600">This Month</span>
+                  <span className="font-medium text-gray-900">${earningsStats.thisMonth}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-helpers-purple">Average per Job</span>
-                  <span className="font-medium text-helpers-dark">$78</span>
+                  <span className="text-gray-600">Average per Job</span>
+                  <span className="font-medium text-gray-900">$78</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-helpers-purple">Jobs This Month</span>
-                  <span className="font-medium text-helpers-dark">16</span>
+                  <span className="text-gray-600">Jobs This Month</span>
+                  <span className="font-medium text-gray-900">16</span>
                 </div>
               </CardContent>
             </Card>
 
             {/* Tax Information */}
-            <Card className="bg-white border-helpers-muted">
+            <Card className="bg-white border-purple-200">
               <CardHeader>
-                <CardTitle className="text-helpers-dark">Tax Information</CardTitle>
+                <CardTitle className="text-gray-900">Tax Information</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <div className="text-sm text-helpers-purple">
+                <div className="text-sm text-gray-600">
                   Your 1099 tax form will be available in January for the previous tax year.
                 </div>
                 <Button
                   variant="outline"
-                  className="w-full border-helpers-muted text-helpers-purple hover:bg-helpers-pale bg-transparent"
+                  className="w-full border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Download Tax Documents

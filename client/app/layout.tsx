@@ -1,8 +1,10 @@
-import type React from "react"
 import type { Metadata } from "next"
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
 import "./globals.css"
+import Footer from "@/components/footer"
+import ErrorBoundary from "@/components/error-boundary"
+import { ThemeProvider } from "@/components/theme-provider"
+import { AuthLayout } from "@/components/auth-layout"
+import Script from "next/script"
 
 export const metadata: Metadata = {
   title: "Helpers - Management System",
@@ -16,8 +18,36 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Google Analytics */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+            strategy="afterInteractive"
+          />
+        )}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+            `}
+          </Script>
+        )}
+      </head>
+      <body className="font-sans min-h-screen flex flex-col bg-background text-foreground" style={{ fontFamily: 'Noto Sans, sans-serif' }}>
+        <ThemeProvider>
+          <ErrorBoundary>
+            <AuthLayout>
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </AuthLayout>
+          </ErrorBoundary>
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
