@@ -1,5 +1,5 @@
-import { decode } from 'https://deno.fresh.dev/std@v1.0/encoding/base64.ts';
-import * as jose from 'https://deno.fresh.dev/x/jose@v4.11.1/index.ts';
+import { decode } from 'https://deno.land/std@0.168.0/encoding/base64.ts';
+import * as jose from 'https://deno.land/x/jose@v4.11.1/index.ts';
 
 export async function verifyJWT(token: string) {
   try {
