@@ -207,3 +207,5 @@ export interface GeolocationCoords {
   longitude: number;
   accuracy?: number;
 }
+
+export * from './database';
