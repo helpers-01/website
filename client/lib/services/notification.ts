@@ -1,7 +1,7 @@
 import { supabase } from '../supabase/client';
-import { messaging } from './clients';
+import { messaging } from '../clients';
 import { getToken } from 'firebase/messaging';
-import type { Database } from '@/types/database.types';
+import type { Database } from '../../shared/types/database';
 
 type Notification = Database['public']['Tables']['notifications']['Insert'];
 type UserDevice = Database['public']['Tables']['user_devices']['Insert'];
