@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase/client';
-import { validateEmail, validatePassword, getUserProfile, SUPER_ADMIN_EMAIL, logAdminAction } from '@/lib/auth-utils';
+import { validateEmail, validatePassword, getUserProfile, SUPER_ADMIN_EMAIL } from '@/lib/auth-utils';
 import type { AuthState } from '@/types/auth';
 
 export default function AdminLogin() {
@@ -53,8 +53,8 @@ export default function AdminLogin() {
         success: "Sign in successful! Redirecting to admin panel...",
       }));
 
-      // Log admin login
-      await logAdminAction('admin_login', {
+      // Log admin login (for debugging)
+      console.log('Admin login:', {
         email: user.email,
         timestamp: new Date().toISOString(),
       });
