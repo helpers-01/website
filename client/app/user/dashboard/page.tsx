@@ -59,12 +59,12 @@ export default function UserDashboard() {
   ]
 
   const serviceCategories = [
-    { name: "Home Cleaning", icon: Home, color: "bg-blue-100 text-blue-600" },
-    { name: "Repairs", icon: Wrench, color: "bg-green-100 text-green-600" },
-    { name: "Painting", icon: Paintbrush, color: "bg-purple-100 text-purple-600" },
-    { name: "Car Service", icon: Car, color: "bg-orange-100 text-orange-600" },
-    { name: "Electrical", icon: Zap, color: "bg-yellow-100 text-yellow-600" },
-    { name: "Plumbing", icon: Droplets, color: "bg-cyan-100 text-cyan-600" },
+    { name: "Home Cleaning", icon: Home, color: "bg-primary text-white" },
+    { name: "Repairs", icon: Wrench, color: "bg-success text-white" },
+    { name: "Painting", icon: Paintbrush, color: "bg-primary text-white" },
+    { name: "Car Service", icon: Car, color: "bg-warning text-textPrimary" },
+    { name: "Electrical", icon: Zap, color: "bg-warning text-textPrimary" },
+    { name: "Plumbing", icon: Droplets, color: "bg-info text-white" },
   ]
 
   const recommendedServices = [
@@ -98,40 +98,39 @@ export default function UserDashboard() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
+    <div className="min-h-screen bg-background">
       <UserNav />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
-            <h2 className="text-2xl font-bold text-gray-900">Welcome back, John!</h2>
+            <h2 className="text-2xl font-bold text-textPrimary">Welcome back, John!</h2>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-sm text-green-600 font-medium">Live Updates</span>
+              <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
+              <span className="text-sm text-success font-medium">Live Updates</span>
             </div>
           </div>
-          <p className="text-gray-600">What service do you need today?</p>
+          <p className="text-textSecondary">What service do you need today?</p>
         </div>
 
         {/* Search Bar */}
-        <Card className="mb-8 bg-white/80 backdrop-blur-sm border-purple-200">
+        <Card className="mb-8">
           <CardContent className="p-6">
             <div className="flex gap-4">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-textSecondary" />
                 <Input
                   placeholder="Search for services..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 border-purple-200 focus:border-purple-400"
                 />
               </div>
-              <div className="flex items-center gap-2 text-gray-600">
+              <div className="flex items-center gap-2 text-textSecondary">
                 <MapPin className="w-4 h-4" />
                 <span className="text-sm">New York, NY</span>
               </div>
-              <Button className="bg-purple-600 hover:bg-purple-700 text-white">Search</Button>
+              <Button>Search</Button>
             </div>
           </CardContent>
         </Card>
@@ -140,9 +139,9 @@ export default function UserDashboard() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {/* Service Categories */}
-            <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-gray-900">Popular Categories</CardTitle>
+                <CardTitle className="text-textPrimary">Popular Categories</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -151,12 +150,12 @@ export default function UserDashboard() {
                     return (
                       <button
                         key={category.name}
-                        className="flex flex-col items-center gap-3 p-4 rounded-lg border border-purple-200 hover:border-purple-400 transition-colors bg-white/50"
+                        className="flex flex-col items-center gap-3 p-4 rounded-lg border border-border hover:border-primary transition-colors bg-surface"
                       >
-                        <div className={`w-12 h-12 rounded-full flex items-center justify-center ${category.color}`}>
+                        <div className="w-12 h-12 rounded-full flex items-center justify-center bg-primary text-white">
                           <IconComponent className="w-6 h-6" />
                         </div>
-                        <span className="text-sm font-medium text-gray-900">{category.name}</span>
+                        <span className="text-sm font-medium text-textPrimary">{category.name}</span>
                       </button>
                     )
                   })}
@@ -165,32 +164,32 @@ export default function UserDashboard() {
             </Card>
 
             {/* Recommended Services */}
-            <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-gray-900">Recommended for You</CardTitle>
+                <CardTitle className="text-textPrimary">Recommended for You</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {recommendedServices.map((service) => (
-                    <div key={service.id} className="border border-purple-200 rounded-lg overflow-hidden bg-white/50">
+                    <div key={service.id} className="border border-border rounded-lg overflow-hidden bg-surface">
                       <img
                         src={service.image || "/placeholder.svg"}
                         alt={service.name}
                         className="w-full h-32 object-cover"
                       />
                       <div className="p-4">
-                        <h3 className="font-semibold text-gray-900 mb-1">{service.name}</h3>
-                        <p className="text-sm text-gray-600 mb-2">{service.provider}</p>
+                        <h3 className="font-semibold text-textPrimary mb-1">{service.name}</h3>
+                        <p className="text-sm text-textSecondary mb-2">{service.provider}</p>
                         <div className="flex items-center gap-2 mb-3">
                           <div className="flex items-center gap-1">
                             <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                             <span className="text-sm font-medium">{service.rating}</span>
                           </div>
-                          <span className="text-sm text-gray-600">({service.reviews} reviews)</span>
+                          <span className="text-sm text-textSecondary">({service.reviews} reviews)</span>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="font-bold text-gray-900">{service.price}</span>
-                          <Button size="sm" className="bg-purple-600 hover:bg-purple-700 text-white">
+                          <span className="font-bold text-textPrimary">{service.price}</span>
+                          <Button size="sm">
                             Book Now
                           </Button>
                         </div>
@@ -205,28 +204,28 @@ export default function UserDashboard() {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Upcoming Bookings */}
-            <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-gray-900">Upcoming Bookings</CardTitle>
+                <CardTitle className="text-textPrimary">Upcoming Bookings</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {upcomingBookings.map((booking) => (
-                  <div key={booking.id} className="border border-purple-200 rounded-lg p-4 bg-white/50">
+                  <div key={booking.id} className="border border-border rounded-lg p-4 bg-surface">
                     <div className="flex items-start justify-between mb-2">
-                      <h4 className="font-medium text-gray-900">{booking.service}</h4>
+                      <h4 className="font-medium text-textPrimary">{booking.service}</h4>
                       <Badge
                         variant={booking.status === "confirmed" ? "default" : "secondary"}
                         className={
                           booking.status === "confirmed"
-                            ? "bg-green-100 text-green-700"
-                            : "bg-yellow-100 text-yellow-700"
+                            ? "bg-success text-white"
+                            : "bg-warning text-textPrimary"
                         }
                       >
                         {booking.status}
                       </Badge>
                     </div>
-                    <p className="text-sm text-gray-600 mb-2">{booking.provider}</p>
-                    <div className="flex items-center gap-4 text-sm text-gray-600">
+                    <p className="text-sm text-textSecondary mb-2">{booking.provider}</p>
+                    <div className="flex items-center gap-4 text-sm text-textSecondary">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-3 h-3" />
                         <span>{booking.date}</span>
@@ -242,39 +241,27 @@ export default function UserDashboard() {
                     </div>
                   </div>
                 ))}
-                <Button
-                  variant="outline"
-                  className="w-full border-purple-200 text-purple-700 hover:bg-purple-50 bg-transparent"
-                >
+                <Button variant="outline" className="w-full">
                   View All Bookings
                 </Button>
               </CardContent>
             </Card>
 
             {/* Quick Actions */}
-            <Card className="bg-white/80 backdrop-blur-sm border-purple-200">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-gray-900">Quick Actions</CardTitle>
+                <CardTitle className="text-textPrimary">Quick Actions</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Button
-                  variant="outline"
-                  className="w-full justify-start border-purple-200 text-purple-700 hover:bg-purple-50 bg-transparent"
-                >
+                <Button variant="outline" className="w-full justify-start">
                   <Calendar className="w-4 h-4 mr-2" />
                   My Bookings
                 </Button>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start border-purple-200 text-purple-700 hover:bg-purple-50 bg-transparent"
-                >
+                <Button variant="outline" className="w-full justify-start">
                   <Star className="w-4 h-4 mr-2" />
                   Leave Review
                 </Button>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start border-purple-200 text-purple-700 hover:bg-purple-50 bg-transparent"
-                >
+                <Button variant="outline" className="w-full justify-start">
                   <Settings className="w-4 h-4 mr-2" />
                   Account Settings
                 </Button>
