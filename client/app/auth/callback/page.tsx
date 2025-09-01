@@ -22,8 +22,8 @@ export default function AuthCallback() {
         }
 
         if (data.session) {
-          // Successfully authenticated
-          router.push('/login');
+          // Successfully authenticated - let main page handle role-based redirects
+          router.push('/');
         } else {
           // No session, redirect to login
           router.push('/login');
@@ -40,10 +40,10 @@ export default function AuthCallback() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-orange-100 to-orange-200">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Verifying your email...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-textSecondary">Verifying your email...</p>
         </div>
       </div>
     );
@@ -51,12 +51,12 @@ export default function AuthCallback() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-orange-100 to-orange-200">
         <div className="text-center">
-          <div className="text-red-600 mb-4">Error: {error}</div>
+          <div className="text-error mb-4">Error: {error}</div>
           <button
             onClick={() => router.push('/login')}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            className="btn-primary"
           >
             Back to Login
           </button>

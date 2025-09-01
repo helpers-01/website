@@ -30,7 +30,10 @@ export async function middleware(req: NextRequest) {
         req.nextUrl.pathname.startsWith('/dashboard/admin') &&
         profile.role !== 'admin'
       ) {
-        const redirectUrl = new URL('/', req.url)
+        // Redirect to correct dashboard based on actual role
+        const redirectPath = profile.role === 'helper' ? '/dashboard/provider' :
+                           profile.role === 'user' ? '/dashboard/customer' : '/login'
+        const redirectUrl = new URL(redirectPath, req.url)
         return NextResponse.redirect(redirectUrl)
       }
 
@@ -38,7 +41,10 @@ export async function middleware(req: NextRequest) {
         req.nextUrl.pathname.startsWith('/dashboard/provider') &&
         profile.role !== 'helper'
       ) {
-        const redirectUrl = new URL('/', req.url)
+        // Redirect to correct dashboard based on actual role
+        const redirectPath = profile.role === 'admin' ? '/dashboard/admin' :
+                           profile.role === 'user' ? '/dashboard/customer' : '/login'
+        const redirectUrl = new URL(redirectPath, req.url)
         return NextResponse.redirect(redirectUrl)
       }
 
@@ -46,7 +52,10 @@ export async function middleware(req: NextRequest) {
         req.nextUrl.pathname.startsWith('/dashboard/customer') &&
         profile.role !== 'user'
       ) {
-        const redirectUrl = new URL('/', req.url)
+        // Redirect to correct dashboard based on actual role
+        const redirectPath = profile.role === 'admin' ? '/dashboard/admin' :
+                           profile.role === 'helper' ? '/dashboard/provider' : '/login'
+        const redirectUrl = new URL(redirectPath, req.url)
         return NextResponse.redirect(redirectUrl)
       }
     }
