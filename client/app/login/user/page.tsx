@@ -88,13 +88,15 @@ export default function UserLoginPage() {
         if (error) throw error;
         setAuthState(prev => ({ ...prev, success: 'Login successful!' }));
       } else {
+        const redirectTo = typeof window !== 'undefined' ? `${window.location.origin}/login` : '/login';
         const { error } = await supabase.auth.signUp({
           email,
           password,
           options: {
             data: {
               role: 'user'
-            }
+            },
+            emailRedirectTo: redirectTo
           }
         });
         if (error) throw error;

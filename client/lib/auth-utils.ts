@@ -36,11 +36,11 @@ export async function getUserProfile(userId: string): Promise<Profile> {
 export function getRoleRedirectPath(role: UserRole): string {
   switch (role) {
     case 'admin':
-      return '/admin-panel';
+      return '/dashboard/admin';
     case 'helper':
-      return '/helper-dashboard';
+      return '/dashboard/provider';
     case 'user':
-      return '/dashboard';
+      return '/dashboard/customer';
     default:
       return '/';
   }

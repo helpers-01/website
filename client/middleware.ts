@@ -11,11 +11,7 @@ export async function middleware(req: NextRequest) {
   } = await supabase.auth.getSession()
 
   // If no session and trying to access protected route, redirect to login
-  if (!session && (
-    req.nextUrl.pathname.startsWith('/admin') ||
-    req.nextUrl.pathname.startsWith('/provider') ||
-    req.nextUrl.pathname.startsWith('/customer')
-  )) {
+  if (!session && req.nextUrl.pathname.startsWith('/dashboard/')) {
     const redirectUrl = new URL('/login', req.url)
     return NextResponse.redirect(redirectUrl)
   }
@@ -31,24 +27,24 @@ export async function middleware(req: NextRequest) {
     // Redirect based on role restrictions
     if (profile?.role) {
       if (
-        req.nextUrl.pathname.startsWith('/admin') && 
+        req.nextUrl.pathname.startsWith('/dashboard/admin') &&
         profile.role !== 'admin'
-      ) {
-        const redirectUrl = new URL('/', req.url)
-        return NextResponse.redirect(redirectUrl)
-      }
-      
-      if (
-        req.nextUrl.pathname.startsWith('/provider') && 
-        profile.role !== 'provider'
       ) {
         const redirectUrl = new URL('/', req.url)
         return NextResponse.redirect(redirectUrl)
       }
 
       if (
-        req.nextUrl.pathname.startsWith('/customer') && 
-        profile.role !== 'customer'
+        req.nextUrl.pathname.startsWith('/dashboard/provider') &&
+        profile.role !== 'helper'
+      ) {
+        const redirectUrl = new URL('/', req.url)
+        return NextResponse.redirect(redirectUrl)
+      }
+
+      if (
+        req.nextUrl.pathname.startsWith('/dashboard/customer') &&
+        profile.role !== 'user'
       ) {
         const redirectUrl = new URL('/', req.url)
         return NextResponse.redirect(redirectUrl)

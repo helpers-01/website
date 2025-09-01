@@ -1,10 +1,40 @@
 "use client"
 
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { User, Users, Shield } from "lucide-react"
+import { useAuth } from "@/lib/contexts/AuthContext"
 
 export default function LoginDashboard() {
+  const { user, role, loading } = useAuth()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!loading && user && role) {
+      // Redirect logged-in users to their dashboard
+      if (role === 'admin') {
+        router.push('/dashboard/admin')
+      } else if (role === 'helper') {
+        router.push('/dashboard/provider')
+      } else if (role === 'user') {
+        router.push('/dashboard/customer')
+      }
+    }
+  }, [user, role, loading, router])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    )
+  }
+
+  if (user) {
+    return null // Will redirect
+  }
   const loginOptions = [
     {
       id: "user",
