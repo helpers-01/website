@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useAuthStore } from '@/lib/stores/auth';
+import { useAuth } from '@/lib/contexts/AuthContext';
 import { referralService } from '@/lib/services/referral';
 
 type ReferralHistory = {
@@ -17,7 +17,7 @@ type ReferralHistory = {
 };
 
 export function ReferralProgram() {
-  const { user } = useAuthStore();
+  const { user } = useAuth();
   const [referralCode, setReferralCode] = useState<string | null>(null);
   const [history, setHistory] = useState<ReferralHistory[]>([]);
   const [loading, setLoading] = useState(true);
