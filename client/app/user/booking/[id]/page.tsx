@@ -1,15 +1,28 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useParams, useRouter } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 import { ArrowLeft, CheckCircle, Star, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
+import { supabase } from "@/lib/supabase/client"
+
+interface Service {
+  id: string
+  name: string
+  provider: string
+  package: string
+  price: number
+  duration: string
+  rating: number
+}
 
 export default function BookingFlow() {
+  const params = useParams()
+  const router = useRouter()
   const [currentStep, setCurrentStep] = useState(1)
   const [selectedDate, setSelectedDate] = useState("")
   const [selectedTime, setSelectedTime] = useState("")
@@ -20,15 +33,47 @@ export default function BookingFlow() {
     zip: "",
     instructions: "",
   })
+  const [service, setService] = useState<Service | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
 
-  const service = {
-    name: "Deep House Cleaning",
-    provider: "CleanPro Services",
-    package: "Standard Clean",
-    price: 89,
-    duration: "3-4 hours",
-    rating: 4.8,
-  }
+  // Fetch service data based on ID
+  useEffect(() => {
+    const fetchService = async () => {
+      try {
+        setLoading(true)
+        const serviceId = params?.id as string
+
+        if (!serviceId) {
+          setError('Service ID not found')
+          return
+        }
+
+        // In a real app, this would fetch from Supabase
+        // For now, using mock data
+        const mockService: Service = {
+          id: serviceId,
+          name: "Deep House Cleaning",
+          provider: "CleanPro Services",
+          package: "Standard Clean",
+          price: 89,
+          duration: "3-4 hours",
+          rating: 4.8,
+        }
+
+        setService(mockService)
+      } catch (err) {
+        console.error('Error fetching service:', err)
+        setError('Failed to load service details')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (params?.id) {
+      fetchService()
+    }
+  }, [params?.id])
 
   const availableDates = [
     { date: "2025-01-15", day: "Today", available: true },
@@ -71,11 +116,50 @@ export default function BookingFlow() {
 
   const handleBooking = () => {
     // Process booking and redirect to success page
-    window.location.href = "/user/booking/success"
+    router.push("/user/booking/success")
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-orange-100 to-orange-200">
+        <div className="flex flex-col items-center gap-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+          <span className="text-primary font-medium">Loading service details...</span>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-orange-100 to-orange-200">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-error mb-4">Error Loading Service</h2>
+          <p className="text-textSecondary mb-6">{error}</p>
+          <Button onClick={() => router.back()}>
+            Go Back
+          </Button>
+        </div>
+      </div>
+    )
+  }
+
+  if (!service) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-orange-100 to-orange-200">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-textPrimary mb-4">Service Not Found</h2>
+          <p className="text-textSecondary mb-6">The service you're looking for doesn't exist.</p>
+          <Button onClick={() => router.push('/user/search')}>
+            Browse Services
+          </Button>
+        </div>
+      </div>
+    )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-r from-orange-100 to-orange-200">
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-sm border-b border-purple-200">
         <div className="max-w-7xl mx-auto p-6">
@@ -243,15 +327,15 @@ export default function BookingFlow() {
                       </div>
                     </div>
                     <div>
-                      <Label htmlFor="instructions" className="text-gray-900">
+                      <Label htmlFor="instructions" className="text-textPrimary">
                         Special Instructions (Optional)
                       </Label>
-                      <Textarea
+                      <Input
                         id="instructions"
                         placeholder="Any special instructions for the service provider..."
                         value={address.instructions}
-                        onChange={(e) => setAddress({ ...address, instructions: e.target.value })}
-                        className="border-purple-200 focus:border-purple-600"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress({ ...address, instructions: e.target.value })}
+                        className="focus:ring-2 focus:ring-primary"
                       />
                     </div>
                   </div>
