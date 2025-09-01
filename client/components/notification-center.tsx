@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useAuthStore } from '@/lib/stores/auth';
+import { useAuth } from '@/lib/contexts/AuthContext';
 import { notificationService } from '@/lib/services/notification';
 
 type Notification = {
@@ -14,7 +14,7 @@ type Notification = {
 };
 
 export function NotificationCenter() {
-  const { user } = useAuthStore();
+  const { user } = useAuth();
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [loading, setLoading] = useState(true);
