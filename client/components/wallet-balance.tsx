@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useAuthStore } from '@/lib/stores/auth';
+import { useAuth } from '@/lib/contexts/AuthContext';
 import { walletService } from '@/lib/services/wallet';
 import { formatCurrency } from '@/lib/utils';
 
@@ -14,7 +14,7 @@ type Transaction = {
 };
 
 export function WalletBalance() {
-  const { user } = useAuthStore();
+  const { user } = useAuth();
   const [balance, setBalance] = useState<number>(0);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
