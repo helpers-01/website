@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useAuthStore } from '@/lib/stores/auth';
+import { useAuth } from '@/lib/contexts/AuthContext';
 import { trackingService } from '@/lib/services/tracking';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 
@@ -26,7 +26,7 @@ const defaultCenter = {
 };
 
 export function LocationTracker({ bookingId }: Props) {
-  const { profile } = useAuthStore();
+  const { user, userProfile, role } = useAuth();
   const [locations, setLocations] = useState<Location[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -52,11 +52,11 @@ export function LocationTracker({ bookingId }: Props) {
 
   // Start tracking for helpers
   useEffect(() => {
-    if (profile?.role === 'helper') {
-      const cleanup = trackingService.watchLocation(bookingId, profile.id);
+    if (role === 'helper' && userProfile?.id) {
+      const cleanup = trackingService.watchLocation(bookingId, userProfile.id);
       return () => cleanup();
     }
-  }, [bookingId, profile]);
+  }, [bookingId, role, userProfile]);
 
   if (loading) {
     return <div className="animate-pulse">Loading location data...</div>;
