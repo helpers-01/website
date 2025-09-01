@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -22,6 +23,7 @@ import {
 } from "lucide-react"
 
 export default function HelperDashboard() {
+  const router = useRouter()
   const [activeTab, setActiveTab] = useState("requests")
   const [refreshTrigger, setRefreshTrigger] = useState(0)
 
@@ -360,7 +362,7 @@ export default function HelperDashboard() {
                 <Button
                   variant="outline"
                   className="w-full justify-start border-purple-200 text-purple-700 hover:bg-purple-50 bg-transparent"
-                  onClick={() => (window.location.href = "/helper/jobs")}
+                  onClick={() => router.push("/helper/jobs")}
                 >
                   <Calendar className="w-4 h-4 mr-2" />
                   View All Jobs
@@ -368,7 +370,7 @@ export default function HelperDashboard() {
                 <Button
                   variant="outline"
                   className="w-full justify-start border-purple-200 text-purple-700 hover:bg-purple-50 bg-transparent"
-                  onClick={() => (window.location.href = "/helper/earnings")}
+                  onClick={() => router.push("/helper/earnings")}
                 >
                   <DollarSign className="w-4 h-4 mr-2" />
                   View Earnings
@@ -376,7 +378,7 @@ export default function HelperDashboard() {
                 <Button
                   variant="outline"
                   className="w-full justify-start border-purple-200 text-purple-700 hover:bg-purple-50 bg-transparent"
-                  onClick={() => (window.location.href = "/helper/profile")}
+                  onClick={() => router.push("/helper/profile")}
                 >
                   <Users className="w-4 h-4 mr-2" />
                   Edit Profile
@@ -384,7 +386,7 @@ export default function HelperDashboard() {
                 <Button
                   variant="outline"
                   className="w-full justify-start border-purple-200 text-purple-700 hover:bg-purple-50 bg-transparent"
-                  onClick={() => (window.location.href = "/helper/reviews")}
+                  onClick={() => router.push("/helper/reviews")}
                 >
                   <Star className="w-4 h-4 mr-2" />
                   View Reviews

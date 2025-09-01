@@ -305,9 +305,11 @@ export default function SearchResults() {
                             <Button variant="outline">
                               View Details
                             </Button>
-                            <Button onClick={() => (window.location.href = `/user/service/${service.id}`)}>
-                              Book Now
-                            </Button>
+                            <Link href={`/user/service/${service.id}`}>
+                              <Button>
+                                Book Now
+                              </Button>
+                            </Link>
                           </div>
                         </div>
                       </div>

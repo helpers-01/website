@@ -49,19 +49,36 @@ export default function BookingFlow() {
           return
         }
 
-        // In a real app, this would fetch from Supabase
-        // For now, using mock data
-        const mockService: Service = {
-          id: serviceId,
-          name: "Deep House Cleaning",
-          provider: "CleanPro Services",
-          package: "Standard Clean",
-          price: 89,
-          duration: "3-4 hours",
-          rating: 4.8,
+        // Fetch service from Supabase
+        const { data: serviceData, error: serviceError } = await supabase
+          .from('services')
+          .select('*')
+          .eq('id', serviceId)
+          .single()
+
+        if (serviceError) {
+          console.error('Error fetching service:', serviceError)
+          setError('Service not found')
+          return
         }
 
-        setService(mockService)
+        if (!serviceData) {
+          setError('Service not found')
+          return
+        }
+
+        // Transform Supabase data to Service interface
+        const service: Service = {
+          id: serviceData.id,
+          name: serviceData.name || 'Unknown Service',
+          provider: serviceData.provider_name || 'Unknown Provider',
+          package: serviceData.package || 'Standard',
+          price: serviceData.price || 0,
+          duration: serviceData.duration || 'TBD',
+          rating: serviceData.rating || 0,
+        }
+
+        setService(service)
       } catch (err) {
         console.error('Error fetching service:', err)
         setError('Failed to load service details')
@@ -161,14 +178,14 @@ export default function BookingFlow() {
   return (
     <div className="min-h-screen bg-gradient-to-r from-orange-100 to-orange-200">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-purple-200">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-border">
         <div className="max-w-7xl mx-auto p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/user/service/1" className="text-gray-600 hover:text-gray-900">
+              <Link href="/user/service/1" className="text-textSecondary hover:text-textPrimary">
                 <ArrowLeft className="w-5 h-5" />
               </Link>
-              <h1 className="text-xl font-bold text-gray-900">Book Service</h1>
+              <h1 className="text-xl font-bold text-textPrimary">Book Service</h1>
             </div>
           </div>
         </div>
@@ -457,15 +474,15 @@ export default function BookingFlow() {
 
                   <div className="flex gap-3">
                     <Button
-                      className="flex-1 bg-purple-600 hover:bg-purple-600-dark text-white"
-                      onClick={() => (window.location.href = "/user/bookings")}
+                      className="flex-1 bg-primary hover:bg-primaryLight text-white"
+                      onClick={() => router.push("/user/bookings")}
                     >
                       View My Bookings
                     </Button>
                     <Button
                       variant="outline"
-                      className="flex-1 border-purple-200 text-gray-600 hover:bg-purple-50 bg-transparent"
-                      onClick={() => (window.location.href = "/user/dashboard")}
+                      className="flex-1"
+                      onClick={() => router.push("/user/dashboard")}
                     >
                       Back to Dashboard
                     </Button>
