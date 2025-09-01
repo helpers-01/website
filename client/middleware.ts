@@ -63,8 +63,9 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      * - public folder
-     * - login page
+     * - api routes
+     * - auth callback
      */
-    '/((?!_next/static|_next/image|favicon.ico|public|login).*)',
+    '/((?!_next/static|_next/image|favicon.ico|public|api|auth/callback).*)',
   ],
 }

@@ -25,7 +25,7 @@ export default function AdminNav() {
   const router = useRouter()
 
   const navItems = [
-    { href: "/admin/dashboard", label: "Dashboard", icon: Home },
+    { href: "/dashboard/admin", label: "Dashboard", icon: Home },
     { href: "/admin/users", label: "Users", icon: Users },
     { href: "/admin/helpers", label: "Helpers", icon: UserCheck },
     { href: "/admin/services", label: "Services", icon: Grid3X3 },
@@ -41,7 +41,7 @@ export default function AdminNav() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/admin/dashboard" className="flex items-center gap-2">
+          <Link href="/dashboard/admin" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
               <Shield className="w-4 h-4 text-white" />
             </div>

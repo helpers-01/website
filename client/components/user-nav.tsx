@@ -13,7 +13,7 @@ export default function UserNav() {
   const router = useRouter()
 
   const navItems = [
-    { href: "/user/dashboard", label: "Dashboard", icon: Home },
+    { href: "/dashboard/customer", label: "Dashboard", icon: Home },
     { href: "/user/categories", label: "Services", icon: Grid3X3 },
     { href: "/user/search", label: "Search", icon: Search },
     { href: "/user/bookings", label: "My Bookings", icon: Calendar },
@@ -28,7 +28,7 @@ export default function UserNav() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/user/dashboard" className="flex items-center gap-2">
+          <Link href="/dashboard/customer" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
               <Home className="w-4 h-4 text-white" />
             </div>
