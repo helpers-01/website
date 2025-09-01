@@ -2,23 +2,23 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuthStore } from '@/lib/stores/auth';
+import { useAuth } from '@/lib/contexts/AuthContext';
 
 type Role = 'user' | 'helper' | 'admin';
 
 export function useProtectedRoute(allowedRoles?: Role[]) {
   const router = useRouter();
-  const { user, profile, loading, initialized } = useAuthStore();
+  const { user, userProfile, role, loading } = useAuth();
 
   useEffect(() => {
-    if (!loading && initialized) {
+    if (!loading) {
       if (!user) {
         router.replace('/login');
-      } else if (allowedRoles && profile && !allowedRoles.includes(profile.role)) {
+      } else if (allowedRoles && role && !allowedRoles.includes(role)) {
         router.replace('/');
       }
     }
-  }, [user, profile, loading, initialized, router, allowedRoles]);
+  }, [user, userProfile, role, loading, router, allowedRoles]);
 
-  return { user, profile, loading, initialized };
+  return { user, userProfile, role, loading };
 }
