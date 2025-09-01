@@ -67,46 +67,46 @@ export default function BookingManagement() {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "Completed":
-        return <CheckCircle className="h-4 w-4 text-green-600" />
+        return <CheckCircle className="h-4 w-4 text-success" />
       case "In Progress":
-        return <Clock className="h-4 w-4 text-blue-600" />
+        return <Clock className="h-4 w-4 text-info" />
       case "Scheduled":
-        return <Clock className="h-4 w-4 text-yellow-600" />
+        return <Clock className="h-4 w-4 text-warning" />
       case "Disputed":
-        return <AlertTriangle className="h-4 w-4 text-red-600" />
+        return <AlertTriangle className="h-4 w-4 text-error" />
       case "Cancelled":
-        return <XCircle className="h-4 w-4 text-gray-600" />
+        return <XCircle className="h-4 w-4 text-textSecondary" />
       default:
-        return <Clock className="h-4 w-4 text-gray-600" />
+        return <Clock className="h-4 w-4 text-textSecondary" />
     }
   }
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case "Completed":
-        return "bg-green-100 text-green-800"
+        return "bg-success/20 text-success hover:bg-success/30"
       case "In Progress":
-        return "bg-blue-100 text-blue-800"
+        return "bg-info/20 text-info hover:bg-info/30"
       case "Scheduled":
-        return "bg-yellow-100 text-yellow-800"
+        return "bg-warning/20 text-warning hover:bg-warning/30"
       case "Disputed":
-        return "bg-red-100 text-red-800"
+        return "bg-error/20 text-error hover:bg-error/30"
       case "Cancelled":
-        return "bg-gray-100 text-gray-800"
+        return "bg-textSecondary/20 text-textSecondary hover:bg-textSecondary/30"
       default:
-        return "bg-gray-100 text-gray-800"
+        return "bg-textSecondary/20 text-textSecondary hover:bg-textSecondary/30"
     }
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-r from-orange-100 to-orange-200">
       <AdminNav />
 
       <div className="max-w-7xl mx-auto p-6 space-y-8">
         {/* Header */}
         <div className="text-center space-y-2">
-          <h1 className="text-4xl font-bold text-gray-900">Booking Management</h1>
-          <p className="text-gray-600">Monitor and manage all platform bookings</p>
+          <h1 className="text-4xl font-bold text-textPrimary hover:scale-105 transition-transform duration-300">Booking Management</h1>
+          <p className="text-textSecondary">Monitor and manage all platform bookings</p>
         </div>
 
         {/* Search and Filters */}

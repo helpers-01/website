@@ -1,16 +1,27 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { Card, CardContent } from "@/components/ui/card"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { User, Users, Shield } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Card, CardContent } from "@/components/ui/card"
+import { Search } from "lucide-react"
 import { useAuth } from "@/lib/contexts/AuthContext"
 import Footer from "@/components/footer"
 
-export default function LoginDashboard() {
+export default function Home() {
   const { user, role, loading } = useAuth()
   const router = useRouter()
+  const [searchQuery, setSearchQuery] = useState("")
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      router.push(`/user/search?q=${encodeURIComponent(searchQuery.trim())}`)
+    } else {
+      router.push('/user/search')
+    }
+  }
 
   useEffect(() => {
     if (!loading && user && role) {
@@ -36,85 +47,99 @@ export default function LoginDashboard() {
   if (user) {
     return null // Will redirect
   }
-  const loginOptions = [
+
+  const services = [
     {
-      id: "user",
-      title: "User Login",
-      description:
-        "Login with your User ID and Password to access your personal account and services. Keep track of your progress and stay updated.",
-      icon: User,
-      href: "/login/user",
+      title: "Housekeeping",
+      desc: "Keep your home sparkling clean with our trusted housekeepers.",
+      img: "/images/housekeeping.jpg",
     },
     {
-      id: "helper",
-      title: "Helper Login",
-      description:
-        "Login to your Helper account using your Employee ID and Password. Access helper tools and manage your assigned tasks.",
-      icon: Users,
-      href: "/login/helper",
+      title: "Plumbing",
+      desc: "Fix leaks, install fixtures, and ensure your plumbing is in top shape.",
+      img: "/images/plumbing.jpg",
     },
     {
-      id: "admin",
-      title: "Admin Login",
-      description:
-        "For Admin Staff only. Use your Admin credentials to access administrative services and system management tools.",
-      icon: Shield,
-      href: "/login/admin",
+      title: "Electrical",
+      desc: "Get help with wiring, lighting, and other electrical tasks.",
+      img: "/images/electrical.jpg",
+    },
+    {
+      title: "Handyman",
+      desc: "Tackle those odd jobs around the house with our skilled handymen.",
+      img: "/images/handyman.jpg",
+    },
+    {
+      title: "Gardening",
+      desc: "Maintain a beautiful yard with our experienced gardening professionals.",
+      img: "/images/gardening.jpg",
     },
   ]
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="flex justify-center py-8">
-        <div className="flex items-center gap-3">
-          <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
-            <Users className="w-8 h-8 text-primary-foreground" />
-          </div>
-          <div>
-            <h1 className="text-3xl font-bold text-foreground">Helpers</h1>
-            <p className="text-primary text-sm">Management System</p>
+    <div className="flex flex-col min-h-screen">
+      {/* Navbar */}
+      <header className="w-full border-b border-border bg-background">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <Link href="/" className="text-xl font-bold text-textPrimary">HelperConnect</Link>
+          <nav className="hidden md:flex gap-6 text-sm font-medium text-textSecondary">
+            <Link href="/user/search" className="hover:text-primary transition-colors">Find Helpers</Link>
+            <Link href="/login/helper" className="hover:text-primary transition-colors">Become a Helper</Link>
+            <Link href="/user/support" className="hover:text-primary transition-colors">Safety</Link>
+            <Link href="/user/support" className="hover:text-primary transition-colors">Support</Link>
+          </nav>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={() => router.push('/login/user')}>Log in</Button>
+            <Button onClick={() => router.push('/login/user')}>Sign up</Button>
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Login Cards Grid */}
-      <div className="max-w-4xl mx-auto px-6 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {loginOptions.map((option) => {
-            const IconComponent = option.icon
-            return (
-              <div
-                key={option.id}
-                className="card-style hover:shadow-lg transition-shadow"
-              >
-                <CardContent className="p-6">
-                  <div className="flex flex-col items-start space-y-4">
-                    {/* Icon */}
-                    <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center">
-                      <IconComponent className="w-6 h-6 text-primary" />
-                    </div>
+      {/* Hero Section */}
+      <section className="relative flex flex-col items-center justify-center bg-gradient-to-r from-orange-100 to-orange-200 px-6 py-20 text-center">
+        <h2 className="text-4xl font-bold mb-4 text-textPrimary">Find local helpers for any task</h2>
+        <p className="mb-6 text-lg text-textSecondary">
+          Connect with skilled professionals in your area for home repairs, cleaning, and more.
+        </p>
+        <div className="flex w-full max-w-md items-center rounded-2xl bg-background shadow p-2">
+          <Input
+            type="text"
+            placeholder="Search for services"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="border-none focus:ring-0"
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleSearch()
+              }
+            }}
+          />
+          <Button
+            className="flex items-center gap-2"
+            onClick={handleSearch}
+          >
+            <Search className="w-4 h-4" /> Search
+          </Button>
+        </div>
+      </section>
 
-                    {/* Title */}
-                    <h2 className="text-xl font-semibold text-foreground">{option.title}</h2>
-
-                    {/* Description */}
-                    <p className="text-sm text-muted-foreground leading-relaxed">{option.description}</p>
-
-                    {/* Login Button */}
-                    <Button
-                      className="btn-primary w-full"
-                      onClick={() => (window.location.href = option.href)}
-                    >
-                      Login Now
-                    </Button>
-                  </div>
+      {/* Popular Services */}
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <h3 className="text-2xl font-bold mb-8 text-textPrimary">Popular Services</h3>
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+          {services.map((s, i) => (
+            <Link key={i} href={`/user/search?q=${encodeURIComponent(s.title.toLowerCase())}`}>
+              <Card className="overflow-hidden shadow hover:shadow-lg transition cursor-pointer">
+                <img src={s.img} alt={s.title} className="h-40 w-full object-cover" />
+                <CardContent className="p-4">
+                  <h4 className="font-semibold mb-2 text-textPrimary">{s.title}</h4>
+                  <p className="text-sm text-textSecondary">{s.desc}</p>
                 </CardContent>
-              </div>
-            )
-          })}
+              </Card>
+            </Link>
+          ))}
         </div>
-      </div>
+      </section>
 
       {/* Footer */}
       <Footer />

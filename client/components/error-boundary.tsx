@@ -53,29 +53,29 @@ function ErrorBoundary({ children, fallback: FallbackComponent }: ErrorBoundaryP
 
 function DefaultErrorFallback({ error, resetError }: { error?: Error; resetError: () => void }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 flex items-center justify-center px-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-6 text-center">
-        <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <AlertTriangle className="w-8 h-8 text-red-600" />
+    <div className="min-h-screen bg-background flex items-center justify-center px-4">
+      <div className="max-w-md w-full bg-white rounded-2xl shadow-sm border border-border p-6 text-center">
+        <div className="w-16 h-16 bg-error/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <AlertTriangle className="w-8 h-8 text-error" />
         </div>
 
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Something went wrong</h1>
+        <h1 className="text-2xl font-bold text-textPrimary mb-2">Something went wrong</h1>
 
-        <p className="text-gray-600 mb-6">
+        <p className="text-textSecondary mb-6">
           We encountered an unexpected error. Please try refreshing the page or contact support if the problem persists.
         </p>
 
         {typeof window !== 'undefined' && window.location.hostname === 'localhost' && error && (
-          <div className="bg-gray-100 rounded-lg p-4 mb-6 text-left">
-            <h3 className="font-semibold text-gray-900 mb-2">Error Details (Local Development)</h3>
-            <pre className="text-sm text-gray-700 whitespace-pre-wrap break-words">
+          <div className="bg-surface rounded-lg p-4 mb-6 text-left">
+            <h3 className="font-semibold text-textPrimary mb-2">Error Details (Local Development)</h3>
+            <pre className="text-sm text-textSecondary whitespace-pre-wrap break-words">
               {error.message}
             </pre>
           </div>
         )}
 
         <div className="flex gap-3 justify-center">
-          <Button onClick={resetError} className="bg-purple-600 hover:bg-purple-700">
+          <Button onClick={resetError}>
             <RefreshCw className="w-4 h-4 mr-2" />
             Try Again
           </Button>
@@ -83,7 +83,6 @@ function DefaultErrorFallback({ error, resetError }: { error?: Error; resetError
           <Button
             variant="outline"
             onClick={() => window.location.reload()}
-            className="border-purple-200 text-purple-700 hover:bg-purple-50"
           >
             Refresh Page
           </Button>

@@ -107,12 +107,12 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
+      <div className="min-h-screen bg-gradient-to-r from-orange-100 to-orange-200">
         <AdminNav />
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="flex flex-col items-center gap-4">
-            <Loader2 className="w-8 h-8 animate-spin text-purple-600" />
-            <span className="text-purple-700 font-medium">Loading dashboard...</span>
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+            <span className="text-primary font-medium">Loading dashboard...</span>
           </div>
         </div>
       </div>
@@ -127,13 +127,13 @@ export default function AdminDashboard() {
         {/* Header */}
         <div className="text-center space-y-2">
           <div className="flex items-center justify-center gap-3">
-            <h1 className="text-4xl font-bold text-foreground">Admin Dashboard</h1>
+            <h1 className="text-4xl font-bold text-textPrimary hover:scale-105 transition-transform duration-300">Admin Dashboard</h1>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-sm text-green-600 font-medium">Live Updates</span>
+              <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
+              <span className="text-sm text-success font-medium">Live Updates</span>
             </div>
           </div>
-          <p className="text-muted-foreground">Manage your Helpers platform with real-time data</p>
+          <p className="text-textSecondary">Manage your Helpers platform with real-time data</p>
         </div>
 
         {/* Stats Overview */}
@@ -252,42 +252,42 @@ export default function AdminDashboard() {
               <CardDescription>Items requiring your attention</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex items-center justify-between p-3 bg-orange-50 rounded-lg border border-orange-200">
+              <div className="flex items-center justify-between p-3 bg-warning/10 rounded-lg border border-warning/20 hover:bg-warning/20 transition-colors">
                 <div>
-                  <p className="text-sm font-medium text-foreground">Helper Applications</p>
-                  <p className="text-xs text-muted-foreground">12 pending approvals</p>
+                  <p className="text-sm font-medium text-textPrimary">Helper Applications</p>
+                  <p className="text-xs text-textSecondary">12 pending approvals</p>
                 </div>
-                <Button size="sm" className="btn-primary">
+                <Button size="sm" className="hover:scale-105 transition-transform">
                   Review
                 </Button>
               </div>
 
-              <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg border border-red-200">
+              <div className="flex items-center justify-between p-3 bg-error/10 rounded-lg border border-error/20 hover:bg-error/20 transition-colors">
                 <div>
-                  <p className="text-sm font-medium text-foreground">Reported Issues</p>
-                  <p className="text-xs text-muted-foreground">5 disputes to resolve</p>
+                  <p className="text-sm font-medium text-textPrimary">Reported Issues</p>
+                  <p className="text-xs text-textSecondary">5 disputes to resolve</p>
                 </div>
-                <Button size="sm" className="btn-primary">
+                <Button size="sm" className="hover:scale-105 transition-transform">
                   Resolve
                 </Button>
               </div>
 
-              <div className="flex items-center justify-between p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+              <div className="flex items-center justify-between p-3 bg-warning/10 rounded-lg border border-warning/20 hover:bg-warning/20 transition-colors">
                 <div>
-                  <p className="text-sm font-medium text-foreground">Payment Issues</p>
-                  <p className="text-xs text-muted-foreground">3 failed transactions</p>
+                  <p className="text-sm font-medium text-textPrimary">Payment Issues</p>
+                  <p className="text-xs text-textSecondary">3 failed transactions</p>
                 </div>
-                <Button size="sm" className="btn-primary">
+                <Button size="sm" className="hover:scale-105 transition-transform">
                   Check
                 </Button>
               </div>
 
-              <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
+              <div className="flex items-center justify-between p-3 bg-info/10 rounded-lg border border-info/20 hover:bg-info/20 transition-colors">
                 <div>
-                  <p className="text-sm font-medium text-foreground">Service Reviews</p>
-                  <p className="text-xs text-muted-foreground">8 flagged reviews</p>
+                  <p className="text-sm font-medium text-textPrimary">Service Reviews</p>
+                  <p className="text-xs text-textSecondary">8 flagged reviews</p>
                 </div>
-                <Button size="sm" className="btn-primary">
+                <Button size="sm" className="hover:scale-105 transition-transform">
                   Moderate
                 </Button>
               </div>
@@ -325,7 +325,7 @@ export default function AdminDashboard() {
             <CardContent>
               <div className="text-3xl font-bold text-foreground">{stats.avgResponseTime}</div>
               <p className="text-sm text-muted-foreground">minutes</p>
-              <Badge className="mt-2 bg-green-100 text-green-800">Excellent</Badge>
+              <Badge className="mt-2 bg-success/20 text-success hover:bg-success/30 transition-colors">Excellent</Badge>
             </CardContent>
           </div>
 
@@ -336,7 +336,7 @@ export default function AdminDashboard() {
             <CardContent>
               <div className="text-xl font-bold text-foreground">{stats.topService}</div>
               <p className="text-sm text-muted-foreground">{Math.floor(stats.totalBookings * 0.06)} bookings this month</p>
-              <Badge className="mt-2 bg-purple-100 text-purple-800">Most Popular</Badge>
+              <Badge className="mt-2 bg-primary/20 text-primary hover:bg-primary/30 transition-colors">Most Popular</Badge>
             </CardContent>
           </div>
         </div>
@@ -349,19 +349,19 @@ export default function AdminDashboard() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Button className="btn-primary h-auto p-4 flex flex-col gap-2">
+              <Button className="btn-primary h-auto p-4 flex flex-col gap-2 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
                 <Users className="h-6 w-6" />
                 <span>Manage Users</span>
               </Button>
-              <Button className="btn-primary h-auto p-4 flex flex-col gap-2">
+              <Button className="btn-primary h-auto p-4 flex flex-col gap-2 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
                 <UserCheck className="h-6 w-6" />
                 <span>Manage Helpers</span>
               </Button>
-              <Button className="btn-primary h-auto p-4 flex flex-col gap-2">
+              <Button className="btn-primary h-auto p-4 flex flex-col gap-2 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
                 <Calendar className="h-6 w-6" />
                 <span>View Bookings</span>
               </Button>
-              <Button className="btn-primary h-auto p-4 flex flex-col gap-2">
+              <Button className="btn-primary h-auto p-4 flex flex-col gap-2 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
                 <TrendingUp className="h-6 w-6" />
                 <span>Analytics</span>
               </Button>

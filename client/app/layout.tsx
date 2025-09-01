@@ -5,7 +5,7 @@ import ErrorBoundary from "@/components/error-boundary"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AuthLayout } from "@/components/auth-layout"
 import { AuthProvider } from "@/lib/contexts/AuthContext"
-import ClickStars from "@/components/ClickStars"
+import StarAnimation from "@/components/StarAnimation"
 import Script from "next/script"
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="light">
+    <html lang="en" className="light">
       <head>
         {/* Google Analytics */}
         {process.env.NEXT_PUBLIC_GA_ID && (
@@ -48,7 +48,7 @@ export default function RootLayout({
                 <main className="flex-1">{children}</main>
                 <Footer />
               </AuthLayout>
-              <ClickStars />
+              <StarAnimation />
             </AuthProvider>
           </ErrorBoundary>
         </ThemeProvider>

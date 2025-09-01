@@ -24,16 +24,16 @@ export default function HelperNav() {
   const isActive = (href: string) => pathname === href
 
   return (
-    <nav className="bg-white border-b border-purple-200 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    <nav className="flex items-center justify-between px-4 py-2 border-b border-border bg-background shadow-sm sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/dashboard/provider" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
+            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
               <Briefcase className="w-4 h-4 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">Helpers</span>
-            <span className="text-sm text-purple-600 font-medium">Helper</span>
+            <span className="text-xl font-bold text-textPrimary">Helpers</span>
+            <span className="text-sm text-primary font-medium">Helper</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -46,8 +46,8 @@ export default function HelperNav() {
                   href={item.href}
                   className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     isActive(item.href)
-                      ? "bg-purple-100 text-purple-700"
-                      : "text-gray-600 hover:text-purple-600 hover:bg-purple-50"
+                      ? "bg-primary text-white"
+                      : "text-textSecondary hover:text-primary hover:bg-surface"
                   }`}
                 >
                   <IconComponent className="w-4 h-4" />
@@ -61,12 +61,11 @@ export default function HelperNav() {
           <div className="hidden md:flex items-center gap-4">
             <Avatar className="h-8 w-8">
               <AvatarImage src="/placeholder.svg" alt="Helper" />
-              <AvatarFallback className="bg-purple-200 text-purple-700">H</AvatarFallback>
+              <AvatarFallback className="bg-surface text-primary">H</AvatarFallback>
             </Avatar>
             <Button
               variant="outline"
               size="sm"
-              className="border-purple-200 text-purple-700 hover:bg-purple-50 bg-transparent"
               onClick={() => router.push("/")}
             >
               <LogOut className="w-4 h-4 mr-2" />
@@ -78,7 +77,7 @@ export default function HelperNav() {
           <Button
             variant="outline"
             size="sm"
-            className="md:hidden border-purple-200 bg-transparent"
+            className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -87,7 +86,7 @@ export default function HelperNav() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-purple-200">
+          <div className="md:hidden py-4 border-t border-border">
             <div className="space-y-2">
               {navItems.map((item) => {
                 const IconComponent = item.icon
@@ -97,8 +96,8 @@ export default function HelperNav() {
                     href={item.href}
                     className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       isActive(item.href)
-                        ? "bg-purple-100 text-purple-700"
-                        : "text-gray-600 hover:text-purple-600 hover:bg-purple-50"
+                        ? "bg-primary text-white"
+                        : "text-textSecondary hover:text-primary hover:bg-surface"
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -107,11 +106,11 @@ export default function HelperNav() {
                   </Link>
                 )
               })}
-              <div className="pt-4 border-t border-purple-200">
+              <div className="pt-4 border-t border-border">
                 <Button
                   variant="outline"
                   size="sm"
-                  className="w-full border-purple-200 text-purple-700 hover:bg-purple-50 bg-transparent"
+                  className="w-full"
                   onClick={() => router.push("/")}
                 >
                   <LogOut className="w-4 h-4 mr-2" />
