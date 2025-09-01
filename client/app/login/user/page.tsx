@@ -207,52 +207,88 @@ export default function UserLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center px-4 py-8">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #F9FAFB 0%, #E2E8F0 100%)' }}>
+      <div className="w-full max-w-md mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <Link href="/login" className="inline-flex items-center gap-2 text-gray-600 hover:text-purple-600 mb-6 transition-colors">
+          <Link
+            href="/login"
+            className="inline-flex items-center gap-2 mb-6 transition-colors"
+            style={{ color: '#4A5568' }}
+          >
             <ArrowLeft className="w-4 h-4" />
             Back to Login Options
           </Link>
 
           <div className="flex justify-center mb-6">
-            <div className="w-20 h-20 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+            <div
+              className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-md"
+              style={{ background: 'linear-gradient(135deg, #6B46C1 0%, #9F7AEA 100%)' }}
+            >
               <User className="w-10 h-10 text-white" />
             </div>
           </div>
 
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1
+            className="mb-2"
+            style={{
+              fontSize: '2rem',
+              fontWeight: 700,
+              lineHeight: '2.5rem',
+              color: '#1A202C',
+              fontFamily: 'Noto Sans, sans-serif'
+            }}
+          >
             {mode === 'login' ? 'Welcome Back' : 'Create Account'}
           </h1>
-          <p className="text-gray-600">
+          <p
+            style={{
+              fontSize: '1rem',
+              fontWeight: 400,
+              lineHeight: '1.5rem',
+              color: '#4A5568',
+              fontFamily: 'Noto Sans, sans-serif'
+            }}
+          >
             {mode === 'login' ? 'Sign in to your account' : 'Join our community today'}
           </p>
         </div>
 
         {/* Auth Card */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+        <div
+          className="p-8 shadow-sm"
+          style={{
+            backgroundColor: '#FFFFFF',
+            border: '1px solid #E2E8F0',
+            borderRadius: '1rem'
+          }}
+        >
           <div className="space-y-6">
             {/* Mode Tabs */}
-            <div className="flex bg-gray-100 rounded-xl p-1">
+            <div
+              className="flex p-1 rounded-xl"
+              style={{ backgroundColor: '#F9FAFB' }}
+            >
               <button
                 type="button"
-                className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-200 ${
-                  mode === 'login'
-                    ? 'bg-white text-purple-600 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
+                className="flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-200"
+                style={{
+                  backgroundColor: mode === 'login' ? '#FFFFFF' : 'transparent',
+                  color: mode === 'login' ? '#6B46C1' : '#4A5568',
+                  boxShadow: mode === 'login' ? '0 1px 3px rgba(0, 0, 0, 0.1)' : 'none'
+                }}
                 onClick={() => switchMode('login')}
               >
                 Sign In
               </button>
               <button
                 type="button"
-                className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-200 ${
-                  mode === 'signup'
-                    ? 'bg-white text-purple-600 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
+                className="flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-200"
+                style={{
+                  backgroundColor: mode === 'signup' ? '#FFFFFF' : 'transparent',
+                  color: mode === 'signup' ? '#6B46C1' : '#4A5568',
+                  boxShadow: mode === 'signup' ? '0 1px 3px rgba(0, 0, 0, 0.1)' : 'none'
+                }}
                 onClick={() => switchMode('signup')}
               >
                 Sign Up
@@ -263,43 +299,74 @@ export default function UserLoginPage() {
             <div className="space-y-3">
               <button
                 type="button"
-                className="w-full flex items-center justify-center gap-3 py-3 px-4 bg-white border-2 border-gray-200 rounded-xl hover:border-gray-300 hover:bg-gray-50 transition-all duration-200"
+                className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-2xl font-medium shadow-md transition-all duration-200"
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  border: '2px solid #E2E8F0',
+                  color: '#1A202C'
+                }}
               >
-                <Chrome className="w-5 h-5 text-red-500" />
-                <span className="text-gray-700 font-medium">Continue with Google</span>
+                <Chrome className="w-5 h-5" style={{ color: '#E53E3E' }} />
+                <span>Continue with Google</span>
               </button>
 
               <button
                 type="button"
-                className="w-full flex items-center justify-center gap-3 py-3 px-4 bg-blue-600 rounded-xl hover:bg-blue-700 transition-all duration-200"
+                className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-2xl font-medium shadow-md transition-all duration-200"
+                style={{
+                  backgroundColor: '#3182CE',
+                  color: '#FFFFFF'
+                }}
               >
-                <Facebook className="w-5 h-5 text-white" />
-                <span className="text-white font-medium">Continue with Facebook</span>
+                <Facebook className="w-5 h-5" />
+                <span>Continue with Facebook</span>
               </button>
             </div>
 
             {/* Divider */}
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-200"></div>
+                <div className="w-full border-t" style={{ borderColor: '#E2E8F0' }}></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white text-gray-500">or continue with</span>
+                <span
+                  className="px-4"
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    color: '#A0AEC0'
+                  }}
+                >
+                  or continue with
+                </span>
               </div>
             </div>
 
             {/* Error/Success Messages */}
             {authState.error && (
-              <div className="flex items-center gap-3 p-4 bg-red-50 border border-red-200 rounded-xl">
-                <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
-                <p className="text-sm text-red-700">{authState.error}</p>
+              <div
+                className="flex items-center gap-3 p-4 rounded-xl"
+                style={{
+                  backgroundColor: '#FED7D7',
+                  border: '1px solid #FEB2B2',
+                  color: '#C53030'
+                }}
+              >
+                <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                <p className="text-sm">{authState.error}</p>
               </div>
             )}
 
             {authState.success && (
-              <div className="flex items-center gap-3 p-4 bg-green-50 border border-green-200 rounded-xl">
-                <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                <p className="text-sm text-green-700">{authState.success}</p>
+              <div
+                className="flex items-center gap-3 p-4 rounded-xl"
+                style={{
+                  backgroundColor: '#C6F6D5',
+                  border: '1px solid #9AE6B4',
+                  color: '#22543D'
+                }}
+              >
+                <CheckCircle className="w-5 h-5 flex-shrink-0" />
+                <p className="text-sm">{authState.success}</p>
               </div>
             )}
 
@@ -308,15 +375,21 @@ export default function UserLoginPage() {
               <form onSubmit={handleEmailAuth} className="space-y-5">
                 {/* Role Selection */}
                 <div className="space-y-3">
-                  <label className="text-sm font-semibold text-gray-700">I want to join as</label>
+                  <label
+                    className="block text-sm font-medium mb-1"
+                    style={{ color: '#4A5568' }}
+                  >
+                    I want to join as
+                  </label>
                   <div className="grid grid-cols-2 gap-3">
                     <button
                       type="button"
-                      className={`p-4 rounded-xl border-2 transition-all duration-200 ${
-                        role === 'customer'
-                          ? 'border-purple-500 bg-purple-50 text-purple-700'
-                          : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
-                      }`}
+                      className="p-4 rounded-xl border-2 transition-all duration-200"
+                      style={{
+                        borderColor: role === 'customer' ? '#6B46C1' : '#E2E8F0',
+                        backgroundColor: role === 'customer' ? '#FAF5FF' : '#FFFFFF',
+                        color: role === 'customer' ? '#6B46C1' : '#4A5568'
+                      }}
                       onClick={() => setRole('customer')}
                     >
                       <User className="w-6 h-6 mx-auto mb-2" />
@@ -324,11 +397,12 @@ export default function UserLoginPage() {
                     </button>
                     <button
                       type="button"
-                      className={`p-4 rounded-xl border-2 transition-all duration-200 ${
-                        role === 'provider'
-                          ? 'border-purple-500 bg-purple-50 text-purple-700'
-                          : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
-                      }`}
+                      className="p-4 rounded-xl border-2 transition-all duration-200"
+                      style={{
+                        borderColor: role === 'provider' ? '#6B46C1' : '#E2E8F0',
+                        backgroundColor: role === 'provider' ? '#FAF5FF' : '#FFFFFF',
+                        color: role === 'provider' ? '#6B46C1' : '#4A5568'
+                      }}
                       onClick={() => setRole('provider')}
                     >
                       <User className="w-6 h-6 mx-auto mb-2" />
@@ -339,14 +413,23 @@ export default function UserLoginPage() {
 
                 {/* Name Field */}
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-semibold text-gray-700">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium mb-1"
+                    style={{ color: '#4A5568' }}
+                  >
                     Full Name
                   </label>
                   <input
                     type="text"
                     id="name"
                     required
-                    className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-3 py-2 rounded-lg focus:outline-none focus:ring-2 transition-all duration-200"
+                    style={{
+                      border: '1px solid #E2E8F0',
+                      color: '#1A202C',
+                      backgroundColor: '#FFFFFF'
+                    }}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Enter your full name"
@@ -355,14 +438,23 @@ export default function UserLoginPage() {
 
                 {/* Email Field */}
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-semibold text-gray-700">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium mb-1"
+                    style={{ color: '#4A5568' }}
+                  >
                     Email Address
                   </label>
                   <input
                     type="email"
                     id="email"
                     required
-                    className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-3 py-2 rounded-lg focus:outline-none focus:ring-2 transition-all duration-200"
+                    style={{
+                      border: '1px solid #E2E8F0',
+                      color: '#1A202C',
+                      backgroundColor: '#FFFFFF'
+                    }}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
@@ -371,13 +463,22 @@ export default function UserLoginPage() {
 
                 {/* Phone Field */}
                 <div className="space-y-2">
-                  <label htmlFor="phone" className="text-sm font-semibold text-gray-700">
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium mb-1"
+                    style={{ color: '#4A5568' }}
+                  >
                     Phone Number
                   </label>
                   <input
                     type="tel"
                     id="phone"
-                    className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-3 py-2 rounded-lg focus:outline-none focus:ring-2 transition-all duration-200"
+                    style={{
+                      border: '1px solid #E2E8F0',
+                      color: '#1A202C',
+                      backgroundColor: '#FFFFFF'
+                    }}
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+1 (555) 123-4567"
@@ -386,7 +487,11 @@ export default function UserLoginPage() {
 
                 {/* Password Field */}
                 <div className="space-y-2">
-                  <label htmlFor="password" className="text-sm font-semibold text-gray-700">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium mb-1"
+                    style={{ color: '#4A5568' }}
+                  >
                     Password
                   </label>
                   <div className="relative">
@@ -394,15 +499,21 @@ export default function UserLoginPage() {
                       type={showPassword ? "text" : "password"}
                       id="password"
                       required
-                      className="w-full border border-gray-200 rounded-xl px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                      className="w-full px-3 py-2 pr-12 rounded-lg focus:outline-none focus:ring-2 transition-all duration-200"
+                      style={{
+                        border: '1px solid #E2E8F0',
+                        color: '#1A202C',
+                        backgroundColor: '#FFFFFF'
+                      }}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Create a strong password"
                     />
                     <button
                       type="button"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors"
+                      style={{ color: '#A0AEC0' }}
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
                     >
                       {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                     </button>
@@ -411,7 +522,11 @@ export default function UserLoginPage() {
 
                 {/* Confirm Password Field */}
                 <div className="space-y-2">
-                  <label htmlFor="confirmPassword" className="text-sm font-semibold text-gray-700">
+                  <label
+                    htmlFor="confirmPassword"
+                    className="block text-sm font-medium mb-1"
+                    style={{ color: '#4A5568' }}
+                  >
                     Confirm Password
                   </label>
                   <div className="relative">
@@ -419,15 +534,21 @@ export default function UserLoginPage() {
                       type={showConfirmPassword ? "text" : "password"}
                       id="confirmPassword"
                       required
-                      className="w-full border border-gray-200 rounded-xl px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                      className="w-full px-3 py-2 pr-12 rounded-lg focus:outline-none focus:ring-2 transition-all duration-200"
+                      style={{
+                        border: '1px solid #E2E8F0',
+                        color: '#1A202C',
+                        backgroundColor: '#FFFFFF'
+                      }}
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder="Confirm your password"
                     />
                     <button
                       type="button"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors"
+                      style={{ color: '#A0AEC0' }}
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
                     >
                       {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                     </button>
@@ -437,7 +558,11 @@ export default function UserLoginPage() {
                 <button
                   type="submit"
                   disabled={authState.isLoading}
-                  className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+                  className="w-full py-2 px-4 rounded-2xl font-medium shadow-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{
+                    background: 'linear-gradient(135deg, #6B46C1 0%, #9F7AEA 100%)',
+                    color: '#FFFFFF'
+                  }}
                 >
                   {authState.isLoading ? (
                     <div className="flex items-center justify-center gap-3">
@@ -456,14 +581,23 @@ export default function UserLoginPage() {
               <form onSubmit={handleEmailAuth} className="space-y-5">
                 {/* Email/Phone Field */}
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-semibold text-gray-700">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium mb-1"
+                    style={{ color: '#4A5568' }}
+                  >
                     Email or Phone
                   </label>
                   <input
                     type="text"
                     id="email"
                     required
-                    className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-3 py-2 rounded-lg focus:outline-none focus:ring-2 transition-all duration-200"
+                    style={{
+                      border: '1px solid #E2E8F0',
+                      color: '#1A202C',
+                      backgroundColor: '#FFFFFF'
+                    }}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email or phone"
@@ -472,7 +606,11 @@ export default function UserLoginPage() {
 
                 {/* Password Field */}
                 <div className="space-y-2">
-                  <label htmlFor="password" className="text-sm font-semibold text-gray-700">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium mb-1"
+                    style={{ color: '#4A5568' }}
+                  >
                     Password
                   </label>
                   <div className="relative">
@@ -480,15 +618,21 @@ export default function UserLoginPage() {
                       type={showPassword ? "text" : "password"}
                       id="password"
                       required
-                      className="w-full border border-gray-200 rounded-xl px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                      className="w-full px-3 py-2 pr-12 rounded-lg focus:outline-none focus:ring-2 transition-all duration-200"
+                      style={{
+                        border: '1px solid #E2E8F0',
+                        color: '#1A202C',
+                        backgroundColor: '#FFFFFF'
+                      }}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter your password"
                     />
                     <button
                       type="button"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors"
+                      style={{ color: '#A0AEC0' }}
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
                     >
                       {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                     </button>
@@ -499,7 +643,8 @@ export default function UserLoginPage() {
                 <div className="flex justify-end">
                   <button
                     type="button"
-                    className="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors"
+                    className="text-sm font-medium transition-colors"
+                    style={{ color: '#6B46C1' }}
                     onClick={handleForgotPassword}
                   >
                     Forgot password?
@@ -509,7 +654,11 @@ export default function UserLoginPage() {
                 <button
                   type="submit"
                   disabled={authState.isLoading}
-                  className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+                  className="w-full py-2 px-4 rounded-2xl font-medium shadow-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{
+                    background: 'linear-gradient(135deg, #6B46C1 0%, #9F7AEA 100%)',
+                    color: '#FFFFFF'
+                  }}
                 >
                   {authState.isLoading ? (
                     <div className="flex items-center justify-center gap-3">
@@ -527,24 +676,56 @@ export default function UserLoginPage() {
             {authState.otpSent && (
               <form onSubmit={handleOtpVerification} className="space-y-5">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Mail className="w-8 h-8 text-green-600" />
+                  <div
+                    className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                    style={{ backgroundColor: '#C6F6D5' }}
+                  >
+                    <Mail className="w-8 h-8" style={{ color: '#38A169' }} />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Check your email</h3>
-                  <p className="text-gray-600 mb-6">
+                  <h3
+                    className="mb-2"
+                    style={{
+                      fontSize: '1.125rem',
+                      fontWeight: 500,
+                      lineHeight: '1.5rem',
+                      color: '#1A202C',
+                      fontFamily: 'Noto Sans, sans-serif'
+                    }}
+                  >
+                    Check your email
+                  </h3>
+                  <p
+                    className="mb-6"
+                    style={{
+                      fontSize: '1rem',
+                      fontWeight: 400,
+                      lineHeight: '1.5rem',
+                      color: '#4A5568',
+                      fontFamily: 'Noto Sans, sans-serif'
+                    }}
+                  >
                     We've sent a verification code to {email}
                   </p>
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="otp" className="text-sm font-semibold text-gray-700 text-center block">
+                  <label
+                    htmlFor="otp"
+                    className="block text-sm font-medium mb-1 text-center"
+                    style={{ color: '#4A5568' }}
+                  >
                     Enter verification code
                   </label>
                   <input
                     type="text"
                     id="otp"
                     required
-                    className="w-full border border-gray-200 rounded-xl px-4 py-4 text-center text-2xl tracking-widest focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-3 py-4 text-center text-2xl tracking-widest rounded-lg focus:outline-none focus:ring-2 transition-all duration-200"
+                    style={{
+                      border: '1px solid #E2E8F0',
+                      color: '#1A202C',
+                      backgroundColor: '#FFFFFF'
+                    }}
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
                     placeholder="000000"
@@ -555,7 +736,11 @@ export default function UserLoginPage() {
                 <button
                   type="submit"
                   disabled={authState.isLoading}
-                  className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+                  className="w-full py-2 px-4 rounded-2xl font-medium shadow-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{
+                    background: 'linear-gradient(135deg, #6B46C1 0%, #9F7AEA 100%)',
+                    color: '#FFFFFF'
+                  }}
                 >
                   {authState.isLoading ? (
                     <div className="flex items-center justify-center gap-3">
@@ -570,7 +755,8 @@ export default function UserLoginPage() {
                 <div className="text-center">
                   <button
                     type="button"
-                    className="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors"
+                    className="text-sm font-medium transition-colors"
+                    style={{ color: '#6B46C1' }}
                     onClick={() => setAuthState(prev => ({ ...prev, otpSent: false, error: null, success: null }))}
                   >
                     Didn't receive code? Resend
@@ -583,13 +769,27 @@ export default function UserLoginPage() {
 
         {/* Footer */}
         <div className="text-center mt-8">
-          <p className="text-sm text-gray-500">
+          <p
+            className="text-sm"
+            style={{
+              color: '#4A5568',
+              fontFamily: 'Noto Sans, sans-serif'
+            }}
+          >
             By continuing, you agree to our{' '}
-            <a href="#" className="text-purple-600 hover:text-purple-700 font-medium transition-colors">
+            <a
+              href="#"
+              className="font-medium transition-colors"
+              style={{ color: '#6B46C1' }}
+            >
               Terms of Service
             </a>{' '}
             and{' '}
-            <a href="#" className="text-purple-600 hover:text-purple-700 font-medium transition-colors">
+            <a
+              href="#"
+              className="font-medium transition-colors"
+              style={{ color: '#6B46C1' }}
+            >
               Privacy Policy
             </a>
           </p>
