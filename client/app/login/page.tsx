@@ -1,26 +1,15 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
-import { Search } from "lucide-react"
+import { User, Shield, Wrench, Search } from "lucide-react"
 import { useAuth } from "@/lib/contexts/AuthContext"
 
-export default function LoginSignIn() {
+export default function LoginSelection() {
   const { user, role, loading } = useAuth()
   const router = useRouter()
-  const [searchQuery, setSearchQuery] = useState("")
-
-  const handleSearch = () => {
-    if (searchQuery.trim()) {
-      router.push(`/user/search?q=${encodeURIComponent(searchQuery.trim())}`)
-    } else {
-      router.push('/user/search')
-    }
-  }
 
   useEffect(() => {
     if (!loading && user && role) {
@@ -37,7 +26,7 @@ export default function LoginSignIn() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-orange-100 to-orange-200">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     )
@@ -47,99 +36,62 @@ export default function LoginSignIn() {
     return null // Will redirect
   }
 
-  const services = [
+  const logins = [
     {
-      title: "Housekeeping",
-      desc: "Keep your home sparkling clean with our trusted housekeepers.",
-      img: "/images/housekeeping.jpg",
+      title: "User Login",
+      desc: "Login to access your personal account and services.",
+      icon: User,
+      href: "/login/user",
+      color: "text-primary"
     },
     {
-      title: "Plumbing",
-      desc: "Fix leaks, install fixtures, and ensure your plumbing is in top shape.",
-      img: "/images/plumbing.jpg",
+      title: "Helper Login",
+      desc: "Login to your Helper account to manage tasks.",
+      icon: Wrench,
+      href: "/login/helper",
+      color: "text-success"
     },
     {
-      title: "Electrical",
-      desc: "Get help with wiring, lighting, and other electrical tasks.",
-      img: "/images/electrical.jpg",
-    },
-    {
-      title: "Handyman",
-      desc: "Tackle those odd jobs around the house with our skilled handymen.",
-      img: "/images/handyman.jpg",
-    },
-    {
-      title: "Gardening",
-      desc: "Maintain a beautiful yard with our experienced gardening professionals.",
-      img: "/images/gardening.jpg",
+      title: "Admin Login",
+      desc: "For Admin Staff to access management tools.",
+      icon: Shield,
+      href: "/login/admin",
+      color: "text-warning"
     },
   ]
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Navbar */}
-      <header className="w-full border-b border-border bg-background">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Link href="/" className="text-xl font-bold text-textPrimary">HelperConnect</Link>
-          <nav className="hidden md:flex gap-6 text-sm font-medium text-textSecondary">
-            <Link href="/user/search" className="hover:text-primary transition-colors">Find Helpers</Link>
-            <Link href="/login/helper" className="hover:text-primary transition-colors">Become a Helper</Link>
-            <Link href="/user/support" className="hover:text-primary transition-colors">Safety</Link>
-            <Link href="/user/support" className="hover:text-primary transition-colors">Support</Link>
-          </nav>
-          <div className="flex gap-2">
-            <Button variant="outline" onClick={() => router.push('/login/user')}>Log in</Button>
-            <Button onClick={() => router.push('/login/user')}>Sign up</Button>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-orange-100 to-orange-200 px-6 py-16">
+      <h1 className="text-4xl font-bold mb-4 text-textPrimary hover:scale-105 transition-transform duration-300">Welcome to HelperConnect</h1>
+      <p className="text-textSecondary mb-12 text-center max-w-2xl leading-relaxed">
+        Your trusted platform for connecting with skilled professionals. Find helpers for any task or become a helper yourself.
+      </p>
 
-      {/* Hero Section */}
-      <section className="relative flex flex-col items-center justify-center bg-gradient-to-r from-orange-100 to-orange-200 px-6 py-20 text-center">
-        <h2 className="text-4xl font-bold mb-4 text-textPrimary">Find local helpers for any task</h2>
-        <p className="mb-6 text-lg text-textSecondary">
-          Connect with skilled professionals in your area for home repairs, cleaning, and more.
-        </p>
-        <div className="flex w-full max-w-md items-center rounded-2xl bg-background shadow p-2">
-          <Input
-            type="text"
-            placeholder="Search for services"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="border-none focus:ring-0"
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                handleSearch()
-              }
-            }}
-          />
-          <Button
-            className="flex items-center gap-2"
-            onClick={handleSearch}
-          >
-            <Search className="w-4 h-4" /> Search
-          </Button>
-        </div>
-      </section>
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mb-12">
+        {logins.map((item, i) => (
+          <Link key={i} href={item.href}>
+            <Card className="cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 hover:border-primary/30 group">
+              <CardContent className="flex flex-col items-center p-8 text-center">
+                <item.icon className={`w-12 h-12 mb-4 ${item.color} group-hover:scale-110 transition-transform duration-300`} />
+                <h2 className="font-bold text-xl text-textPrimary mb-3 group-hover:text-primary transition-colors">{item.title}</h2>
+                <p className="text-sm text-textSecondary leading-relaxed group-hover:text-textPrimary transition-colors">{item.desc}</p>
+              </CardContent>
+            </Card>
+          </Link>
+        ))}
+      </div>
 
-      {/* Popular Services */}
-      <section className="mx-auto max-w-7xl px-6 py-16">
-        <h3 className="text-2xl font-bold mb-8 text-textPrimary">Popular Services</h3>
-        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          {services.map((s, i) => (
-            <Link key={i} href={`/user/search?q=${encodeURIComponent(s.title.toLowerCase())}`}>
-              <Card className="overflow-hidden shadow hover:shadow-lg transition cursor-pointer">
-                <img src={s.img} alt={s.title} className="h-40 w-full object-cover" />
-                <CardContent className="p-4">
-                  <h4 className="font-semibold mb-2 text-textPrimary">{s.title}</h4>
-                  <p className="text-sm text-textSecondary">{s.desc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
-      </section>
-
+      <Link href="/user/search">
+        <Card className="cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 hover:border-success/30 group">
+          <CardContent className="flex flex-col items-center p-8 text-center">
+            <Search className="w-12 h-12 mb-4 text-success group-hover:scale-110 transition-transform duration-300" />
+            <h2 className="font-bold text-xl text-textPrimary mb-3 group-hover:text-success transition-colors">Browse Services</h2>
+            <p className="text-sm text-textSecondary leading-relaxed group-hover:text-textPrimary transition-colors">
+              Explore services and find the perfect helper for your needs
+            </p>
+          </CardContent>
+        </Card>
+      </Link>
     </div>
   )
 }
