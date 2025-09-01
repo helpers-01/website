@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { User, Users, Shield } from "lucide-react"
 import { useAuth } from "@/lib/contexts/AuthContext"
+import Footer from "@/components/footer"
 
 export default function LoginDashboard() {
   const { user, role, loading } = useAuth()
@@ -27,7 +28,7 @@ export default function LoginDashboard() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     )
   }
@@ -116,9 +117,7 @@ export default function LoginDashboard() {
       </div>
 
       {/* Footer */}
-      <div className="text-center pb-8">
-        <p className="text-xs text-muted-foreground">© 2025 Helpers Management System. All rights reserved.</p>
-      </div>
+      <Footer />
     </div>
   )
 }

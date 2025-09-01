@@ -19,15 +19,22 @@ const config: Config = {
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
+        primary: "#6B46C1",
+        primaryLight: "#9F7AEA",
+        background: "#FFFFFF",
+        surface: "#F9FAFB",
+        textPrimary: "#1A202C",
+        textSecondary: "#4A5568",
+        border: "#E2E8F0",
+        muted: "#A0AEC0",
+        success: "#38A169",
+        warning: "#DD6B20",
+        error: "#E53E3E",
+        info: "#3182CE",
+        // Keep shadcn/ui colors for compatibility
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
@@ -35,10 +42,6 @@ const config: Config = {
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",

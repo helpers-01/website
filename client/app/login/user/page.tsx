@@ -207,62 +207,34 @@ export default function UserLoginPage() {
   };
 
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #F9FAFB 0%, #E2E8F0 100%)' }}>
+    <div className="min-h-screen bg-background">
       <div className="w-full max-w-md mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
           <Link
             href="/login"
-            className="inline-flex items-center gap-2 mb-6 transition-colors"
-            style={{ color: '#4A5568' }}
+            className="inline-flex items-center gap-2 mb-6 transition-colors text-textSecondary hover:text-textPrimary"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Login Options
           </Link>
 
           <div className="flex justify-center mb-6">
-            <div
-              className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-md"
-              style={{ background: 'linear-gradient(135deg, #6B46C1 0%, #9F7AEA 100%)' }}
-            >
+            <div className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-md bg-primary">
               <User className="w-10 h-10 text-white" />
             </div>
           </div>
 
-          <h1
-            className="mb-2"
-            style={{
-              fontSize: '2rem',
-              fontWeight: 700,
-              lineHeight: '2.5rem',
-              color: '#1A202C',
-              fontFamily: 'Noto Sans, sans-serif'
-            }}
-          >
+          <h1 className="mb-2 text-2xl font-bold text-textPrimary">
             {mode === 'login' ? 'Welcome Back' : 'Create Account'}
           </h1>
-          <p
-            style={{
-              fontSize: '1rem',
-              fontWeight: 400,
-              lineHeight: '1.5rem',
-              color: '#4A5568',
-              fontFamily: 'Noto Sans, sans-serif'
-            }}
-          >
+          <p className="text-base text-textSecondary">
             {mode === 'login' ? 'Sign in to your account' : 'Join our community today'}
           </p>
         </div>
 
         {/* Auth Card */}
-        <div
-          className="p-8 shadow-sm"
-          style={{
-            backgroundColor: '#FFFFFF',
-            border: '1px solid #E2E8F0',
-            borderRadius: '1rem'
-          }}
-        >
+        <div className="p-8 shadow-sm bg-white border border-border rounded-2xl">
           <div className="space-y-6">
             {/* Mode Tabs */}
             <div

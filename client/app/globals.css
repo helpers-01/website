@@ -10,8 +10,8 @@
   --surface: #F9FAFB;
   --text-primary: #1A202C;
   --text-secondary: #4A5568;
-  --primary: #6B46C1;
-  --primary-light: #9F7AEA;
+  --primary: 262 83% 57%;
+  --primary-light: 275 84% 66%;
   --border: #E2E8F0;
   --muted: #A0AEC0;
   --success: #38A169;
@@ -36,26 +36,29 @@
   --line-height-xl: 2rem;
   --line-height-2xl: 2.5rem;
 
-  /* Add missing shadcn/ui variables */
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --primary: 262.1 83.3% 57.8%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 222.2 84% 4.9%;
-  --muted: 210 40% 96%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96%;
-  --accent-foreground: 222.2 84% 4.9%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 262.1 83.3% 57.8%;
+  /* Shadcn/ui compatible variables */
+  --card: #FFFFFF;
+  --card-foreground: #1A202C;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A202C;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F9FAFB;
+  --secondary-foreground: #1A202C;
+  --muted-foreground: #4A5568;
+  --accent: #F9FAFB;
+  --accent-foreground: #1A202C;
+  --destructive: #E53E3E;
+  --destructive-foreground: #FFFFFF;
+  --input: #E2E8F0;
+  --ring: #6B46C1;
+  --sidebar: #F9FAFB;
+  --sidebar-foreground: #1A202C;
+  --sidebar-primary: #6B46C1;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F9FAFB;
+  --sidebar-accent-foreground: #1A202C;
+  --sidebar-border: #E2E8F0;
+  --sidebar-ring: #6B46C1;
   --chart-1: 12 76% 61%;
   --chart-2: 173 58% 39%;
   --chart-3: 197 37% 24%;
@@ -77,28 +80,30 @@
   --warning: #F6AD55;
   --error: #FC8181;
   --info: #63B3ED;
-}
 
-.dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
-  --popover: 222.2 84% 4.9%;
-  --popover-foreground: 210 40% 98%;
-  --primary: 217.2 91.2% 59.8%;
-  --primary-foreground: 222.2 84% 4.9%;
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 224.3 76.3% 94.1%;
+  /* Shadcn/ui dark mode variables */
+  --card: #1A1A1A;
+  --card-foreground: #FFFFFF;
+  --popover: #1A1A1A;
+  --popover-foreground: #FFFFFF;
+  --primary-foreground: #1A1A1A;
+  --secondary: #242424;
+  --secondary-foreground: #FFFFFF;
+  --muted-foreground: #A0AEC0;
+  --accent: #242424;
+  --accent-foreground: #FFFFFF;
+  --destructive: #FC8181;
+  --destructive-foreground: #1A1A1A;
+  --input: #2D2D2D;
+  --ring: #9F7AEA;
+  --sidebar: #242424;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #9F7AEA;
+  --sidebar-primary-foreground: #1A1A1A;
+  --sidebar-accent: #242424;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #2D2D2D;
+  --sidebar-ring: #9F7AEA;
   --chart-1: 220 70% 50%;
   --chart-2: 160 60% 45%;
   --chart-3: 30 80% 55%;
@@ -116,153 +121,89 @@
   body {
     background-color: var(--background);
     color: var(--text-primary);
-    font-family: 'Noto Sans', system-ui, -apple-system, sans-serif;
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-base);
-    font-weight: var(--font-weight-normal);
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400;
   }
 
   h1 {
-    font-size: var(--font-size-3xl);
-    line-height: var(--line-height-2xl);
-    font-weight: var(--font-weight-bold);
+    font-size: 2rem;
+    line-height: 2.5rem;
+    font-weight: 700;
   }
 
   h2 {
-    font-size: var(--font-size-2xl);
-    line-height: var(--line-height-xl);
-    font-weight: var(--font-weight-semibold);
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
   }
 
   h3 {
-    font-size: var(--font-size-xl);
-    line-height: var(--line-height-lg);
-    font-weight: var(--font-weight-semibold);
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
   }
 
   h4 {
-    font-size: var(--font-size-lg);
-    line-height: var(--line-height-base);
-    font-weight: var(--font-weight-medium);
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    font-weight: 500;
+  }
+
+  small {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 400;
   }
 }
 
 @layer components {
   .btn {
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-lg);
-    font-weight: var(--font-weight-medium);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    transition: all 0.2s;
+    @apply px-4 py-2 rounded-2xl font-medium shadow-md;
   }
 
   .btn-primary {
-    background-color: var(--primary);
-    color: white;
-  }
-
-  .btn-primary:hover {
-    background-color: var(--primary-light);
+    @apply bg-primary text-white hover:bg-primaryLight;
   }
 
   .btn-secondary {
-    background-color: var(--surface);
-    color: var(--primary);
-    border: 1px solid var(--primary);
-  }
-
-  .btn-secondary:hover {
-    background-color: var(--primary-light);
-    color: white;
+    @apply bg-surface text-primary border border-primary hover:bg-primaryLight hover:text-white;
   }
 
   .btn-outline {
-    border: 1px solid var(--border);
-    color: var(--text-primary);
-  }
-
-  .btn-outline:hover {
-    background-color: var(--surface);
+    @apply border border-gray-300 text-textPrimary hover:bg-gray-100;
   }
 
   .card {
-    border-radius: var(--radius-lg);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    border: 1px solid var(--border);
-    background-color: white;
-    padding: 1rem;
-  }
-
-  .card-style {
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(4px);
-    border: 1px solid #e2e8f0;
-    border-radius: var(--radius-lg);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    transition: box-shadow 0.2s;
-  }
-
-  .card-style:hover {
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    @apply rounded-2xl shadow-sm border border-border bg-white p-4;
   }
 
   .input {
-    width: 100%;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 0.5rem 0.75rem;
-    color: var(--text-primary);
-  }
-
-  .input:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px var(--primary);
+    @apply w-full border border-border rounded-lg px-3 py-2 text-textPrimary focus:outline-none focus:ring-2 focus:ring-primary;
   }
 
   .label {
-    display: block;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    color: var(--text-secondary);
-    margin-bottom: 0.25rem;
+    @apply block text-sm font-medium text-textSecondary mb-1;
   }
 
   .sidebar {
-    height: 100%;
-    background-color: var(--surface);
-    border-right: 1px solid var(--border);
+    @apply h-full bg-surface border-r border-border;
   }
 
   .sidebar-item-active {
-    background-color: var(--primary);
-    color: white;
-    border-radius: var(--radius);
+    @apply bg-primary text-white rounded-md;
   }
 
-  .sidebar-item {
-    color: var(--text-secondary);
-  }
-
-  .sidebar-item:hover {
-    background-color: var(--surface);
-    color: var(--text-primary);
+  .sidebar-item-inactive {
+    @apply text-textSecondary hover:bg-gray-100 hover:text-textPrimary;
   }
 
   .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid var(--border);
-    background-color: white;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    @apply flex items-center justify-between px-4 py-2 border-b border-border bg-white shadow-sm;
   }
 
   .footer {
-    background-color: var(--surface);
-    border-top: 1px solid var(--border);
-    font-size: var(--font-size-sm);
-    color: var(--text-secondary);
-    padding: 1.5rem;
+    @apply bg-surface border-t border-border text-sm text-textSecondary p-6;
   }
 }
