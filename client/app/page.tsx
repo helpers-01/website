@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Users, UserCheck, Calendar, Search, Shield } from "lucide-react"
 import { useAuth } from "@/lib/contexts/AuthContext"
-import Footer from "@/components/footer"
 
 export default function Dashboard() {
   const { user, role, loading } = useAuth()
@@ -142,8 +141,6 @@ export default function Dashboard() {
         </div>
       </main>
 
-      {/* Footer */}
-      <Footer />
     </div>
   )
 }

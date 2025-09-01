@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Search } from "lucide-react"
 import { useAuth } from "@/lib/contexts/AuthContext"
-import Footer from "@/components/footer"
 
 export default function LoginSignIn() {
   const { user, role, loading } = useAuth()
@@ -141,8 +140,6 @@ export default function LoginSignIn() {
         </div>
       </section>
 
-      {/* Footer */}
-      <Footer />
     </div>
   )
 }
