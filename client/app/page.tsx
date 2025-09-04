@@ -3,30 +3,31 @@
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/lib/contexts/AuthContext"
+import HomePage from "@/src/pages"
 
 export default function RootPage() {
   const { user, role, loading } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
-    if (!loading) {
-      if (user && role) {
-        // Redirect logged-in users to their dashboard
-        if (role === 'admin') {
-          router.push('/dashboard/admin')
-        } else if (role === 'helper') {
-          router.push('/dashboard/provider')
-        } else if (role === 'user') {
-          router.push('/dashboard/customer')
-        }
-      } else {
-        // Redirect non-logged-in users to login page
-        router.push('/login')
+    if (!loading && user && role) {
+      // Redirect logged-in users to their dashboard
+      if (role === 'admin') {
+        router.push('/dashboard/admin')
+      } else if (role === 'helper') {
+        router.push('/dashboard/provider')
+      } else if (role === 'user') {
+        router.push('/dashboard/customer')
       }
     }
   }, [user, role, loading, router])
 
-  // Show loading state while determining redirect
+  // Show landing page for non-logged-in users or while loading
+  if (loading || !user) {
+    return <HomePage />
+  }
+
+  // Show loading state while redirecting logged-in users
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-orange-100 to-orange-200">
       <div className="flex flex-col items-center gap-4">

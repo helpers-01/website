@@ -1,56 +1,101 @@
-import Link from "next/link"
+import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
+import Image from "next/image"
 
-export default function Footer() {
+export function Footer() {
   return (
-    <footer className="bg-surface border-t border-border text-sm text-textSecondary p-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* About Us */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-textPrimary">About Us</h3>
-            <p className="text-textSecondary text-sm leading-relaxed">
-              Helpers is your trusted service marketplace, connecting users and helpers.
+    <footer className="bg-card border-t border-border">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid md:grid-cols-4 gap-8">
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <Image
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Helpers%20logo.jpg-8tii2yjyr4KGeMlFK33cmezJCBajnt.jpeg"
+                alt="Helpers Logo"
+                width={32}
+                height={32}
+                className="rounded-lg"
+              />
+              <span className="text-lg font-bold">Helpers</span>
+            </div>
+            <p className="text-muted-foreground text-sm text-pretty">
+              Your trusted platform for professional home services. Connecting you with verified service providers in
+              your area.
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-textPrimary">Quick Links</h3>
+          <div>
+            <h3 className="font-semibold mb-4">Company</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/about" className="text-textSecondary hover:text-primary transition-colors">About Us</Link></li>
-              <li><Link href="/safety" className="text-textSecondary hover:text-primary transition-colors">Safety</Link></li>
-              <li><Link href="/support" className="text-textSecondary hover:text-primary transition-colors">Support</Link></li>
-              <li><Link href="/contact" className="text-textSecondary hover:text-primary transition-colors">Contact</Link></li>
+              <li>
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Careers
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Press
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Legal */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-textPrimary">Legal</h3>
+          <div>
+            <h3 className="font-semibold mb-4">Support</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/terms" className="text-textSecondary hover:text-primary transition-colors">Terms & Conditions</Link></li>
-              <li><Link href="/privacy" className="text-textSecondary hover:text-primary transition-colors">Privacy Policy</Link></li>
+              <li>
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Help Center
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Contact Us
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Terms of Service
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Contact Info */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-textPrimary">Get in Touch</h3>
-            <p className="text-textSecondary text-sm">
-              Have questions? We're here to help 24/7.
-            </p>
-            <p className="text-textSecondary text-sm">
-              Email: support@helpers.com<br />
-              Phone: +91 98765 43210
-            </p>
+          <div>
+            <h3 className="font-semibold mb-4">Follow Us</h3>
+            <div className="flex gap-4">
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Twitter className="w-5 h-5" />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Linkedin className="w-5 h-5" />
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-border mt-8 pt-8 text-center">
-          <p className="text-textSecondary text-sm">
-            © 2025 Helpers Limited. Terms and Conditions apply.
-          </p>
+        <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
+          <p>&copy; 2024 Helpers. All rights reserved.</p>
         </div>
       </div>
     </footer>

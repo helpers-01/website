@@ -1,12 +1,12 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { CustomerDashboard } from "@/components/customer-dashboard"
+import { BookingPage } from "@/components/booking-page"
 
-export default function CustomerDashboardPage() {
+export default function Booking() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <CustomerDashboard />
+      <BookingPage />
       <Footer />
     </div>
   )

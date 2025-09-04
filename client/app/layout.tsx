@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import "./globals.css"
-import Footer from "@/components/footer"
+import { Footer } from "@/components/footer"
 import ErrorBoundary from "@/components/error-boundary"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AuthLayout } from "@/components/auth-layout"
