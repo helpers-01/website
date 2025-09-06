@@ -22,14 +22,6 @@ export default function EntryPage() {
       icon: Users,
       path: '/login/helper',
       color: 'bg-green-500'
-    },
-    {
-      id: 'admin',
-      title: 'Admin Login',
-      description: 'Administrative access for system management and oversight',
-      icon: Shield,
-      path: '/login/admin',
-      color: 'bg-purple-500'
     }
   ];
 
@@ -47,7 +39,7 @@ export default function EntryPage() {
         </div>
 
         {/* Login Options Grid */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
           {loginOptions.map((option) => {
             const IconComponent = option.icon;
             return (

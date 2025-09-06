@@ -12,6 +12,37 @@ export const loginSchema = z.object({
     .max(100, 'Password must be less than 100 characters'),
 })
 
+export const signupSchema = z.object({
+  full_name: z
+    .string()
+    .min(2, 'Full name must be at least 2 characters')
+    .max(100, 'Full name must be less than 100 characters'),
+  email: z
+    .string()
+    .min(1, 'Email is required')
+    .email('Please enter a valid email address'),
+  phone: z
+    .string()
+    .optional()
+    .refine(
+      (val) => !val || /^\+?[1-9]\d{1,14}$/.test(val),
+      'Please enter a valid phone number'
+    ),
+  password: z
+    .string()
+    .min(8, 'Password must be at least 8 characters')
+    .max(100, 'Password must be less than 100 characters')
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, 'Password must contain at least one uppercase letter, one lowercase letter, and one number'),
+  confirmPassword: z.string(),
+  terms: z.boolean().refine(val => val === true, 'You must accept the terms and conditions'),
+}).refine(
+  (data) => data.password === data.confirmPassword,
+  {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
+  }
+)
+
 export const adminLoginSchema = z.object({
   username: z
     .string()
@@ -225,6 +256,7 @@ export const searchSchema = z.object({
 
 // Type exports for form usage
 export type LoginFormData = z.infer<typeof loginSchema>
+export type SignupFormData = z.infer<typeof signupSchema>
 export type AdminLoginFormData = z.infer<typeof adminLoginSchema>
 export type HelperLoginFormData = z.infer<typeof helperLoginSchema>
 export type UserLoginFormData = z.infer<typeof userLoginSchema>

@@ -1,23 +1,12 @@
 import { supabase } from '../supabase/client';
-import { messaging } from '../clients';
-import { getToken } from 'firebase/messaging';
 
 type Notification = any;
 type UserDevice = any;
 
 export const notificationService = {
   async requestPermission(): Promise<string | null> {
-    try {
-      const permission = await Notification.requestPermission();
-      if (permission === 'granted') {
-        const token = await getToken(messaging);
-        return token;
-      }
-      return null;
-    } catch (error) {
-      console.error('Error requesting notification permission:', error);
-      return null;
-    }
+    // Firebase removed - push notifications disabled
+    return null;
   },
 
   async registerDevice(userId: string, token: string): Promise<void> {

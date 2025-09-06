@@ -11,7 +11,7 @@ const testimonials = [
     rating: 5,
     comment:
       "Absolutely fantastic service! The cleaning team was professional, thorough, and left my home spotless. I'll definitely book again.",
-    avatar: "/professional-woman-smiling-headshot.png",
+    avatar: "/images/testimonials/professional-woman-smiling-headshot.png",
   },
   {
     name: "Mike Chen",
@@ -19,7 +19,7 @@ const testimonials = [
     rating: 5,
     comment:
       "The electrician arrived on time, diagnosed the issue quickly, and fixed everything perfectly. Great communication throughout the process.",
-    avatar: "/professional-man-smiling-headshot.png",
+    avatar: "/images/testimonials/professional-man-smiling-headshot.png",
   },
   {
     name: "Emily Rodriguez",
@@ -27,7 +27,7 @@ const testimonials = [
     rating: 5,
     comment:
       "Amazing experience! The stylist was skilled and friendly. Getting a professional haircut at home was so convenient.",
-    avatar: "/smiling-professional-woman.png",
+    avatar: "/images/testimonials/smiling-professional-woman.png",
   },
 ]
 

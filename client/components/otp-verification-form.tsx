@@ -3,16 +3,46 @@
 import type React from "react"
 
 import { useState, useRef, useEffect } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Phone, RefreshCw } from "lucide-react"
+import { Phone, RefreshCw, AlertCircle, Loader2 } from "lucide-react"
+import { supabase } from "@/lib/supabase/client"
+import { toast } from "sonner"
 
 export function OTPVerificationForm() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""])
   const [timeLeft, setTimeLeft] = useState(60)
   const [canResend, setCanResend] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState("")
+  const [showEmailInput, setShowEmailInput] = useState(false)
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
+
+  const router = useRouter()
+  // SECURITY FIX: Remove email from URL parameters to prevent exposure
+  // Use sessionStorage for temporary secure storage instead
+  const [email, setEmail] = useState("")
+
+  useEffect(() => {
+    // SECURITY FIX: Retrieve email from sessionStorage instead of URL
+    const storedEmail = sessionStorage.getItem('otp_email')
+    if (storedEmail) {
+      setEmail(storedEmail)
+    } else {
+      // If no email in sessionStorage, show email input
+      setShowEmailInput(true)
+    }
+
+    // Clean up sessionStorage after 5 minutes for security
+    const cleanupTimer = setTimeout(() => {
+      sessionStorage.removeItem('otp_email')
+    }, 5 * 60 * 1000) // 5 minutes
+
+    return () => clearTimeout(cleanupTimer)
+  }, [])
 
   useEffect(() => {
     if (timeLeft > 0) {
@@ -42,19 +72,82 @@ export function OTPVerificationForm() {
     }
   }
 
-  const handleResend = () => {
-    setTimeLeft(60)
-    setCanResend(false)
-    setOtp(["", "", "", "", "", ""])
-    inputRefs.current[0]?.focus()
+  const handleResend = async () => {
+    if (!email) {
+      setError("No email found. Please try signing up again.")
+      return
+    }
+
+    setIsLoading(true)
+    setError("")
+
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        email: email,
+      })
+
+      if (error) {
+        setError(error.message)
+        return
+      }
+
+      setTimeLeft(60)
+      setCanResend(false)
+      setOtp(["", "", "", "", "", ""])
+      inputRefs.current[0]?.focus()
+      toast.success("OTP sent successfully!")
+    } catch (error) {
+      console.error("Resend OTP error:", error)
+      setError("Failed to resend OTP. Please try again.")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const otpValue = otp.join("")
-    if (otpValue.length === 6) {
-      console.log("OTP submitted:", otpValue)
-      // Handle OTP verification
+
+    if (otpValue.length !== 6) {
+      setError("Please enter a complete 6-digit code")
+      return
+    }
+
+    setIsLoading(true)
+    setError("")
+
+    try {
+      // Verify OTP with Supabase
+      const { data, error } = await supabase.auth.verifyOtp({
+        email: email,
+        token: otpValue,
+        type: 'email'
+      })
+
+      if (error) {
+        // Handle specific error cases
+        switch (error.message) {
+          case "Token has expired or is invalid":
+            setError("The verification code has expired. Please request a new one.")
+            break
+          case "Invalid token":
+            setError("Invalid verification code. Please check and try again.")
+            break
+          default:
+            setError(error.message)
+        }
+        return
+      }
+
+      if (data.session && data.user) {
+        toast.success("Account verified successfully!")
+        router.push("/dashboard/customer")
+      }
+    } catch (error) {
+      console.error("OTP verification error:", error)
+      setError("Verification failed. Please try again.")
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -68,7 +161,30 @@ export function OTPVerificationForm() {
         <CardDescription>We've sent a 6-digit code to your phone number ending in ****1234</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
+        {error && (
+          <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700">
+            <AlertCircle className="w-4 h-4" />
+            <span className="text-sm">{error}</span>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-6">
+          {showEmailInput && (
+            <div className="space-y-2">
+              <Label htmlFor="email">Email Address</Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email address"
+                className="border-blue-200 focus:border-blue-400"
+                disabled={isLoading}
+                required
+              />
+            </div>
+          )}
+
           <div className="flex justify-center gap-3">
             {otp.map((digit, index) => (
               <Input
@@ -83,12 +199,24 @@ export function OTPVerificationForm() {
                 onChange={(e) => handleChange(index, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(index, e)}
                 className="w-12 h-12 text-center text-lg font-semibold border-blue-200 focus:border-blue-400"
+                disabled={isLoading}
               />
             ))}
           </div>
 
-          <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700" disabled={otp.join("").length !== 6}>
-            Verify Code
+          <Button
+            type="submit"
+            className="w-full bg-blue-600 hover:bg-blue-700"
+            disabled={otp.join("").length !== 6 || isLoading}
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Verifying...
+              </>
+            ) : (
+              "Verify Code"
+            )}
           </Button>
         </form>
 
@@ -98,10 +226,15 @@ export function OTPVerificationForm() {
           ) : (
             <button
               onClick={handleResend}
-              className="text-sm text-blue-600 hover:text-blue-700 flex items-center gap-1 mx-auto"
+              disabled={isLoading}
+              className="text-sm text-blue-600 hover:text-blue-700 flex items-center gap-1 mx-auto disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <RefreshCw className="w-4 h-4" />
-              Resend Code
+              {isLoading ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <RefreshCw className="w-4 h-4" />
+              )}
+              {isLoading ? "Sending..." : "Resend Code"}
             </button>
           )}
         </div>

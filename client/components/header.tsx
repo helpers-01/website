@@ -4,39 +4,39 @@ import Link from "next/link"
 
 export function Header() {
   return (
-    <header className="bg-background border-b border-border sticky top-0 z-50">
+    <header className="bg-gradient-to-r from-purple-600 to-blue-600 border-b border-purple-300 sticky top-0 z-50 shadow-lg">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Helpers%20logo.jpg-8tii2yjyr4KGeMlFK33cmezJCBajnt.jpeg"
+            src="/Helpers logo.jpg"
             alt="Helpers Logo"
             width={40}
             height={40}
             className="rounded-lg"
           />
-          <span className="text-xl font-bold text-foreground">Helpers</span>
+          <span className="text-xl font-bold text-white">Helpers</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
-          <a href="#services" className="text-muted-foreground hover:text-foreground transition-colors">
+          <a href="#services" className="text-white/90 hover:text-white transition-colors font-medium">
             Services
           </a>
-          <a href="#how-it-works" className="text-muted-foreground hover:text-foreground transition-colors">
+          <a href="#how-it-works" className="text-white/90 hover:text-white transition-colors font-medium">
             How It Works
           </a>
-          <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors">
+          <a href="#about" className="text-white/90 hover:text-white transition-colors font-medium">
             About
           </a>
-          <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">
+          <a href="#contact" className="text-white/90 hover:text-white transition-colors font-medium">
             Contact
           </a>
         </nav>
 
         <div className="flex items-center gap-3">
-          <Button asChild variant="ghost" className="hidden sm:inline-flex">
+          <Button asChild variant="ghost" className="hidden sm:inline-flex text-white border-white/20 hover:bg-white/10 hover:text-white">
             <Link href="/auth">Sign In</Link>
           </Button>
-          <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+          <Button asChild className="bg-white text-purple-600 hover:bg-gray-100 font-semibold shadow-md">
             <Link href="/auth">Get Started</Link>
           </Button>
         </div>

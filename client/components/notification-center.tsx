@@ -23,16 +23,8 @@ export function NotificationCenter() {
   useEffect(() => {
     if (user) {
       loadNotifications();
-      setupPushNotifications();
     }
   }, [user]);
-
-  async function setupPushNotifications() {
-    const token = await notificationService.requestPermission();
-    if (token) {
-      await notificationService.registerDevice(user!.id, token);
-    }
-  }
 
   async function loadNotifications() {
     try {

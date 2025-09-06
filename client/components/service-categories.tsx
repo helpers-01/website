@@ -1,7 +1,9 @@
+import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
-import { Scissors, Sparkles, Wrench, Paintbrush, Zap, Hammer, Car, Laptop } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Scissors, Sparkles, Wrench, Paintbrush, Zap, Hammer, Car, Laptop, Heart, Stethoscope, ShoppingBag, MoreHorizontal } from "lucide-react"
 
-const services = [
+const allServices = [
   {
     icon: Scissors,
     title: "Salon & Beauty",
@@ -50,9 +52,33 @@ const services = [
     description: "Computer repair, setup, troubleshooting",
     color: "text-accent",
   },
+  {
+    icon: Heart,
+    title: "Healthcare",
+    description: "Medical assistance and consultations",
+    color: "text-primary",
+  },
+  {
+    icon: Stethoscope,
+    title: "Medical Store",
+    description: "Medicines and healthcare products",
+    color: "text-accent",
+  },
+  {
+    icon: ShoppingBag,
+    title: "General Store",
+    description: "Daily essentials and groceries",
+    color: "text-primary",
+  },
 ]
 
 export function ServiceCategories() {
+  const [showAll, setShowAll] = useState(false)
+  const [expandedService, setExpandedService] = useState<number | null>(null)
+
+  const displayedServices = showAll ? allServices : allServices.slice(0, 8)
+  const hasMoreServices = allServices.length > 8
+
   return (
     <section id="services" className="py-16">
       <div className="container mx-auto px-4">
@@ -64,7 +90,7 @@ export function ServiceCategories() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {services.map((service, index) => {
+          {displayedServices.map((service, index) => {
             const Icon = service.icon
             return (
               <Card key={index} className="hover:shadow-lg transition-shadow cursor-pointer group">
@@ -79,6 +105,19 @@ export function ServiceCategories() {
             )
           })}
         </div>
+
+        {hasMoreServices && (
+          <div className="text-center mt-8">
+            <Button
+              onClick={() => setShowAll(!showAll)}
+              variant="outline"
+              className="px-8 py-2"
+            >
+              <MoreHorizontal className="w-4 h-4 mr-2" />
+              {showAll ? 'Show Less' : `View All Services (${allServices.length})`}
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   )

@@ -8,17 +8,17 @@ const banners = [
   {
     title: "Professional Salon Services at Home",
     subtitle: "Book expert beauticians and stylists for home visits",
-    image: "/professional-salon-services-at-home-with-beauticia.jpg",
+    image: "/images/hero/professional-salon-services-at-home-with-beauticia.jpg",
   },
   {
     title: "Expert Home Cleaning Services",
     subtitle: "Reliable and thorough cleaning for your home",
-    image: "/professional-home-cleaning-service-with-cleaner-in.jpg",
+    image: "/images/hero/professional-home-cleaning-service-with-cleaner-in.jpg",
   },
   {
     title: "Trusted Electrician Services",
     subtitle: "Licensed electricians for all your electrical needs",
-    image: "/electrician-modern-home.png",
+    image: "/images/hero/electrician-modern-home.png",
   },
 ]
 
