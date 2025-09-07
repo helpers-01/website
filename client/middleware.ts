@@ -1,11 +1,29 @@
 import { NextResponse } from 'next/server'
-import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
+import { createServerClient } from '@supabase/ssr'
 import type { NextRequest } from 'next/server'
 import type { Database } from '@/types/database.types'
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next()
-  const supabase = createMiddlewareClient<Database>({ req, res })
+  const supabase = createServerClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return req.cookies.getAll().map(cookie => ({
+            name: cookie.name,
+            value: cookie.value,
+          }))
+        },
+        setAll(cookies) {
+          cookies.forEach(({ name, value, options }) => {
+            res.cookies.set(name, value, options)
+          })
+        },
+      },
+    }
+  )
   const {
     data: { session },
   } = await supabase.auth.getSession()
@@ -24,37 +42,39 @@ export async function middleware(req: NextRequest) {
       .eq('id', session.user.id)
       .single()
 
+    const typedProfile = profile as { role: 'user' | 'helper' | 'admin' } | null
+
     // Redirect based on role restrictions
-    if (profile?.role) {
+    if (typedProfile?.role) {
       if (
         req.nextUrl.pathname.startsWith('/dashboard/admin') &&
-        profile.role !== 'admin'
+        typedProfile.role !== 'admin'
       ) {
         // Redirect to correct dashboard based on actual role
-        const redirectPath = profile.role === 'helper' ? '/dashboard/provider' :
-                           profile.role === 'user' ? '/dashboard/customer' : '/login'
+        const redirectPath = typedProfile.role === 'helper' ? '/dashboard/provider' :
+                           typedProfile.role === 'user' ? '/dashboard/customer' : '/login'
         const redirectUrl = new URL(redirectPath, req.url)
         return NextResponse.redirect(redirectUrl)
       }
 
       if (
         req.nextUrl.pathname.startsWith('/dashboard/provider') &&
-        profile.role !== 'helper'
+        typedProfile.role !== 'helper'
       ) {
         // Redirect to correct dashboard based on actual role
-        const redirectPath = profile.role === 'admin' ? '/dashboard/admin' :
-                           profile.role === 'user' ? '/dashboard/customer' : '/login'
+        const redirectPath = typedProfile.role === 'admin' ? '/dashboard/admin' :
+                           typedProfile.role === 'user' ? '/dashboard/customer' : '/login'
         const redirectUrl = new URL(redirectPath, req.url)
         return NextResponse.redirect(redirectUrl)
       }
 
       if (
         req.nextUrl.pathname.startsWith('/dashboard/customer') &&
-        profile.role !== 'user'
+        typedProfile.role !== 'user'
       ) {
         // Redirect to correct dashboard based on actual role
-        const redirectPath = profile.role === 'admin' ? '/dashboard/admin' :
-                           profile.role === 'helper' ? '/dashboard/provider' : '/login'
+        const redirectPath = typedProfile.role === 'admin' ? '/dashboard/admin' :
+                           typedProfile.role === 'helper' ? '/dashboard/provider' : '/login'
         const redirectUrl = new URL(redirectPath, req.url)
         return NextResponse.redirect(redirectUrl)
       }
