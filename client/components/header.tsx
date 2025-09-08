@@ -18,9 +18,9 @@ export function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
-          <a href="#services" className="text-white/90 hover:text-white transition-colors font-medium">
+          <Link href="/services" className="text-white/90 hover:text-white transition-colors font-medium">
             Services
-          </a>
+          </Link>
           <a href="#how-it-works" className="text-white/90 hover:text-white transition-colors font-medium">
             How It Works
           </a>
