@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Razorpay from 'razorpay'
 
+// Force Node.js runtime for external packages
+export const runtime = "nodejs"
+
 // Initialize Razorpay with server-side credentials
 let razorpay: Razorpay | null = null
 
