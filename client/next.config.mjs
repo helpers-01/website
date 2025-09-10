@@ -15,6 +15,13 @@ const nextConfig = {
       },
     ],
   },
+  // Disable static optimization to avoid SSR issues
+  experimental: {
+    serverComponentsExternalPackages: [],
+  },
+  generateBuildId: async () => {
+    return 'build-' + Date.now()
+  },
 }
 
 export default nextConfig

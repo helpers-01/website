@@ -19,7 +19,7 @@ export const trackingService = {
       accuracy
     };
 
-    const { error } = await supabase
+    const { error } = await (supabase as any)
       .from('location_updates')
       .insert(update);
 

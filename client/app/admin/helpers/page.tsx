@@ -72,11 +72,14 @@ export default function HelperManagement() {
 
       if (helpersError) throw helpersError
 
+      // Ensure helpersData is an array
+      const safeHelpersData = helpersData || []
+
       // Calculate statistics
-      const totalHelpers = helpersData?.length || 0
-      const approvedHelpers = helpersData?.filter(helper => helper.status === 'approved').length || 0
-      const pendingHelpers = helpersData?.filter(helper => helper.status === 'pending').length || 0
-      const rejectedHelpers = helpersData?.filter(helper => helper.status === 'rejected').length || 0
+      const totalHelpers = safeHelpersData.length
+      const approvedHelpers = safeHelpersData.filter((helper: any) => helper.status === 'approved').length
+      const pendingHelpers = safeHelpersData.filter((helper: any) => helper.status === 'pending').length
+      const rejectedHelpers = safeHelpersData.filter((helper: any) => helper.status === 'rejected').length
 
       setStats({
         totalHelpers,
@@ -86,7 +89,7 @@ export default function HelperManagement() {
       })
 
       // Format helpers data
-      const formattedHelpers = helpersData?.map(helper => ({
+      const formattedHelpers = safeHelpersData.map((helper: any) => ({
         id: helper.id,
         name: helper.name || 'Unknown Helper',
         email: helper.email,
@@ -99,7 +102,7 @@ export default function HelperManagement() {
         status: helper.status === 'approved' ? 'Approved' : helper.status === 'pending' ? 'Pending' : 'Rejected',
         joinDate: new Date(helper.created_at).toLocaleDateString(),
         avatar: helper.avatar_url || "/placeholder.svg?height=40&width=40",
-      })) || []
+      }))
 
       setHelpers(formattedHelpers)
     } catch (error) {

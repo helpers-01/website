@@ -7,7 +7,7 @@ export const referralService = {
   async generateCode(userId: string): Promise<string> {
     const code = Math.random().toString(36).substring(2, 8).toUpperCase();
     
-    const { error } = await supabase
+    const { error } = await (supabase as any)
       .from('profiles')
       .update({ referral_code: code })
       .eq('id', userId);
@@ -29,14 +29,14 @@ export const referralService = {
 
     // Create referral record
     const referral: Referral = {
-      referrer_id: referrer.id,
+      referrer_id: (referrer as any).id,
       referred_id: userId,
       code,
       status: 'pending',
       reward_amount: 100 // Configure reward amount as needed
     };
 
-    const { error } = await supabase
+    const { error } = await (supabase as any)
       .from('referrals')
       .insert(referral);
 
@@ -51,12 +51,12 @@ export const referralService = {
       .single();
 
     if (referralError) throw referralError;
-    if (!referral || referral.reward_claimed) {
+    if (!referral || (referral as any).reward_claimed) {
       throw new Error('Reward already claimed or invalid referral');
     }
 
     // Update referral status
-    const { error: updateError } = await supabase
+    const { error: updateError } = await (supabase as any)
       .from('referrals')
       .update({
         status: 'completed',
@@ -69,9 +69,9 @@ export const referralService = {
 
     // Add reward to referrer's wallet
     await walletService.addFunds(
-      referral.referrer_id,
-      referral.reward_amount,
-      `Referral reward for code ${referral.code}`
+      (referral as any).referrer_id,
+      (referral as any).reward_amount,
+      `Referral reward for code ${(referral as any).code}`
     );
   },
 

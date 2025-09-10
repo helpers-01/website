@@ -12,7 +12,7 @@ export const walletService = {
       .single();
     
     if (error) throw error;
-    return data?.wallet_balance || 0;
+    return (data as any)?.wallet_balance || 0;
   },
 
   async addFunds(userId: string, amount: number, referenceId: string): Promise<void> {
@@ -25,13 +25,13 @@ export const walletService = {
       description: 'Added funds to wallet'
     };
 
-    const { error: transactionError } = await supabase
+    const { error: transactionError } = await (supabase as any)
       .from('wallet_transactions')
       .insert(transaction);
 
     if (transactionError) throw transactionError;
 
-    const { error: updateError } = await supabase.rpc('increment_wallet_balance', {
+    const { error: updateError } = await (supabase as any).rpc('increment_wallet_balance', {
       user_id: userId,
       increment_amount: amount
     });
@@ -48,13 +48,13 @@ export const walletService = {
       description
     };
 
-    const { error: transactionError } = await supabase
+    const { error: transactionError } = await (supabase as any)
       .from('wallet_transactions')
       .insert(transaction);
 
     if (transactionError) throw transactionError;
 
-    const { error: updateError } = await supabase.rpc('decrement_wallet_balance', {
+    const { error: updateError } = await (supabase as any).rpc('decrement_wallet_balance', {
       user_id: userId,
       decrement_amount: amount
     });

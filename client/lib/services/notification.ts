@@ -54,13 +54,13 @@ export const notificationService = {
 
     if (devices && devices.length > 0) {
       // Send to Firebase Cloud Messaging
-      const tokens = devices.map(d => d.device_token);
+      const tokens = (devices as any[]).map((d: any) => d.device_token);
       // Implement FCM send logic here
     }
   },
 
   async markAsRead(notificationId: string): Promise<void> {
-    const { error } = await supabase
+    const { error } = await (supabase as any)
       .from('notifications')
       .update({ read: true })
       .eq('id', notificationId);

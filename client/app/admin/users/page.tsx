@@ -66,11 +66,14 @@ export default function UserManagement() {
 
       if (usersError) throw usersError
 
+      // Ensure usersData is an array
+      const safeUsersData = usersData || []
+
       // Calculate statistics
-      const totalUsers = usersData?.length || 0
-      const activeUsers = usersData?.filter(user => user.status === 'active').length || 0
-      const inactiveUsers = usersData?.filter(user => user.status === 'inactive').length || 0
-      const suspendedUsers = usersData?.filter(user => user.status === 'suspended').length || 0
+      const totalUsers = safeUsersData.length
+      const activeUsers = safeUsersData.filter((user: any) => user.status === 'active').length
+      const inactiveUsers = safeUsersData.filter((user: any) => user.status === 'inactive').length
+      const suspendedUsers = safeUsersData.filter((user: any) => user.status === 'suspended').length
 
       setStats({
         totalUsers,
@@ -80,7 +83,7 @@ export default function UserManagement() {
       })
 
       // Format users data
-      const formattedUsers = usersData?.map(user => ({
+      const formattedUsers = safeUsersData.map((user: any) => ({
         id: user.id,
         name: user.name || 'Unknown User',
         email: user.email,
@@ -90,7 +93,7 @@ export default function UserManagement() {
         totalBookings: user.bookings?.[0]?.count || 0,
         status: user.status === 'active' ? 'Active' : user.status === 'suspended' ? 'Suspended' : 'Inactive',
         avatar: user.avatar_url || "/placeholder.svg?height=40&width=40",
-      })) || []
+      }))
 
       setUsers(formattedUsers)
     } catch (error) {

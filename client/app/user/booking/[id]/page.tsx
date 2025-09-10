@@ -69,13 +69,13 @@ export default function BookingFlow() {
 
         // Transform Supabase data to Service interface
         const service: Service = {
-          id: serviceData.id,
-          name: serviceData.name || 'Unknown Service',
-          provider: serviceData.provider_name || 'Unknown Provider',
-          package: serviceData.package || 'Standard',
-          price: serviceData.price || 0,
-          duration: serviceData.duration || 'TBD',
-          rating: serviceData.rating || 0,
+          id: (serviceData as any).id,
+          name: (serviceData as any).name || 'Unknown Service',
+          provider: (serviceData as any).provider_name || 'Unknown Provider',
+          package: (serviceData as any).package || 'Standard',
+          price: (serviceData as any).price || 0,
+          duration: (serviceData as any).duration || 'TBD',
+          rating: (serviceData as any).rating || 0,
         }
 
         setService(service)

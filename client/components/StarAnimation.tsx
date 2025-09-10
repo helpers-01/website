@@ -17,6 +17,9 @@ export default function StarAnimation() {
   const [stars, setStars] = useState<Star[]>([])
 
   useEffect(() => {
+    // Only run on client side
+    if (typeof window === 'undefined') return
+
     const handleClick = (e: MouseEvent) => {
       const starCount = Math.floor(Math.random() * 5) + 2
       const newStars: Star[] = []

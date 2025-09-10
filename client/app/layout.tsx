@@ -5,8 +5,10 @@ import ErrorBoundary from "@/components/error-boundary"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AuthLayout } from "@/components/auth-layout"
 import { AuthProvider } from "@/lib/contexts/AuthContext"
-import StarAnimation from "@/components/StarAnimation"
 import Script from "next/script"
+
+// Disable static generation to avoid SSR issues
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: "Helpers - Management System",
@@ -69,7 +71,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <main className="flex-1">{children}</main>
                 <Footer />
               </AuthLayout>
-              <StarAnimation />
             </AuthProvider>
           </ErrorBoundary>
         </ThemeProvider>
