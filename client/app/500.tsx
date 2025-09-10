@@ -1,6 +1,3 @@
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
-
 export default function ServerError() {
   return (
     <div className="min-h-screen bg-gradient-to-r from-orange-100 to-orange-200 flex items-center justify-center px-4">

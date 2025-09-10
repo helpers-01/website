@@ -15,7 +15,7 @@ const nextConfig = {
       },
     ],
   },
-  // Disable static optimization to avoid SSR issues
+  // Disable static generation to avoid SSR issues
   experimental: {
     serverComponentsExternalPackages: [],
   },

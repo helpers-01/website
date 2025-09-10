@@ -64,16 +64,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
 
-        <ThemeProvider>
-          <ErrorBoundary>
-            <AuthProvider>
-              <AuthLayout>
-                <main className="flex-1">{children}</main>
-                <Footer />
-              </AuthLayout>
-            </AuthProvider>
-          </ErrorBoundary>
-        </ThemeProvider>
+        <div>
+          <main>{children}</main>
+        </div>
       </body>
     </html>
   )

@@ -1,5 +1,8 @@
 "use client"
 
+// Force dynamic rendering for this page since it depends on database data
+export const dynamic = 'force-dynamic'
+
 import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
