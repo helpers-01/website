@@ -65,7 +65,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </noscript>
 
         <div>
-          <main>{children}</main>
+          <ErrorBoundary>
+            <main>{children}</main>
+          </ErrorBoundary>
         </div>
       </body>
     </html>
