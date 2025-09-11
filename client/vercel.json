@@ -80,11 +80,6 @@
     }
   ],
 
-  "functions": {
-    "app/**/*.tsx": {
-      "runtime": "@vercel/next"
-    }
-  },
 
   "crons": [
     {
