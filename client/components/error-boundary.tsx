@@ -65,9 +65,9 @@ function DefaultErrorFallback({ error, resetError }: { error?: Error; resetError
           We encountered an unexpected error. Please try refreshing the page or contact support if the problem persists.
         </p>
 
-        {typeof window !== 'undefined' && window.location.hostname === 'localhost' && error && (
+        {process.env.NODE_ENV === 'development' && error && (
           <div className="bg-surface rounded-lg p-4 mb-6 text-left">
-            <h3 className="font-semibold text-textPrimary mb-2">Error Details (Local Development)</h3>
+            <h3 className="font-semibold text-textPrimary mb-2">Error Details (Development)</h3>
             <pre className="text-sm text-textSecondary whitespace-pre-wrap break-words">
               {error.message}
             </pre>

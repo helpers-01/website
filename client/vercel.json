@@ -80,6 +80,12 @@
     }
   ],
 
+  "functions": {
+    "app/**/*.tsx": {
+      "runtime": "@vercel/next"
+    }
+  },
+
   "crons": [
     {
       "path": "/api/cron/cleanup",

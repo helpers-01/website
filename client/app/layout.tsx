@@ -10,6 +10,11 @@ import Script from "next/script"
 // Disable static generation to avoid SSR issues
 export const dynamic = 'force-dynamic'
 
+// Prevent static generation of error pages
+export const generateStaticParams = () => {
+  return []
+}
+
 export const metadata: Metadata = {
   title: "Helpers - Management System",
   description: "Complete service management platform for customers, helpers, and administrators",

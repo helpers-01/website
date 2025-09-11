@@ -19,6 +19,10 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: [],
   },
+  // Prevent static generation of error pages
+  trailingSlash: false,
+  skipTrailingSlashRedirect: true,
+  skipMiddlewareUrlNormalize: true,
   generateBuildId: async () => {
     return 'build-' + Date.now()
   },
