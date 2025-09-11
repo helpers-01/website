@@ -78,7 +78,7 @@ export function CustomerSignInForm() {
         await refreshProfile()
 
         toast.success("Successfully signed in!")
-        router.push("/dashboard/customer")
+        router.push("/user/dashboard")
       }
     } catch (error) {
       console.error("Sign in error:", error)

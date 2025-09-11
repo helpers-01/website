@@ -141,7 +141,7 @@ export function OTPVerificationForm() {
 
       if (data.session && data.user) {
         toast.success("Account verified successfully!")
-        router.push("/dashboard/customer")
+        router.push("/user/dashboard")
       }
     } catch (error) {
       console.error("OTP verification error:", error)

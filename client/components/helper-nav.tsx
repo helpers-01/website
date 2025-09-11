@@ -13,7 +13,7 @@ export default function HelperNav() {
   const router = useRouter()
 
   const navItems = [
-    { href: "/dashboard/provider", label: "Dashboard", icon: Home },
+    { href: "/helper/dashboard", label: "Dashboard", icon: Home },
     { href: "/helper/jobs", label: "My Jobs", icon: Briefcase },
     { href: "/helper/profile", label: "Profile", icon: User },
     { href: "/helper/reviews", label: "Reviews", icon: Star },
@@ -28,7 +28,7 @@ export default function HelperNav() {
       <div className="max-w-7xl mx-auto w-full">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link href="/dashboard/provider" className="flex items-center gap-2">
+          <Link href="/helper/dashboard" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
               <Briefcase className="w-4 h-4 text-white" />
             </div>

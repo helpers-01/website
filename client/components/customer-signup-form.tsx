@@ -91,7 +91,7 @@ export function CustomerSignUpForm() {
       } else if (data.session) {
         // Auto-confirmed (if email confirmation is disabled)
         toast.success("Account created successfully!")
-        router.push("/dashboard/customer")
+        router.push("/user/dashboard")
       }
     } catch (error) {
       console.error("Sign up error:", error)

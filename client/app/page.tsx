@@ -13,11 +13,11 @@ export default function RootPage() {
     if (!loading && user && role) {
       // Redirect logged-in users to their dashboard
       if (role === 'admin') {
-        router.push('/dashboard/admin')
+        router.push('/admin/dashboard')
       } else if (role === 'helper') {
-        router.push('/dashboard/provider')
+        router.push('/helper/dashboard')
       } else if (role === 'user') {
-        router.push('/dashboard/customer')
+        router.push('/user/dashboard')
       }
     }
   }, [user, role, loading, router])
