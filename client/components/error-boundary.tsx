@@ -14,6 +14,9 @@ function ErrorBoundary({ children, fallback: FallbackComponent }: ErrorBoundaryP
   const [error, setError] = useState<Error | undefined>()
 
   useEffect(() => {
+    // Only add event listeners on the client side
+    if (typeof window === 'undefined') return
+
     const handleError = (event: ErrorEvent) => {
       console.error('Error caught by boundary:', event.error)
       setHasError(true)

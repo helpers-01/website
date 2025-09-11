@@ -105,8 +105,11 @@ export function CustomerSignInForm() {
         return
       }
 
-      // SECURITY FIX: Store email in sessionStorage instead of URL
-      sessionStorage.setItem('otp_email', formData.email)
+      // Only run on client side
+      if (typeof window !== 'undefined') {
+        // SECURITY FIX: Store email in sessionStorage instead of URL
+        sessionStorage.setItem('otp_email', formData.email)
+      }
       toast.success("OTP sent to your email!")
       router.push("/auth/otp-verification")
     } catch (error) {

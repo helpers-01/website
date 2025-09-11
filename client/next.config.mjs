@@ -23,6 +23,8 @@ const nextConfig = {
   trailingSlash: false,
   skipTrailingSlashRedirect: true,
   skipMiddlewareUrlNormalize: true,
+  // Explicitly disable static optimization for all pages
+  output: 'standalone',
   generateBuildId: async () => {
     return 'build-' + Date.now()
   },

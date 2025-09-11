@@ -27,6 +27,9 @@ export function OTPVerificationForm() {
   const [email, setEmail] = useState("")
 
   useEffect(() => {
+    // Only run on client side
+    if (typeof window === 'undefined') return
+
     // SECURITY FIX: Retrieve email from sessionStorage instead of URL
     const storedEmail = sessionStorage.getItem('otp_email')
     if (storedEmail) {

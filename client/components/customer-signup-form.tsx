@@ -84,8 +84,11 @@ export function CustomerSignUpForm() {
 
       if (data.user && !data.session) {
         // Email confirmation required
-        // SECURITY FIX: Store email in sessionStorage instead of URL
-        sessionStorage.setItem('otp_email', formData.email)
+        // Only run on client side
+        if (typeof window !== 'undefined') {
+          // SECURITY FIX: Store email in sessionStorage instead of URL
+          sessionStorage.setItem('otp_email', formData.email)
+        }
         toast.success("Account created! Please check your email to confirm your account.")
         router.push("/auth/otp-verification")
       } else if (data.session) {

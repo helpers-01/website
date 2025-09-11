@@ -15,6 +15,9 @@ export const generateStaticParams = () => {
   return []
 }
 
+// Disable static optimization for this layout
+export const revalidate = 0
+
 export const metadata: Metadata = {
   title: "Helpers - Management System",
   description: "Complete service management platform for customers, helpers, and administrators",
