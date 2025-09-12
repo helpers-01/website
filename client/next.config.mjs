@@ -28,6 +28,15 @@ const nextConfig = {
   generateBuildId: async () => {
     return 'build-' + Date.now()
   },
+  // Ignore src directory to prevent Pages Router detection
+  pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
+  webpack: (config, { isServer }) => {
+    // Exclude src directory from webpack processing
+    config.resolve.alias = {
+      ...config.resolve.alias,
+    }
+    return config
+  },
 }
 
 export default nextConfig
