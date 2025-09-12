@@ -2,10 +2,10 @@
 
 import { useEffect } from 'react';
 
-interface ErrorProps {
-  error: Error;
+type ErrorProps = {
+  error: Error & { digest?: string };
   reset: () => void;
-}
+};
 
 export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
@@ -25,10 +25,11 @@ export default function Error({ error, reset }: ErrorProps) {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            aria-hidden="true"
           >
-            <polygon points="7.86,2 16.14,2 22,7.86 22,16.14 16.14,22 7.86,22 2,16.14 2,7.86 7.86,2" />
-            <line x1="12" y1="8" x2="12" y2="12" />
-            <line x1="12" y1="16" x2="12.01" y2="16" />
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L14.71 3.86a2 2 0 00-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
           </svg>
         </div>
         <h1 className="text-xl font-bold text-gray-900 mb-2">Something went wrong!</h1>
@@ -37,7 +38,7 @@ export default function Error({ error, reset }: ErrorProps) {
         </p>
         <div className="space-x-4">
           <button
-            onClick={reset}
+            onClick={() => reset()}
             className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-800 transition"
           >
             Try again
@@ -49,6 +50,9 @@ export default function Error({ error, reset }: ErrorProps) {
             Go Home
           </a>
         </div>
+        {error?.digest ? (
+          <p className="mt-4 text-xs text-gray-400">Error digest: {error.digest}</p>
+        ) : null}
       </div>
     </div>
   );

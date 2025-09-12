@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import { Footer } from "@/components/footer"
-import ErrorBoundary from "@/components/error-boundary"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AuthLayout } from "@/components/auth-layout"
 import { AuthProvider } from "@/lib/contexts/AuthContext"
@@ -72,11 +71,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
 
-        <div>
-          <ErrorBoundary>
-            <main>{children}</main>
-          </ErrorBoundary>
-        </div>
+        <main>{children}</main>
       </body>
     </html>
   )

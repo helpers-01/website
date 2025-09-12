@@ -3,7 +3,31 @@
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/lib/contexts/AuthContext"
-import HomePage from "@/src/pages"
+import { Header } from "@/components/header"
+import { HeroSection } from "@/components/hero-section"
+import { SearchSection } from "@/components/search-section"
+import { ServiceCategories } from "@/components/service-categories"
+import { HowItWorks } from "@/components/how-it-works"
+import { AboutUs } from "@/components/about-us"
+import { Testimonials } from "@/components/testimonials"
+import { AppDownload } from "@/components/app-download"
+
+function LandingPage() {
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main>
+        <HeroSection />
+        <SearchSection />
+        <ServiceCategories />
+        <HowItWorks />
+        <AboutUs />
+        <Testimonials />
+        <AppDownload />
+      </main>
+    </div>
+  )
+}
 
 export default function RootPage() {
   const { user, role, loading } = useAuth()
@@ -11,23 +35,20 @@ export default function RootPage() {
 
   useEffect(() => {
     if (!loading && user && role) {
-      // Redirect logged-in users to their dashboard
-      if (role === 'admin') {
-        router.push('/admin/dashboard')
-      } else if (role === 'helper') {
-        router.push('/helper/dashboard')
-      } else if (role === 'user') {
-        router.push('/user/dashboard')
+      if (role === "admin") {
+        router.push("/admin/dashboard")
+      } else if (role === "helper") {
+        router.push("/helper/dashboard")
+      } else if (role === "user") {
+        router.push("/user/dashboard")
       }
     }
   }, [user, role, loading, router])
 
-  // Show landing page for non-logged-in users or while loading
   if (loading || !user) {
-    return <HomePage />
+    return <LandingPage />
   }
 
-  // Show loading state while redirecting logged-in users
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-orange-100 to-orange-200">
       <div className="flex flex-col items-center gap-4">
