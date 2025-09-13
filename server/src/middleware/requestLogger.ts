@@ -19,6 +19,7 @@ export const requestLogger = (req: Request, res: Response, next: NextFunction) =
       userAgent: req.get('User-Agent'),
       ip: req.ip || req.socket.remoteAddress,
       contentLength: res.get('Content-Length'),
+      requestId: res.get('x-request-id') || (req.headers['x-request-id'] as string | undefined),
     };
 
     // Log different levels based on status code

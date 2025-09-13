@@ -1,6 +1,6 @@
 import { supabaseAdmin } from '../config/supabase';
 import { logger } from '../utils/logger';
-import { Service, ServiceCategory, SearchFilters } from '../../../shared/types';
+import { Service, ServiceCategory, SearchFilters } from '@shared/types';
 
 export class ServiceService {
   // Get all service categories
@@ -111,18 +111,19 @@ export class ServiceService {
     let filteredData = data || [];
 
     if (filters.rating_min !== undefined) {
-      filteredData = filteredData.filter(service => 
-        service.provider_services?.some(ps => 
-          ps.providers?.rating_average && ps.providers.rating_average >= filters.rating_min!
+      filteredData = filteredData.filter((service: any) =>
+        service.provider_services?.some((ps: any) =>
+          ps?.providers?.rating_average && ps.providers.rating_average >= (filters.rating_min as number)
         )
       );
     }
 
     if (filters.location) {
-      filteredData = filteredData.filter(service =>
-        service.provider_services?.some(ps =>
-          ps.providers?.service_areas?.some(area =>
-            area.toLowerCase().includes(filters.location!.toLowerCase())
+      const needle = (filters.location as string).toLowerCase();
+      filteredData = filteredData.filter((service: any) =>
+        service.provider_services?.some((ps: any) =>
+          ps?.providers?.service_areas?.some((area: string) =>
+            area.toLowerCase().includes(needle)
           )
         )
       );

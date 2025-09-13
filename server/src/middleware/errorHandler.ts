@@ -1,79 +1,75 @@
 import { Request, Response, NextFunction } from 'express';
 import { logger } from '../utils/logger';
-import { handleApiError } from '@shared/utils';
+import ApiError from '../utils/ApiError';
 
-export interface AppError extends Error {
-  statusCode?: number;
-  code?: string;
-  details?: any;
-}
+export type AppError =
+  | ApiError
+  | (Error & { statusCode?: number; code?: string; details?: unknown });
 
 export const errorHandler = (
-  error: AppError,
+  err: AppError,
   req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) => {
-  logger.error('Error Handler:', {
-    message: error.message,
-    stack: error.stack,
+  const apiError =
+    err instanceof ApiError
+      ? err
+      : new ApiError(
+          err.message || 'Internal server error',
+          (err as any).statusCode || 500,
+          (err as any).code || 'INTERNAL_ERROR',
+          (err as any).details
+        );
+
+  logger.error('Error Handler', {
+    message: apiError.message,
+    stack: (err as any).stack,
     url: req.url,
     method: req.method,
     body: req.body,
     params: req.params,
     query: req.query,
+    requestId: res.get('x-request-id') || (req.headers['x-request-id'] as string | undefined),
   });
 
-  const { message, code, statusCode } = handleApiError(error);
-
-  res.status(statusCode).json({
+  res.status(apiError.statusCode).json({
     success: false,
     error: {
-      message,
-      code,
-      ...(process.env.NODE_ENV === 'development' && { 
-        stack: error.stack,
-        details: error.details 
+      message: apiError.message,
+      code: apiError.code,
+      ...(process.env.NODE_ENV === 'development' && {
+        stack: (err as any).stack,
+        details: (apiError as any).details,
       }),
     },
+    correlationId: res.get('x-request-id') || (req.headers['x-request-id'] as string | undefined),
     timestamp: new Date().toISOString(),
   });
 };
 
-export const notFoundHandler = (req: Request, res: Response) => {
+export const notFoundHandler = (req: Request, _res: Response, next: NextFunction) => {
   const message = `Route ${req.originalUrl} not found`;
-  
+
   logger.warn(`404 - ${message}`, {
     method: req.method,
     url: req.originalUrl,
     ip: req.ip,
+    requestId: (req.headers['x-request-id'] as string | undefined),
   });
 
-  res.status(404).json({
-    success: false,
-    error: {
-      message,
-      code: 'NOT_FOUND',
-    },
-    timestamp: new Date().toISOString(),
-  });
+  next(ApiError.notFound(message));
 };
 
-export const asyncHandler = (fn: Function) => {
-  return (req: Request, res: Response, next: NextFunction) => {
+export const asyncHandler =
+  (fn: (req: Request, res: Response, next: NextFunction) => any) =>
+  (req: Request, res: Response, next: NextFunction) => {
     Promise.resolve(fn(req, res, next)).catch(next);
   };
-};
 
 export const createError = (
   message: string,
-  statusCode: number = 400,
-  code: string = 'BAD_REQUEST',
-  details?: any
-): AppError => {
-  const error = new Error(message) as AppError;
-  error.statusCode = statusCode;
-  error.code = code;
-  error.details = details;
-  return error;
-};
+  statusCode = 400,
+  code = 'BAD_REQUEST',
+  details?: unknown
+) => new ApiError(message, statusCode, code, details);
