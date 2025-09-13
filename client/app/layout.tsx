@@ -4,6 +4,7 @@ import { Footer } from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AuthLayout } from "@/components/auth-layout"
 import { AuthProvider } from "@/lib/contexts/AuthContext"
+import ErrorBoundary from "@/components/error-boundary"
 import Script from "next/script"
 
 // Disable static generation to avoid SSR issues
@@ -71,7 +72,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
 
-        <main>{children}</main>
+        <ErrorBoundary>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem={false}
+            disableTransitionOnChange
+          >
+            <AuthProvider>
+              <main>{children}</main>
+            </AuthProvider>
+          </ThemeProvider>
+        </ErrorBoundary>
       </body>
     </html>
   )

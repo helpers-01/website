@@ -5,6 +5,8 @@ import providersRoutes from './providers';
 import bookingsRoutes from './bookings';
 import reviewsRoutes from './reviews';
 import uploadRoutes from './upload';
+import paymentsRoutes from './payments';
+import adminRoutes from './admin';
 import { createError } from '../middleware/errorHandler';
 
 const router = express.Router();
@@ -26,6 +28,8 @@ router.use('/providers', providersRoutes);
 router.use('/bookings', bookingsRoutes);
 router.use('/reviews', reviewsRoutes);
 router.use('/upload', uploadRoutes);
+router.use('/payments', paymentsRoutes);
+router.use('/admin', adminRoutes);
 
 // Error testing endpoint (for validation of error pipeline)
 router.get('/errors/test', (_req, _res) => {

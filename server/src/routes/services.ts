@@ -55,6 +55,87 @@ router.get('/', asyncHandler(async (req, res) => {
   });
 }));
 
+// Service Categories Routes (must come before parameterized routes)
+
+// GET /api/services/categories - Get all categories
+router.get('/categories', asyncHandler(async (req, res) => {
+  const { is_active = 'true' } = req.query;
+
+  const { data: categories, error } = await supabaseAdmin
+    .from('service_categories')
+    .select('*')
+    .eq('is_active', is_active === 'true')
+    .order('name');
+
+  if (error) {
+    throw createError('Failed to fetch categories', 500, 'FETCH_ERROR', error);
+  }
+
+  res.json({
+    success: true,
+    data: categories,
+  });
+}));
+
+// POST /api/services/categories - Create category (Admin only)
+router.post('/categories', authenticateToken, requireRole('admin'), asyncHandler(async (req: AuthRequest, res) => {
+  const validation = serviceCategorySchema.safeParse(req.body);
+  
+  if (!validation.success) {
+    throw createError('Validation failed', 400, 'VALIDATION_ERROR', validation.error.errors);
+  }
+
+  const categoryData = validation.data;
+
+  const { data: category, error } = await supabaseAdmin
+    .from('service_categories')
+    .insert(categoryData)
+    .select()
+    .single();
+
+  if (error) {
+    throw createError('Failed to create category', 500, 'CREATE_ERROR', error);
+  }
+
+  res.status(201).json({
+    success: true,
+    message: 'Category created successfully',
+    data: category,
+  });
+}));
+
+// PUT /api/services/categories/:id - Update category (Admin only)
+router.put('/categories/:id', authenticateToken, requireRole('admin'), asyncHandler(async (req: AuthRequest, res) => {
+  const { id } = req.params;
+  const validation = serviceCategorySchema.partial().safeParse(req.body);
+  
+  if (!validation.success) {
+    throw createError('Validation failed', 400, 'VALIDATION_ERROR', validation.error.errors);
+  }
+
+  const updateData = {
+    ...validation.data,
+    updated_at: new Date().toISOString(),
+  };
+
+  const { data: category, error } = await supabaseAdmin
+    .from('service_categories')
+    .update(updateData)
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error) {
+    throw createError('Failed to update category', 500, 'UPDATE_ERROR', error);
+  }
+
+  res.json({
+    success: true,
+    message: 'Category updated successfully',
+    data: category,
+  });
+}));
+
 // GET /api/services/:id - Get service by ID
 router.get('/:id', asyncHandler(async (req, res) => {
   const { id } = req.params;
@@ -153,87 +234,6 @@ router.delete('/:id', authenticateToken, requireRole('admin'), asyncHandler(asyn
   res.json({
     success: true,
     message: 'Service deleted successfully',
-  });
-}));
-
-// Service Categories Routes
-
-// GET /api/services/categories - Get all categories
-router.get('/categories', asyncHandler(async (req, res) => {
-  const { is_active = 'true' } = req.query;
-
-  const { data: categories, error } = await supabaseAdmin
-    .from('service_categories')
-    .select('*')
-    .eq('is_active', is_active === 'true')
-    .order('name');
-
-  if (error) {
-    throw createError('Failed to fetch categories', 500, 'FETCH_ERROR', error);
-  }
-
-  res.json({
-    success: true,
-    data: categories,
-  });
-}));
-
-// POST /api/services/categories - Create category (Admin only)
-router.post('/categories', authenticateToken, requireRole('admin'), asyncHandler(async (req: AuthRequest, res) => {
-  const validation = serviceCategorySchema.safeParse(req.body);
-  
-  if (!validation.success) {
-    throw createError('Validation failed', 400, 'VALIDATION_ERROR', validation.error.errors);
-  }
-
-  const categoryData = validation.data;
-
-  const { data: category, error } = await supabaseAdmin
-    .from('service_categories')
-    .insert(categoryData)
-    .select()
-    .single();
-
-  if (error) {
-    throw createError('Failed to create category', 500, 'CREATE_ERROR', error);
-  }
-
-  res.status(201).json({
-    success: true,
-    message: 'Category created successfully',
-    data: category,
-  });
-}));
-
-// PUT /api/services/categories/:id - Update category (Admin only)
-router.put('/categories/:id', authenticateToken, requireRole('admin'), asyncHandler(async (req: AuthRequest, res) => {
-  const { id } = req.params;
-  const validation = serviceCategorySchema.partial().safeParse(req.body);
-  
-  if (!validation.success) {
-    throw createError('Validation failed', 400, 'VALIDATION_ERROR', validation.error.errors);
-  }
-
-  const updateData = {
-    ...validation.data,
-    updated_at: new Date().toISOString(),
-  };
-
-  const { data: category, error } = await supabaseAdmin
-    .from('service_categories')
-    .update(updateData)
-    .eq('id', id)
-    .select()
-    .single();
-
-  if (error) {
-    throw createError('Failed to update category', 500, 'UPDATE_ERROR', error);
-  }
-
-  res.json({
-    success: true,
-    message: 'Category updated successfully',
-    data: category,
   });
 }));
 

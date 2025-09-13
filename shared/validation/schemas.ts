@@ -99,6 +99,8 @@ export const updateBookingStatusSchema = z.object({
 
 // Review Validation Schemas
 export const reviewSchema = z.object({
+  booking_id: z.string().uuid('Invalid booking ID'),
+  provider_id: z.string().uuid('Invalid provider ID'),
   rating: z.number().min(1, 'Rating must be at least 1').max(5, 'Rating must be at most 5'),
   comment: z.string().max(1000, 'Comment must be less than 1000 characters').optional(),
 });
@@ -134,6 +136,28 @@ export const fileUploadSchema = z.object({
   size: z.number().max(5 * 1024 * 1024, 'File size must be less than 5MB'),
 });
 
+// Payment Validation Schemas
+export const paymentSchema = z.object({
+  booking_id: z.string().uuid('Invalid booking ID'),
+  amount: z.number().min(0, 'Amount must be non-negative'),
+  currency: z.string().length(3, 'Currency must be 3 characters').default('usd'),
+});
+
+export const paymentConfirmSchema = z.object({
+  payment_id: z.string().uuid('Invalid payment ID'),
+  payment_intent_id: z.string().min(1, 'Payment intent ID is required'),
+});
+
+// Admin Validation Schemas
+export const updateUserRoleSchema = z.object({
+  role: userRoleSchema,
+});
+
+export const verifyProviderSchema = z.object({
+  status: z.enum(['verified', 'rejected']),
+  rejection_reason: z.string().optional(),
+});
+
 // Environment Validation Schema
 export const envSchema = z.object({
   SUPABASE_URL: z.string().url(),
@@ -144,4 +168,9 @@ export const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']),
   JWT_SECRET: z.string().min(32),
   CORS_ORIGIN: z.string(),
+  RAZORPAY_KEY_ID: z.string().optional(),
+  RAZORPAY_KEY_SECRET: z.string().optional(),
+  STRIPE_SECRET_KEY: z.string().optional(),
+  PAYPAL_CLIENT_ID: z.string().optional(),
+  PAYPAL_CLIENT_SECRET: z.string().optional(),
 });

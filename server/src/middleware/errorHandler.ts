@@ -33,6 +33,25 @@ export const errorHandler = (
     requestId: res.get('x-request-id') || (req.headers['x-request-id'] as string | undefined),
   });
 
+  // For 404 errors, return the exact format specified
+  if (apiError.statusCode === 404) {
+    res.status(404).json({
+      error: "Not Found",
+      status: 404
+    });
+    return;
+  }
+
+  // For 500 errors, return the exact format specified
+  if (apiError.statusCode >= 500) {
+    res.status(500).json({
+      error: "Internal Server Error",
+      status: 500
+    });
+    return;
+  }
+
+  // For other errors, return detailed format
   res.status(apiError.statusCode).json({
     success: false,
     error: {
@@ -48,7 +67,7 @@ export const errorHandler = (
   });
 };
 
-export const notFoundHandler = (req: Request, _res: Response, next: NextFunction) => {
+export const notFoundHandler = (req: Request, res: Response, next: NextFunction) => {
   const message = `Route ${req.originalUrl} not found`;
 
   logger.warn(`404 - ${message}`, {
@@ -58,7 +77,11 @@ export const notFoundHandler = (req: Request, _res: Response, next: NextFunction
     requestId: (req.headers['x-request-id'] as string | undefined),
   });
 
-  next(ApiError.notFound(message));
+  // Return the exact format specified for 404 errors
+  res.status(404).json({
+    error: "Not Found",
+    status: 404
+  });
 };
 
 export const asyncHandler =

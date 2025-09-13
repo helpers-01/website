@@ -20,8 +20,8 @@ WORKDIR /app
 # Copy package files and shared dependencies
 COPY package*.json ./
 COPY tsconfig.json ./
-# Copy shared utilities
-COPY ../shared ../shared/
+# Copy shared utilities from parent directory
+COPY --from=deps /app/../shared ../shared/
 
 # Install all dependencies (including dev)
 RUN npm ci && npm cache clean --force
